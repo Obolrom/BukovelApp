@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_services"
-        android:name="com.company.app.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.company.app.ui.services.ServicesFragment"
+        android:label="@string/title_services"
+        tools:layout="@layout/fragment_services" />
 
     <fragment
         android:id="@+id/navigation_lifts"

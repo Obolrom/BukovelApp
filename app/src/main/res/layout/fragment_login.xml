@@ -38,7 +38,7 @@
                 style="@style/match_wrap_layout"
                 android:id="@+id/tiet_enter_password"
                 android:hint="@string/enter_password"
-                android:inputType="text"/>
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
@@ -67,5 +67,16 @@
             android:textStyle="bold"
             android:layout_gravity="center"/>
     </LinearLayout>
+
+    <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintVertical_bias="0.0"
+        android:text="Ya EBAL"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
