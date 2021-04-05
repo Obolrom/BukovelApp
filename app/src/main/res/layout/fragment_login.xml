@@ -5,23 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/text_input_layout"
-        android:id="@+id/til_enter_login"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        style="@style/sign_til"
+        android:id="@+id/lin_lay_login_input_fields"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/lin_lay_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/text_input_layout"
-            android:id="@+id/tiet_enter_login"
-            android:hint="@string/enter_login"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/match_wrap_layout"
+            android:id="@+id/til_enter_login"
+            android:layout_marginBottom="15dp"
+            app:startIconDrawable="@drawable/ic_baseline_person_outline_24">
 
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/match_wrap_layout"
+                android:id="@+id/tiet_enter_login"
+                android:hint="@string/enter_login"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/match_wrap_layout"
+            android:id="@+id/til_enter_password"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/match_wrap_layout"
+                android:id="@+id/tiet_enter_password"
+                android:hint="@string/enter_password"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lin_lay_login_button"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lin_lay_login_input_fields">
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/login_button"
+            android:layout_width="210dp"
+            android:id="@+id/btn_sign_in"
+            android:background="@drawable/rounded_button"
+            android:layout_margin="10dp" />
+
+        <TextView
+            style="@style/match_wrap_layout"
+            android:layout_width="wrap_content"
+            android:id="@+id/sign_up_link_tv"
+            android:text="@string/sign_up_hyper_link"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
