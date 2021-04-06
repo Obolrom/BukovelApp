@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.recyclerview.widget.RecyclerView
 import com.company.app.R
 import java.lang.ClassCastException
@@ -15,7 +16,7 @@ class ServiceAdapter(callback: OnItemSelected?, services: List<Service>):
     private var context: OnItemSelected? = null
 
     interface OnItemSelected {
-        fun onItemClicked(index: Int)
+        fun onItemClicked(index: Int, score: Float)
     }
 
     init {
@@ -29,15 +30,19 @@ class ServiceAdapter(callback: OnItemSelected?, services: List<Service>):
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val image: ImageView
         val name : TextView
-        var score: Double
+        val ratingBar: AppCompatRatingBar
+        var score: Float
 
         init {
             image = itemView.findViewById(R.id.service_iv)
             name = itemView.findViewById(R.id.service_name_tv)
-            score = 0.0
+            ratingBar = itemView.findViewById(R.id.service_rb)
+            score = 0.0f
 
             itemView.setOnClickListener {
-                context?.onItemClicked(serviceList.indexOf(itemView.tag))
+                val service = itemView.tag
+                val score = (service as? Service)?.score ?: this.score
+                context?.onItemClicked(serviceList.indexOf(service), score)
             }
         }
     }
@@ -53,7 +58,9 @@ class ServiceAdapter(callback: OnItemSelected?, services: List<Service>):
         holder.itemView.tag = serviceList[position]
 //        holder.image.setImageResource(serviceList[position].background)
         holder.name.text = serviceList[position].name
-        holder.score = serviceList[position].score
+        val score = serviceList[position].score
+        holder.score = score
+        holder.ratingBar.rating = score
     }
 
     override fun getItemCount(): Int = serviceList.size

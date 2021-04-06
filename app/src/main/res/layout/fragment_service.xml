@@ -1,62 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_margin="10dp"
     android:background="@color/grey">
 
     <ImageView
-        android:layout_width="0dp"
+        android:layout_width="130dp"
         android:layout_height="match_parent"
-        android:layout_weight="4"
         android:src="@drawable/ic_baseline_elevator_24"
         android:id="@+id/service_iv"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="5"
+        android:layout_weight="6"
         android:orientation="vertical">
 
         <TextView
             style="@style/match_wrap_layout"
+            android:id="@+id/service_name_tv"
             android:textStyle="bold"
             android:textSize="24sp"
             android:gravity="center"
-            android:text="Atlas Weekend"
-            android:id="@+id/service_name_tv"/>
+            android:text="Atlas Weekend" />
 
-        <LinearLayout
-            style="@style/match_wrap_layout"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_24"/>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_24"/>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_24"/>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_24"/>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_24"/>
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatRatingBar
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:id="@+id/service_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:numStars="5"
+            android:rating="3.5"
+            android:stepSize="0.05"/>
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

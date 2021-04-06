@@ -16,18 +16,18 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnItemSelected {
     private lateinit var root: View
 
     private val services: List<Service> = listOf(
-            Service(3.5, "Ski school", 120932),
-            Service(4.6, "Хаски покатушки", 239012),
-            Service(4.7, "Whisky Bar", 120932),
-            Service(3.89, "Lords of the Boards", 239012),
-            Service(2.5, "Ski school", 120932),
-            Service(2.6, "Хаски покатушки", 239012),
-            Service(2.7, "Whisky Bar", 120932),
-            Service(3.89, "Lords of the Boards", 239012),
-            Service(1.5, "Ski school", 120932),
-            Service(1.6, "Хаски покатушки", 239012),
-            Service(1.7, "Whisky Bar", 120932),
-            Service(1.89, "Lords of the Boards", 239012))
+            Service(3.5f, "Ski school", 120932),
+            Service(4.6f, "Хаски покатушки", 239012),
+            Service(4.7f, "Whisky Bar", 120932),
+            Service(3.89f, "Lords of the Boards", 239012),
+            Service(2.5f, "Ski school", 120932),
+            Service(2.6f, "Хаски покатушки", 239012),
+            Service(2.7f, "Whisky Bar", 120932),
+            Service(3.89f, "Lords of the Boards", 239012),
+            Service(1.5f, "Ski school", 120932),
+            Service(1.6f, "Хаски покатушки", 239012),
+            Service(1.7f, "Whisky Bar", 120932),
+            Service(1.89f, "Lords of the Boards", 239012))
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,7 +48,7 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnItemSelected {
 
         val recyclerView = root.findViewById<RecyclerView>(R.id.rv_services)
         recyclerView.setHasFixedSize(true)
-//        recyclerView.overScrollMode = View.OVER_SCROLL_ALWAYS
+        recyclerView.overScrollMode = View.OVER_SCROLL_ALWAYS
 
         val adapter = ServiceAdapter(this, services)
         recyclerView.adapter = adapter
@@ -57,9 +57,11 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnItemSelected {
         recyclerView.layoutManager = layoutManager
     }
 
-    override fun onItemClicked(index: Int) {
+    override fun onItemClicked(index: Int, score: Float) {
         context?.apply {
-            Toast.makeText(context, index.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,
+                    "index $index, score $score",
+                    Toast.LENGTH_SHORT).show()
         }
     }
 }

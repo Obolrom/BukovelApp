@@ -20,4 +20,9 @@
         <item name="android:layout_marginLeft">30dp</item>
     </style>
 
+    <style name="rating_bar_24dp" parent="@style/Widget.AppCompat.RatingBar.Small">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/title_bar_tall</item>
+    </style>
+
 </resources>
