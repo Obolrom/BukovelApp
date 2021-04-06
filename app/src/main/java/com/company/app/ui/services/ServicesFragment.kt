@@ -53,8 +53,7 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnItemSelected {
         val adapter = ServiceAdapter(this, services)
         recyclerView.adapter = adapter
 
-        val layoutManager = LinearLayoutManager(context)
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onItemClicked(index: Int, score: Float) {

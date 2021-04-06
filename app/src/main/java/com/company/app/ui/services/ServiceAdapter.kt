@@ -13,7 +13,7 @@ import java.lang.ClassCastException
 class ServiceAdapter(callback: OnItemSelected?, services: List<Service>):
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
     private val serviceList: List<Service> = services
-    private var context: OnItemSelected? = null
+    private var context: OnItemSelected?
 
     interface OnItemSelected {
         fun onItemClicked(index: Int, score: Float)
