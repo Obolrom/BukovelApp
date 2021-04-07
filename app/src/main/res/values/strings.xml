@@ -13,4 +13,6 @@
     <string name="home">Home</string>
     <string name="ski_lift">Lifts</string>
     <string name="services">Services</string>
+    <string name="enter_password_again">enter password again</string>
+    <string name="sign_up">sign up</string>
 </resources>

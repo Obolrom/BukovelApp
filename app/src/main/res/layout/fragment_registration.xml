@@ -8,7 +8,7 @@
     <LinearLayout
         style="@style/lin_lay_input_sign_fields"
         android:id="@+id/lin_lay_sign_up_input_fields"
-        app:layout_constraintBottom_toTopOf="@+id/lin_lay_login_button"
+        app:layout_constraintBottom_toTopOf="@+id/lin_lay_sign_up_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,9 +20,21 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/match_wrap_layout"
-                android:id="@+id/tiet_sign_in_enter_login"
+                android:id="@+id/tiet_sign_up_enter_login"
                 android:hint="@string/enter_login"
                 android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/match_wrap_layout"
+            android:layout_marginBottom="15dp"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/match_wrap_layout"
+                android:id="@+id/tiet_sign_up_enter_password"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -31,14 +43,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/match_wrap_layout"
-                android:id="@+id/tiet_sign_in_enter_password"
-                android:hint="@string/enter_password"
+                android:id="@+id/tiet_sign_up_enter_password_again"
+                android:hint="@string/enter_password_again"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/lin_lay_login_button"
+        android:id="@+id/lin_lay_sign_up_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -49,8 +61,9 @@
 
         <androidx.appcompat.widget.AppCompatButton
             style="@style/login_sign_in_button"
+            android:id="@+id/btn_sign_up"
             android:layout_width="210dp"
-            android:id="@+id/btn_sign_in"
+            android:text="@string/sign_up"
             android:background="@drawable/rounded_button"
             android:layout_margin="10dp" />
 
