@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.company.app.ui.login.LoginFragment
 
-class MainActivity : AppCompatActivity(), LoginFragment.LoginSignUpLink {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
@@ -29,9 +29,5 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSignUpLink {
                 R.id.navigation_map))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    override fun onLinkListener() {
-        navController.navigate(R.id.action_navigation_login_to_navigation_registration)
     }
 }

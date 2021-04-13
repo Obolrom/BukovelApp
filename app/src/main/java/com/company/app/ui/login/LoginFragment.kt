@@ -9,15 +9,12 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.company.app.R
 import com.google.android.material.textfield.TextInputEditText
 
 class LoginFragment : Fragment() {
-    interface LoginSignUpLink {
-        fun onLinkListener()
-    }
 
-    private lateinit var callback: LoginSignUpLink
     private lateinit var loginInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
     private lateinit var loginViewModel: LoginViewModel
@@ -25,7 +22,6 @@ class LoginFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        this.callback = (context as? LoginSignUpLink)!!
     }
 
     override fun onCreateView(
@@ -47,8 +43,7 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         signInButton.setOnClickListener {
-            Toast.makeText(context, "sign in button", Toast.LENGTH_SHORT).show()
-            callback.onLinkListener()
+            findNavController().navigate(R.id.action_navigation_login_to_navigation_registration)
         }
     }
 }
