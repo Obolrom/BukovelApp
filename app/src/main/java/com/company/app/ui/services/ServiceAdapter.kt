@@ -6,43 +6,28 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRatingBar
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.app.R
-import java.lang.ClassCastException
 
-class ServiceAdapter(callback: OnItemSelected?, services: List<Service>):
-        RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
-    private val serviceList: List<Service> = services
-    private var context: OnItemSelected?
-
-    interface OnItemSelected {
-        fun onItemClicked(index: Int, score: Float)
-    }
-
-    init {
-        try {
-            context = callback
-        } catch (exception: ClassCastException) {
-            throw ClassCastException(exception.message + " RecyclerView.Adapter is not implemented")
-        }
+class ServiceAdapter(private val callback: OnServiceClickListener) :
+        ListAdapter<Service, ServiceAdapter.ViewHolder>(ServiceComparator()) {
+    interface OnServiceClickListener {
+        fun onServiceClicked(score: Float)
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val image: ImageView
-        val name : TextView
-        val ratingBar: AppCompatRatingBar
-        var score: Float
+        val image: ImageView = itemView.findViewById(R.id.service_iv)
+        val name : TextView = itemView.findViewById(R.id.service_name_tv)
+        val ratingBar: AppCompatRatingBar = itemView.findViewById(R.id.service_rb)
 
-        init {
-            image = itemView.findViewById(R.id.service_iv)
-            name = itemView.findViewById(R.id.service_name_tv)
-            ratingBar = itemView.findViewById(R.id.service_rb)
-            score = 0.0f
+        fun bind(listItem: Service) {
+            name.text = listItem.name
+            ratingBar.rating = listItem.score
 
             itemView.setOnClickListener {
-                val service = itemView.tag
-                val score = (service as? Service)?.score ?: this.score
-                context?.onItemClicked(serviceList.indexOf(service), score)
+                callback.onServiceClicked(ratingBar.rating)
             }
         }
     }
@@ -55,13 +40,17 @@ class ServiceAdapter(callback: OnItemSelected?, services: List<Service>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.tag = serviceList[position]
-//        holder.image.setImageResource(serviceList[position].background)
-        holder.name.text = serviceList[position].name
-        val score = serviceList[position].score
-        holder.score = score
-        holder.ratingBar.rating = score
+        val listItem = getItem(position)
+        holder.bind(listItem)
     }
 
-    override fun getItemCount(): Int = serviceList.size
+    class ServiceComparator : DiffUtil.ItemCallback<Service>() {
+        override fun areItemsTheSame(oldItem: Service, newItem: Service): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Service, newItem: Service): Boolean {
+            return oldItem == newItem
+        }
+    }
 }
