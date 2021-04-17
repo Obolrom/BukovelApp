@@ -17,7 +17,7 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/navigation_map"
+        android:id="@+id/navigation_maps"
         android:icon="@drawable/ic_baseline_map_24"
         android:title="@string/map" />
 
