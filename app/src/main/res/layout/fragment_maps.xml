@@ -9,4 +9,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     map:cameraZoom="13.1"
-    map:uiZoomControls="true"/>
+    map:mapId="@string/map_id"
+    map:uiZoomControls="true"
+    tools:layout="@layout/fragment_maps" />
