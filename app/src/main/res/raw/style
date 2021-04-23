@@ -1,26 +1,10 @@
 [
   {
-    "featureType": "poi.business",
+    "featureType": "poi.sports_complex",
+    "elementType": "geometry",
     "stylers": [
       {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "stylers": [
-      {
-        "visibility": "off"
+        "weight": 5
       }
     ]
   }

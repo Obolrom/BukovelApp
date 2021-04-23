@@ -1,6 +1,7 @@
 package com.company.app.ui.map
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -9,13 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.company.app.App
 import com.company.app.R
-import com.google.android.gms.maps.*
+import com.google.android.libraries.maps.*
 
-import com.google.android.gms.maps.model.*
-import com.google.maps.GeoApiContext
-import com.google.maps.model.DirectionsResult
-import kotlinx.android.synthetic.main.fragment_maps.*
+import com.google.android.libraries.maps.model.*
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -50,13 +49,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap?) {
         googleMap = map ?: return
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(bukovelResortCenter))
-//        val lift11B = PolylineOptions()
-//            .add(LatLng(48.371245, 24.379582))
-//            .add(LatLng(48.372998, 24.395268))
-//            .width(7.0f)
-//            .pattern(listOf(Gap(10F), Dash(30F)))
-//            .jointType(JointType.ROUND)
-//        googleMap.addPolyline(lift11B)
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style))
+
+        val slopes = (activity?.application as App).slopes
+        for (slope in slopes) {
+            val slopeView = PolylineOptions()
+                    .width(7.0f)
+                    .endCap(RoundCap())
+                    .addAll(slope.coordinates)
+                    .visible(true)
+                    .pattern(listOf(Gap(10F), Dash(30F)))
+            googleMap.addPolyline(slopeView)
+        }
     }
 
     private fun getLocationPermission() {

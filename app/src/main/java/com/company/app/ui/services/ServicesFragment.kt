@@ -12,12 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.company.app.App
 import com.company.app.R
 
 class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
 
     private val serviceViewModel: ServiceViewModel by viewModels {
-        ServiceViewModelFactory()
+        ServiceViewModelFactory((activity?.application as App).repository)
     }
     private lateinit var root: View
 
