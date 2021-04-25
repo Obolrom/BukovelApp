@@ -1,13 +1,13 @@
-package com.company.app.ui.dashboard
+package com.company.app.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class LoginViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is Login Fragment"
     }
     val text: LiveData<String> = _text
 }
