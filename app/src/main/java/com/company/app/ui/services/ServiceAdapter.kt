@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.app.R
+import com.squareup.picasso.Picasso
 
 class ServiceAdapter(private val callback: OnServiceClickListener) :
         ListAdapter<Service, ServiceAdapter.ViewHolder>(ServiceComparator()) {

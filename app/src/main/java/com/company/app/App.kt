@@ -13,9 +13,9 @@ import java.util.*
 
 class App: Application() {
     private val slopeDirectory = "slopes"
+    private val _slopes: MutableList<Slope> = LinkedList()
     val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob())
     val repository by lazy { Repository(this) }
-    private val _slopes: MutableList<Slope> = LinkedList()
     lateinit var slopes: List<Slope>
 
     override fun onCreate() {
@@ -24,16 +24,15 @@ class App: Application() {
         // FIXME: 21.04.21 add slopes to List
         coroutineScope.run {
             val gsonConverter = Gson()
-            val context = applicationContext
-            val assetFiles = context?.assets?.list(slopeDirectory)
+            val assets = applicationContext?.assets
+            val assetFiles = assets?.list(slopeDirectory)
             assetFiles?.let { fileNames ->
                 for (filePath in fileNames) {
                     try {
-                        val file = context.assets?.open("$slopeDirectory/$filePath")
-                        val content = file?.bufferedReader()?.use(BufferedReader::readText)
+                        val file = assets.open("$slopeDirectory/$filePath")
+                        val content = file.bufferedReader().use(BufferedReader::readText)
                         val slope = gsonConverter.fromJson(content, Slope::class.java)
                         _slopes.add(slope)
-                        Log.d(slopeDirectory, slope.toString())
                     } catch (ioe: IOException) {
                         ioe.printStackTrace()
                     }

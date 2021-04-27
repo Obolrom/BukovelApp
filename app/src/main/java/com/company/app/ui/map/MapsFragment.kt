@@ -2,19 +2,22 @@ package com.company.app.ui.map
 
 import android.content.pm.PackageManager
 import android.graphics.Color
-import androidx.fragment.app.Fragment
-
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.company.app.App
 import com.company.app.R
 import com.google.android.libraries.maps.*
-
 import com.google.android.libraries.maps.model.*
+import com.google.maps.android.SphericalUtil
+import java.util.*
+import kotlin.math.roundToInt
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -48,10 +51,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap?) {
         googleMap = map ?: return
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(bukovelResortCenter))
-        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style))
+        with(googleMap) {
+            moveCamera(CameraUpdateFactory.newLatLng(bukovelResortCenter))
+            setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style))
+        }
 
         val slopes = (activity?.application as App).slopes
+        val spanGradient = StyleSpan(StrokeStyle
+                .gradientBuilder(Color.BLACK, Color.GREEN)
+                .build())
         for (slope in slopes) {
             val slopeView = PolylineOptions()
                     .width(7.0f)
@@ -59,8 +67,22 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     .addAll(slope.coordinates)
                     .visible(true)
                     .pattern(listOf(Gap(10F), Dash(30F)))
+                    .addSpan(spanGradient)
             googleMap.addPolyline(slopeView)
+
+            // TODO: 26.04.21 calculate this for edges of graph one time and put
+            //       in JSON. Do not calculate this each time
+            val distance = calculateDistance(slope).roundToInt()
+            Log.d("slopes", "${slope.name}, distance = $distance meters")
         }
+    }
+
+    private fun calculateDistance(slope: Slope): Double {
+        var distance = 0.0
+        for (i in 1 until slope.coordinates.size)
+            distance += SphericalUtil
+                    .computeDistanceBetween(slope.coordinates[i - 1], slope.coordinates[i])
+        return distance
     }
 
     private fun getLocationPermission() {
@@ -68,8 +90,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         if (ContextCompat.checkSelfPermission(context?.applicationContext!!, fineLocation)
             == PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(context?.applicationContext!!, coarseLocation).let {
-                code ->
+            ContextCompat.checkSelfPermission(context?.applicationContext!!, coarseLocation).let { code ->
                 if (code != PackageManager.PERMISSION_GRANTED)
                     requestPermissions(permissions, locationPermissionRequest)
             }
