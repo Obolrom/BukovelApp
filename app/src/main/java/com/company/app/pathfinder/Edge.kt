@@ -1,9 +1,10 @@
 package com.company.app.pathfinder
 
-class Vertex(
-        val node: Int,
+class Edge(
+        val start: Int,
         val destination: Int,
         val weight: Int
 ) {
-
+    constructor(destination: Int, weight: Int)
+            : this(-1, destination, weight)
 }

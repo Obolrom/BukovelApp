@@ -1,4 +1,5 @@
 package com.company.app.pathfinder
 
-class ShortestPathFoundException {
-}
+import java.lang.Exception
+
+class ShortestPathFoundException : Exception("Shortest path was found")

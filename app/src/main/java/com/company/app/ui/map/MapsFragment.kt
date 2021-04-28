@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.company.app.App
 import com.company.app.R
 import com.google.android.libraries.maps.*
@@ -25,6 +26,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val coarseLocation = android.Manifest.permission.ACCESS_COARSE_LOCATION
     private val locationPermissionRequest: Int = 2001
     private val bukovelResortCenter: LatLng = LatLng(48.364952, 24.3990655)
+    private val mapViewModel: MapViewModel by viewModels {
+        MapViewModelFactory((activity?.application as App).repository)
+    }
     private lateinit var root: View
     private lateinit var googleMap: GoogleMap
 
