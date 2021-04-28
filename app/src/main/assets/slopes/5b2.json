@@ -1,0 +1,17 @@
+{
+  "name": "5b2",
+  "coordinates": [
+    { "latitude" : 48.364717, "longitude" : 24.383276 },
+    { "latitude" : 48.365416, "longitude" : 24.382906 },
+    { "latitude" : 48.365665, "longitude" : 24.382809 },
+    { "latitude" : 48.365879, "longitude" : 24.382756 },
+    { "latitude" : 48.365964, "longitude" : 24.382777 },
+    { "latitude" : 48.366029, "longitude" : 24.382895 },
+    { "latitude" : 48.366036, "longitude" : 24.383002 },
+    { "latitude" : 48.365979, "longitude" : 24.383217 },
+    { "latitude" : 48.365979, "longitude" : 24.383217 },
+    { "latitude" : 48.365629, "longitude" : 24.383893 },
+    { "latitude" : 48.365565, "longitude" : 24.384032 },
+    { "latitude" : 48.365166, "longitude" : 24.384767 }
+  ]
+}
