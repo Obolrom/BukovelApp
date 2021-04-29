@@ -19,7 +19,7 @@ class ShortestPathFinder(
     }
 
     private fun dijkstra() {
-        priorityQueue.add(Edge(source, 0))
+        priorityQueue.add(Edge(source, 0, ""))
         shortestPaths.updateDistance(source, 0)
 
         try {
@@ -53,7 +53,7 @@ class ShortestPathFinder(
                     shortestPaths.updateParent(node.destination, parentVertex.destination)
                 }
 
-                priorityQueue.add(Edge(node.destination, shortestPaths.getDistance(node)))
+                priorityQueue.add(Edge(node.destination, shortestPaths.getDistance(node), ""))
             }
         }
     }

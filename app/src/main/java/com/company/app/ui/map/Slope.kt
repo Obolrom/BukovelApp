@@ -3,8 +3,10 @@ package com.company.app.ui.map
 import com.google.android.libraries.maps.model.*
 
 
-data class Slope(
+class Slope(
         val name: String,
         val complexity: Complexity,
-        val coordinates: List<LatLng>
-)
+        val coordinates: List<LatLng>) {
+    var active: Boolean = true
+}
+

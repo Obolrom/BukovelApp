@@ -31,6 +31,7 @@ class App: Application() {
                         val file = assets.open("$slopeDirectory/$filePath")
                         val content = file.bufferedReader().use(BufferedReader::readText)
                         val slope = gsonConverter.fromJson(content, Slope::class.java)
+                        slope.active = true
                         _slopes.add(slope)
                     } catch (ioe: IOException) {
                         ioe.printStackTrace()
