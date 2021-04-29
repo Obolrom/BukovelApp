@@ -1,5 +1,6 @@
 {
   "name": "5b",
+  "complexity" : "BLUE",
   "coordinates": [
     { "latitude" : 48.360864, "longitude" : 24.384394 },
     { "latitude" : 48.360942, "longitude" : 24.384360 },

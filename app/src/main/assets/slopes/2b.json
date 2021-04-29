@@ -1,5 +1,6 @@
 {
   "name":"2b",
+  "complexity" : "RED",
   "coordinates": [
     { "latitude" : 48.349289, "longitude" : 24.407487 },
     { "latitude" : 48.349230, "longitude" : 24.407310 },

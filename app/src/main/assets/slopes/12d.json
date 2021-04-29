@@ -1,5 +1,6 @@
 {
   "name": "12d",
+  "complexity" : "RED",
   "coordinates": [
     { "latitude" : 48.369855, "longitude" : 24.375336 },
     { "latitude" : 48.369915, "longitude" : 24.375794 },

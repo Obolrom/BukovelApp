@@ -1,5 +1,6 @@
 {
   "name": "1с",
+  "complexity" : "BLUE",
   "coordinates": [
     { "latitude" : 48.348383, "longitude" : 24.411274 },
     { "latitude" : 48.348098, "longitude" : 24.410441 },
@@ -73,13 +74,6 @@
     { "latitude" : 48.352508, "longitude" : 24.417628 },
     { "latitude" : 48.352608, "longitude" : 24.417357 },
     { "latitude" : 48.352673, "longitude" : 24.417073 },
-    { "latitude" : 48.352715, "longitude" : 24.416773 },
-    { "latitude" : 48.352733, "longitude" : 24.416782 },
-    { "latitude" : 48.352757, "longitude" : 24.416782 },
-    { "latitude" : 48.352778, "longitude" : 24.416773 },
-    { "latitude" : 48.352813, "longitude" : 24.416744 },
-    { "latitude" : 48.352889, "longitude" : 24.416632 },
-    { "latitude" : 48.352929, "longitude" : 24.416592 },
-    { "latitude" : 48.353709, "longitude" : 24.416430 }
+    { "latitude" : 48.352715, "longitude" : 24.416773 }
   ]
 }

@@ -1,5 +1,6 @@
 {
   "name": "17a",
+  "complexity" : "BLUE",
   "coordinates": [
     { "latitude" : 48.360864, "longitude" : 24.384394 },
     { "latitude" : 48.360939, "longitude" : 24.384339 },

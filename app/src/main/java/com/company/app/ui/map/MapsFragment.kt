@@ -73,11 +73,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     .pattern(listOf(Gap(10F), Dash(30F)))
                     .addSpan(spanGradient)
             googleMap.addPolyline(slopeView)
+            Log.d("slopes", "${slope.name} comp: ${slope.complexity}")
 
             // TODO: 26.04.21 calculate this for edges of graph one time and put
             //       in JSON. Do not calculate this each time
-            val distance = calculateDistance(slope).roundToInt()
-            Log.d("slopes", "${slope.name}, distance = $distance meters")
+//            val distance = calculateDistance(slope).roundToInt()
+//            Log.d("slopes", "${slope.name}, distance = $distance meters")
         }
     }
 

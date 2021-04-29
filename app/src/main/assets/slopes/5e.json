@@ -1,5 +1,6 @@
 {
   "name": "5e",
+  "complexity" : "BLACK",
   "coordinates": [
     { "latitude" : 48.359633, "longitude" : 24.393027 },
     { "latitude" : 48.359646, "longitude" : 24.393211 },

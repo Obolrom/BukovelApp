@@ -5,5 +5,6 @@ import com.google.android.libraries.maps.model.*
 
 data class Slope(
         val name: String,
+        val complexity: Complexity,
         val coordinates: List<LatLng>
 )

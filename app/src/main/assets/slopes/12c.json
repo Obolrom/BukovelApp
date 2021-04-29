@@ -1,5 +1,6 @@
 {
   "name": "12c",
+  "complexity" : "RED",
   "coordinates": [
     { "latitude" : 48.367944, "longitude" : 24.371852 },
     { "latitude" : 48.367923, "longitude" : 24.371972 },

@@ -21,7 +21,6 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // FIXME: 21.04.21 add slopes to List
         coroutineScope.run {
             val gsonConverter = Gson()
             val assets = applicationContext?.assets

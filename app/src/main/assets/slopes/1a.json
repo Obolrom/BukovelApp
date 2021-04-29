@@ -1,5 +1,6 @@
 {
   "name": "1a",
+  "complexity" : "RED",
   "coordinates": [
     { "latitude" : 48.348383, "longitude" : 24.411274 },
     { "latitude" : 48.348385, "longitude" : 24.411563 },
