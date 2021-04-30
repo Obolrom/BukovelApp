@@ -1,6 +1,5 @@
 package com.company.app.pathfinder
 
-import com.company.app.ui.map.Slope
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,9 +18,8 @@ class Graph(vertices: Int) {
         val forDeletion = mutableListOf<Edge>()
         for (slope in adjacencyList) {
             for (edge in slope) {
-                if (edge.pieceOf == name) {
+                if (edge.pieceOf == name)
                     forDeletion.add(edge)
-                }
             }
             slope.removeAll(forDeletion)
             forDeletion.clear()

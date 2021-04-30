@@ -8,4 +8,7 @@ class Edge(
 ) {
     constructor(destination: Int, weight: Int, pieceOf: String)
             : this(-1, destination, weight, pieceOf)
+
+    constructor(destination: Int, weight: Int)
+            : this(destination, weight, "")
 }

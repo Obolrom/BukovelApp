@@ -22,11 +22,11 @@ class ShortestPaths(vertices: Int) {
         return path
     }
 
-    fun updateDistance(vertex: Int, distance: Int) {
+    fun updateShortestDistance(vertex: Int, distance: Int) {
         paths[vertex].distance = distance
     }
 
-    fun updateParent(vertex: Int, parent: Int) {
+    fun updateParentByShortestPath(vertex: Int, parent: Int) {
         paths[vertex].parent = parent
     }
 

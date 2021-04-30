@@ -5,12 +5,12 @@ import kotlin.NoSuchElementException
 
 class ShortestPathFinder(
         private val graph: Graph,
-        val source: Int,
-        val destination: Int) {
+        private val source: Int,
+        private val destination: Int) {
     private val priorityQueue: PriorityQueue<Edge> = PriorityQueue(graph.vertexAmount) { vertex1, vertex2 ->
         vertex1.weight.compareTo(vertex2.weight)
     }
-    private val visited: MutableSet<Int> = hashSetOf()
+    private val visitedVertices: MutableSet<Int> = hashSetOf()
     private val shortestPaths: ShortestPaths = ShortestPaths(graph.vertexAmount)
 
     fun getShortestPath(): List<Int> {
@@ -19,17 +19,17 @@ class ShortestPathFinder(
     }
 
     private fun dijkstra() {
-        priorityQueue.add(Edge(source, 0, ""))
-        shortestPaths.updateDistance(source, 0)
+        priorityQueue.add(Edge(source, 0))
+        shortestPaths.updateShortestDistance(source, 0)
 
         try {
-            while (visited.size != graph.vertexAmount) {
-                val currentVertex = priorityQueue.remove()
-                visited.add(currentVertex.destination)
-                if (visited.contains(destination)) {
+            while (visitedVertices.size != graph.vertexAmount) {
+                val currentEdge = priorityQueue.remove()
+                visitedVertices.add(currentEdge.destination)
+                if (visitedVertices.contains(destination)) {
                     throw ShortestPathFoundException()
                 }
-                visitNeighbors(currentVertex)
+                visitNeighbors(currentEdge)
             }
         } catch (nse: NoSuchElementException) {
 
@@ -38,22 +38,22 @@ class ShortestPathFinder(
         }
     }
 
-    private fun visitNeighbors(parentVertex: Edge) {
+    private fun visitNeighbors(parentEdge: Edge) {
         var edgeDistance: Int
         var fullDistance: Int
 
-        val adjacencyList = graph.getAdjacentEdges(parentVertex)
-        for (node in adjacencyList) {
-            if ( ! visited.contains(node.destination)) {
-                edgeDistance = node.weight
-                fullDistance = shortestPaths.getDistance(parentVertex) + edgeDistance
+        val adjacencyList = graph.getAdjacentEdges(parentEdge)
+        for (edge in adjacencyList) {
+            if ( ! visitedVertices.contains(edge.destination)) {
+                edgeDistance = edge.weight
+                fullDistance = shortestPaths.getDistance(parentEdge) + edgeDistance
 
-                if (fullDistance < shortestPaths.getDistance(node)) {
-                    shortestPaths.updateDistance(node.destination, fullDistance)
-                    shortestPaths.updateParent(node.destination, parentVertex.destination)
+                if (fullDistance < shortestPaths.getDistance(edge)) {
+                    shortestPaths.updateShortestDistance(edge.destination, fullDistance)
+                    shortestPaths.updateParentByShortestPath(edge.destination, parentEdge.destination)
                 }
 
-                priorityQueue.add(Edge(node.destination, shortestPaths.getDistance(node), ""))
+                priorityQueue.add(Edge(edge.destination, shortestPaths.getDistance(edge)))
             }
         }
     }
