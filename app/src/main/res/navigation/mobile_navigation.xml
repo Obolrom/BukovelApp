@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/navigation_maps"
         android:name="com.company.app.ui.map.MapsFragment"
-        android:label="fragment_maps"
+        android:label="SlopesMap"
         tools:layout="@layout/fragment_maps" />
 
     <fragment
