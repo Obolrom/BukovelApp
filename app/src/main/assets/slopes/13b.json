@@ -1,0 +1,33 @@
+{
+  "name": "13b",
+  "complexity": "RED",
+  "coordinates": [
+    { "latitude" : 48.371202, "longitude" : 24.421260 },
+    { "latitude" : 48.371412, "longitude" : 24.420484 },
+    { "latitude" : 48.371577, "longitude" : 24.419752 },
+    { "latitude" : 48.371603, "longitude" : 24.419547 },
+    { "latitude" : 48.371606, "longitude" : 24.419384 },
+    { "latitude" : 48.371533, "longitude" : 24.418916 },
+    { "latitude" : 48.371507, "longitude" : 24.418467 },
+    { "latitude" : 48.371533, "longitude" : 24.418166 },
+    { "latitude" : 48.371633, "longitude" : 24.417492 },
+    { "latitude" : 48.371673, "longitude" : 24.417286 },
+    { "latitude" : 48.371696, "longitude" : 24.417076 },
+    { "latitude" : 48.371703, "longitude" : 24.416861 },
+    { "latitude" : 48.371689, "longitude" : 24.416731 },
+    { "latitude" : 48.371666, "longitude" : 24.416615 },
+    { "latitude" : 48.371576, "longitude" : 24.416342 },
+    { "latitude" : 48.371335, "longitude" : 24.415751 },
+    { "latitude" : 48.371235, "longitude" : 24.415481 },
+    { "latitude" : 48.371166, "longitude" : 24.415225 },
+    { "latitude" : 48.371135, "longitude" : 24.415040 },
+    { "latitude" : 48.371058, "longitude" : 24.414818 },
+    { "latitude" : 48.371004, "longitude" : 24.414605 },
+    { "latitude" : 48.370972, "longitude" : 24.414426 },
+    { "latitude" : 48.370958, "longitude" : 24.414194 },
+    { "latitude" : 48.370999, "longitude" : 24.413710 },
+    { "latitude" : 48.370999, "longitude" : 24.413710 },
+    { "latitude" : 48.371098, "longitude" : 24.413310 },
+    { "latitude" : 48.371155, "longitude" : 24.413159 }
+  ]
+}
