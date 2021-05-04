@@ -60,18 +60,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style))
         }
 
-        val slopes = (activity?.application as App).slopes
-        val spanGradient = StyleSpan(StrokeStyle
-                .gradientBuilder(Color.BLACK, Color.GREEN)
-                .build())
+        val slopes = mapViewModel.slopes
         for (slope in slopes) {
             val slopeView = PolylineOptions()
                     .width(7.0f)
                     .endCap(RoundCap())
                     .addAll(slope.coordinates)
                     .visible(true)
-                    .pattern(listOf(Gap(10F), Dash(30F)))
-                    .addSpan(spanGradient)
+//                    .pattern(listOf(Gap(10F), Dash(30F)))
+                    .addSpan(getGradientByComplexity(slope.complexity))
             googleMap.addPolyline(slopeView)
 //            Log.d("slopes",
 //                    "${slope.name} comp: ${slope.complexity}, isActive: ${slope.active}")

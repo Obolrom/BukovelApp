@@ -1,6 +1,6 @@
 package com.company.app.pathfinder
 
-class Edge(
+data class Edge(
         val start: Int,
         val destination: Int,
         val weight: Int,

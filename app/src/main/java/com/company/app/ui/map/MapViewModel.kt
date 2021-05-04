@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.company.app.repository.Repository
 
 class MapViewModel(private val repository: Repository): ViewModel() {
-
+    val slopes = repository.slopes
 }
 
 class MapViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {

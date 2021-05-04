@@ -4,6 +4,7 @@
     "elementType": "geometry",
     "stylers": [
       {
+        "visibility" : "off",
         "weight": 4
       }
     ]

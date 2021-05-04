@@ -14,6 +14,8 @@ import kotlinx.coroutines.SupervisorJob
 class Repository(private val app: App) {
     private val bukovelService: BukovelService by lazy { RetrofitServices.bukovelService }
 
+    val slopes = app.slopes
+
     fun callRetrofitApi() : Service {
         var service: Service = Service(4.3f, "sdf", "dsfs")
         bukovelService.getTestService()
