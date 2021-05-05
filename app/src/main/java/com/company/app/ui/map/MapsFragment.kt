@@ -1,10 +1,7 @@
 package com.company.app.ui.map
 
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +14,6 @@ import com.company.app.R
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
 import com.google.maps.android.SphericalUtil
-import java.util.*
-import kotlin.math.roundToInt
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -61,15 +56,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
 
         val slopes = mapViewModel.slopes
+        val lifts = mapViewModel.lifts
         for (slope in slopes) {
-            val slopeView = PolylineOptions()
-                    .width(7.0f)
-                    .endCap(RoundCap())
-                    .addAll(slope.coordinates)
-                    .visible(true)
-//                    .pattern(listOf(Gap(10F), Dash(30F)))
-                    .addSpan(getGradientByComplexity(slope.complexity))
-            googleMap.addPolyline(slopeView)
+            googleMap.addPolyline(slope.style)
 //            Log.d("slopes",
 //                    "${slope.name} comp: ${slope.complexity}, isActive: ${slope.active}")
 
@@ -77,6 +66,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             //       in JSON. Do not calculate this each time
 //            val distance = calculateDistance(slope).roundToInt()
 //            Log.d("slopes", "${slope.name}, distance = $distance meters")
+        }
+
+        for (lift in lifts) {
+            googleMap.addPolyline(lift.style)
         }
     }
 

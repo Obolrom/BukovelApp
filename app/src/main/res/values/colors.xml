@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#808080</color>
     <color name="golden">#FFCC01</color>
+    <color name="lift">#ff32CD32</color>
 </resources>

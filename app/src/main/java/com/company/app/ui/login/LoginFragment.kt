@@ -44,9 +44,7 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         signInButton.setOnClickListener {
-            val service = (activity?.application as App).repository.callRetrofitApi()
-            Toast.makeText(context, "${service.name}\n${service.imageUrl}", Toast.LENGTH_SHORT).show()
-//            findNavController().navigate(R.id.action_navigation_login_to_navigation_registration)
+            findNavController().navigate(R.id.action_navigation_login_to_navigation_registration)
         }
     }
 }

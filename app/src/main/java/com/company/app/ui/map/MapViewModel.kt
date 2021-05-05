@@ -6,6 +6,7 @@ import com.company.app.repository.Repository
 
 class MapViewModel(private val repository: Repository): ViewModel() {
     val slopes = repository.slopes
+    val lifts = repository.lifts
 }
 
 class MapViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {

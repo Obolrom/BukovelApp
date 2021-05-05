@@ -16,6 +16,8 @@ class Repository(private val app: App) {
 
     val slopes = app.slopes
 
+    val lifts = app.lifts
+
     fun callRetrofitApi() : Service {
         var service: Service = Service(4.3f, "sdf", "dsfs")
         bukovelService.getTestService()

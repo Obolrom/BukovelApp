@@ -28,8 +28,14 @@ abstract class Gradient(
         val lowest: Int,
         val highest: Int)
 
-object RedGradient: Gradient(Color.RED, Color.RED)
+object RedGradient: Gradient(
+        Color.parseColor("#ff810000"),
+        Color.parseColor("#ffce1212"))
 
-object BlueGradient: Gradient(Color.BLUE, Color.BLUE)
+object BlueGradient: Gradient(
+        Color.parseColor("#ff3f3697"),
+        Color.parseColor("#ff3d84b8"))
 
-object BlackGradient: Gradient(Color.BLACK, Color.BLACK)
+object BlackGradient: Gradient(
+        Color.parseColor("#ff000000"),
+        Color.parseColor("#ff252525"))
