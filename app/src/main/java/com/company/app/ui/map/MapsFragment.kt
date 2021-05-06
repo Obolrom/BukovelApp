@@ -2,6 +2,7 @@ package com.company.app.ui.map
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ import com.company.app.App
 import com.company.app.R
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
-import com.google.maps.android.SphericalUtil
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -59,26 +59,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val lifts = mapViewModel.lifts
         for (slope in slopes) {
             googleMap.addPolyline(slope.style)
-//            Log.d("slopes",
-//                    "${slope.name} comp: ${slope.complexity}, isActive: ${slope.active}")
-
-            // TODO: 26.04.21 calculate this for edges of graph one time and put
-            //       in JSON. Do not calculate this each time
-//            val distance = calculateDistance(slope).roundToInt()
-//            Log.d("slopes", "${slope.name}, distance = $distance meters")
         }
 
         for (lift in lifts) {
             googleMap.addPolyline(lift.style)
         }
-    }
-
-    private fun calculateDistance(slope: Slope): Double {
-        var distance = 0.0
-        for (i in 1 until slope.coordinates.size)
-            distance += SphericalUtil
-                    .computeDistanceBetween(slope.coordinates[i - 1], slope.coordinates[i])
-        return distance
     }
 
     private fun getLocationPermission() {

@@ -1,6 +1,7 @@
 package com.company.app
 
 import android.app.Application
+import android.util.Log
 import com.company.app.repository.Repository
 import com.company.app.ui.map.*
 import com.google.android.libraries.maps.model.Dash
@@ -8,12 +9,14 @@ import com.google.android.libraries.maps.model.Gap
 import com.google.android.libraries.maps.model.PolylineOptions
 import com.google.android.libraries.maps.model.RoundCap
 import com.google.gson.Gson
+import com.google.maps.android.SphericalUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import java.io.BufferedReader
 import java.io.IOException
+import kotlin.math.roundToInt
 
 class App: Application() {
     private val slopeDirectory = "slopes"
@@ -34,7 +37,19 @@ class App: Application() {
             slopes = readSlopesDirectory(assets?.list(slopeDirectory) ?: arrayOf())
             lifts = readLiftsDirectory(assets?.list(liftsDirectory) ?: arrayOf())
             edges = readEdgesDirectory(assets?.list(edgesDirectory) ?: arrayOf())
+            for (slope in edges) {
+                val distance = calculateDistance(slope).roundToInt()
+                Log.d("slopes", "${slope.name}, distance = $distance meters")
+            }
         }
+    }
+
+    private fun calculateDistance(slope: EdgeRepresentation): Double {
+        var distance = 0.0
+        for (i in 1 until slope.coordinates.size)
+            distance += SphericalUtil
+                    .computeDistanceBetween(slope.coordinates[i - 1], slope.coordinates[i])
+        return distance
     }
 
     private fun readSlopesDirectory(fileNames: Array<String>): List<Slope> {
@@ -72,7 +87,7 @@ class App: Application() {
                         .endCap(RoundCap())
                         .visible(true)
                         .pattern(listOf(Gap(10F), Dash(15F)))
-                        .color(R.color.lift)
+                        .color(R.color.purple_200)
                         .addAll(lift.coordinates)
                 directions.add(lift)
             } catch (ioe: IOException) {
@@ -92,10 +107,8 @@ class App: Application() {
                 edge.active = true
                 edge.style = PolylineOptions()
                         .width(8.0f)
-                        .endCap(RoundCap())
                         .visible(true)
-                        .pattern(listOf(Gap(10F), Dash(15F)))
-                        .color(R.color.lift)
+                        .color(R.color.purple_200)
                         .addAll(edge.coordinates)
                 directions.add(edge)
             } catch (ioe: IOException) {
