@@ -1,0 +1,22 @@
+{
+  "name": "11c",
+  "start": 43,
+  "destination": 46,
+  "complexity": "BLACK",
+  "distance": 1,
+  "coordinates": [
+    { "latitude" : 48.370011, "longitude" : 24.382425 },
+    { "latitude" : 48.370022, "longitude" : 24.382515 },
+    { "latitude" : 48.370039, "longitude" : 24.382587 },
+    { "latitude" : 48.370234, "longitude" : 24.382855 },
+    { "latitude" : 48.370364, "longitude" : 24.383103 },
+    { "latitude" : 48.370501, "longitude" : 24.383515 },
+    { "latitude" : 48.370570, "longitude" : 24.383901 },
+    { "latitude" : 48.370625, "longitude" : 24.384128 },
+    { "latitude" : 48.370826, "longitude" : 24.385184 },
+    { "latitude" : 48.371052, "longitude" : 24.385735 },
+    { "latitude" : 48.371121, "longitude" : 24.385833 },
+    { "latitude" : 48.371241, "longitude" : 24.386111 },
+    { "latitude" : 48.371350, "longitude" : 24.386288 }
+  ]
+}
