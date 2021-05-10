@@ -1,0 +1,17 @@
+{
+  "name": "1c",
+  "start" : 2,
+  "destination" : 1,
+  "complexity" : "BLUE",
+  "distance": 1,
+  "coordinates":
+  [
+    {"latitude": 48.352037, "longitude": 24.418433},
+    {"latitude": 48.352286, "longitude": 24.418069},
+    {"latitude": 48.352365, "longitude": 24.417926},
+    {"latitude": 48.352508, "longitude": 24.417628},
+    {"latitude": 48.352608, "longitude": 24.417357},
+    {"latitude": 48.352673, "longitude": 24.417073},
+    {"latitude": 48.352715, "longitude": 24.416773}
+  ]
+}

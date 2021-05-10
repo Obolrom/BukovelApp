@@ -1,6 +1,7 @@
 package com.company.app.ui.map
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,10 +42,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         getLocationPermission()
     }
 
@@ -63,6 +60,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         for (lift in lifts) {
             googleMap.addPolyline(lift.style)
+        }
+
+        for (edge in (activity?.application as App).edges) {
+            googleMap.addPolyline(PolylineOptions()
+                .width(7.0f)
+                .endCap(RoundCap())
+                .visible(true)
+                .addAll(edge.coordinates)
+                .color(Color.parseColor("#7CFC00")))
         }
     }
 

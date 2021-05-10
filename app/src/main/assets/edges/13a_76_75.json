@@ -1,0 +1,15 @@
+{
+  "name": "13a",
+  "start" : 76,
+  "destination" : 75,
+  "complexity" : "RED",
+  "distance": 1,
+  "coordinates": [
+    {"latitude": 48.370294, "longitude": 24.411942},
+    {"latitude": 48.370096, "longitude": 24.411486},
+    {"latitude": 48.370010, "longitude": 24.411339},
+    {"latitude": 48.369862, "longitude": 24.411132},
+    {"latitude": 48.369695, "longitude": 24.410947},
+    {"latitude": 48.369470, "longitude": 24.410738}
+  ]
+}
