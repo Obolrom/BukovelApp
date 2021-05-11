@@ -3,7 +3,7 @@
   "start" : 5,
   "destination" : 2,
   "complexity" : "RED",
-  "distance" : 266  ,
+  "distance" : 266,
   "coordinates": [
     { "latitude" : 48.349888, "longitude" : 24.417146 },
     { "latitude" : 48.350131, "longitude" : 24.417053 },

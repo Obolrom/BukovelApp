@@ -1,0 +1,24 @@
+{
+  "name": "14a",
+  "start" : 67,
+  "destination" : 68,
+  "complexity" : "BLUE",
+  "distance" : 450,
+  "coordinates": [
+    { "latitude" : 48.372777, "longitude" : 24.408023 },
+    { "latitude" : 48.372611, "longitude" : 24.408014 },
+    { "latitude" : 48.372493, "longitude" : 24.408038 },
+    { "latitude" : 48.372359, "longitude" : 24.408025 },
+    { "latitude" : 48.372028, "longitude" : 24.407975 },
+    { "latitude" : 48.371787, "longitude" : 24.407950 },
+    { "latitude" : 48.371527, "longitude" : 24.407877 },
+    { "latitude" : 48.371276, "longitude" : 24.407870 },
+    { "latitude" : 48.371007, "longitude" : 24.407802 },
+    { "latitude" : 48.370718, "longitude" : 24.407711 },
+    { "latitude" : 48.370430, "longitude" : 24.407599 },
+    { "latitude" : 48.370159, "longitude" : 24.407523 },
+    { "latitude" : 48.369900, "longitude" : 24.407405 },
+    { "latitude" : 48.368946, "longitude" : 24.406923 },
+    { "latitude" : 48.368823, "longitude" : 24.406899 }
+  ]
+}

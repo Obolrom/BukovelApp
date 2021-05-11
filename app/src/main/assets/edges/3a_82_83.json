@@ -1,0 +1,13 @@
+{
+  "name": "3a",
+  "start" : 82,
+  "destination" : 83,
+  "complexity" : "BLUE",
+  "distance": 76,
+  "coordinates":
+  [
+    { "latitude" : 48.370054, "longitude" : 24.418881 },
+    { "latitude" : 48.369898, "longitude" : 24.418605 },
+    { "latitude" : 48.369557, "longitude" : 24.418174 }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "tr4",
+  "start" : 30,
+  "destination" : 31,
+  "complexity" : "BLUE",
+  "distance": 37,
+  "coordinates":
+  [
+    {"latitude": 48.366783, "longitude": 24.382403},
+    {"latitude": 48.366539, "longitude": 24.382059}
+  ]
+}

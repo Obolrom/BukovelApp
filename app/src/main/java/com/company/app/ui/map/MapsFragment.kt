@@ -83,7 +83,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             for (edge in (activity?.application as App).edges) {
                 graph.addEdge(Edge(edge))
             }
-            val pathFinder = ShortestPathFinder(graph, 71, 80)
+            val pathFinder = ShortestPathFinder(graph, 80, 69)
             delay(5000)
             val path = pathFinder.getShortestPath()
             withContext(Dispatchers.Main) {
