@@ -1,0 +1,15 @@
+{
+  "name": "5g",
+  "start" : 84,
+  "destination" : 20,
+  "complexity" : "RED",
+  "distance": 59,
+  "coordinates": [
+    {"latitude": 48.356988, "longitude": 24.403346},
+    {"latitude": 48.356998, "longitude": 24.403454},
+    {"latitude": 48.356997, "longitude": 24.403670},
+    {"latitude": 48.356986, "longitude": 24.403933},
+    {"latitude": 48.356960, "longitude": 24.404060},
+    {"latitude": 48.356907, "longitude": 24.404073}
+  ]
+}

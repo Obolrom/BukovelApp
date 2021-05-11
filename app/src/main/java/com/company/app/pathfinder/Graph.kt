@@ -1,5 +1,6 @@
 package com.company.app.pathfinder
 
+import com.company.app.ui.map.EdgeRepresentation
 import java.util.*
 
 class Graph(vertices: Int) {

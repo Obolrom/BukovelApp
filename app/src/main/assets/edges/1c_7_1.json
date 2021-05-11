@@ -1,9 +1,9 @@
 {
-  "name": "1c",
+  "name": "1e",
   "start" : 7,
   "destination" : 1,
   "complexity" : "BLUE",
-  "distance": 1,
+  "distance": 58,
   "coordinates":
   [ {"latitude": 48.352606, "longitude": 24.416090},
     {"latitude": 48.352608, "longitude": 24.416163},

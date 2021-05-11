@@ -1,0 +1,28 @@
+{
+  "name": "11d",
+  "start" : 43,
+  "destination" : 44,
+  "complexity" : "RED",
+  "distance": 511,
+  "coordinates":
+  [
+    {"latitude": 48.370011, "longitude": 24.382425},
+    {"latitude": 48.369740, "longitude": 24.383079},
+    {"latitude": 48.369512, "longitude": 24.383744},
+    {"latitude": 48.369419, "longitude": 24.384109},
+    {"latitude": 48.369205, "longitude": 24.384710},
+    {"latitude": 48.369084, "longitude": 24.385000},
+    {"latitude": 48.368628, "longitude": 24.385766},
+    {"latitude": 48.368407, "longitude": 24.386024},
+    {"latitude": 48.368329, "longitude": 24.386174},
+    {"latitude": 48.368293, "longitude": 24.386292},
+    {"latitude": 48.368279, "longitude": 24.386528},
+    {"latitude": 48.368279, "longitude": 24.386539},
+    {"latitude": 48.368361, "longitude": 24.386804},
+    {"latitude": 48.368468, "longitude": 24.386932},
+    {"latitude": 48.368782, "longitude": 24.387168},
+    {"latitude": 48.368910, "longitude": 24.387179},
+    {"latitude": 48.369081, "longitude": 24.387136},
+    {"latitude": 48.369402, "longitude": 24.387147}
+  ]
+}

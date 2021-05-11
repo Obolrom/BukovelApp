@@ -1,0 +1,17 @@
+{
+  "name": "11d",
+  "start" : 36,
+  "destination" : 42,
+  "complexity" : "RED",
+  "distance": 147,
+  "coordinates":
+  [
+    {"latitude": 48.371251, "longitude": 24.379823},
+    {"latitude": 48.371173, "longitude": 24.379614},
+    {"latitude": 48.371108, "longitude": 24.379764},
+    {"latitude": 48.371066, "longitude": 24.380032},
+    {"latitude": 48.371016, "longitude": 24.380193},
+    {"latitude": 48.370610, "longitude": 24.381127}
+
+  ]
+}

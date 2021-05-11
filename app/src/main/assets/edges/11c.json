@@ -1,9 +1,9 @@
 {
   "name": "11c",
   "start": 43,
-  "destination": 46,
+  "destination": 45,
   "complexity": "BLACK",
-  "distance": 1,
+  "distance": 328,
   "coordinates": [
     { "latitude" : 48.370011, "longitude" : 24.382425 },
     { "latitude" : 48.370022, "longitude" : 24.382515 },

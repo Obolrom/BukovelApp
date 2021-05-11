@@ -13,8 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.company.app.App
 import com.company.app.R
+import com.company.app.pathfinder.Edge
+import com.company.app.pathfinder.Graph
+import com.company.app.pathfinder.ShortestPathFinder
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -69,6 +76,22 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 .visible(true)
                 .addAll(edge.coordinates)
                 .color(Color.parseColor("#7CFC00")))
+        }
+
+        (activity?.application as App).coroutineScope.launch {
+            val graph = Graph(86)
+            for (edge in (activity?.application as App).edges) {
+                graph.addEdge(Edge(edge))
+            }
+            val pathFinder = ShortestPathFinder(graph, 71, 80)
+            delay(5000)
+            val path = pathFinder.getShortestPath()
+            withContext(Dispatchers.Main) {
+                Toast.makeText(
+                    context?.applicationContext,
+                    path.toString(), Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 

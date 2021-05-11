@@ -3,7 +3,7 @@
   "start": 36,
   "destination": 40,
   "complexity": "BLACK",
-  "distance": 1,
+  "distance": 860,
   "coordinates": [
     { "latitude" : 48.377457, "longitude" : 24.383309 },
     { "latitude" : 48.377383, "longitude" : 24.383436 },

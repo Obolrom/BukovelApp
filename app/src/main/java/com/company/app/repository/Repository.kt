@@ -13,6 +13,11 @@ import kotlinx.coroutines.SupervisorJob
 
 class Repository(private val app: App) {
     private val bukovelService: BukovelService by lazy { RetrofitServices.bukovelService }
+    private val database: BukovelDatabase by lazy {
+        BukovelDatabase.getDatabase(app.applicationContext, coroutineScope)
+    }
+
+    val coroutineScope: CoroutineScope = app.coroutineScope
 
     val slopes = app.slopes
 

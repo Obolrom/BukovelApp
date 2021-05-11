@@ -1,0 +1,11 @@
+{
+  "name": "2r",
+  "start": 17,
+  "destination": 10,
+  "complexity": "BLUE",
+  "distance": 1095,
+  "coordinates": [
+    { "latitude" : 48.35807852456763, "longitude" : 24.40767445756532 },
+    { "latitude" : 48.34832455873529, "longitude" : 24.40970033821845 }
+  ]
+}

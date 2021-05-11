@@ -1,0 +1,11 @@
+{
+  "name": "1r",
+  "start" : 0,
+  "destination" : 8,
+  "complexity" : "BLUE",
+  "distance": 700,
+  "coordinates": [
+    { "latitude" : 48.35370545667654, "longitude" : 24.416359137964715 },
+    { "latitude" : 48.34838398451325, "longitude" : 24.41131149541255 }
+  ]
+}

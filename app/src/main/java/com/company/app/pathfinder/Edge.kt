@@ -1,5 +1,7 @@
 package com.company.app.pathfinder
 
+import com.company.app.ui.map.EdgeRepresentation
+
 data class Edge(
         val start: Int,
         val destination: Int,
@@ -11,4 +13,10 @@ data class Edge(
 
     constructor(destination: Int, weight: Int)
             : this(destination, weight, "")
+
+    constructor(edgeRepresentation: EdgeRepresentation)
+            : this(edgeRepresentation.start,
+                    edgeRepresentation.destination,
+                    edgeRepresentation.distance,
+                    edgeRepresentation.name)
 }

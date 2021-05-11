@@ -1,0 +1,11 @@
+{
+  "name": "17",
+  "start": 30,
+  "destination": 27,
+  "complexity": "BLUE",
+  "distance": 619,
+  "coordinates": [
+    { "latitude" : 48.36649942234565, "longitude" : 24.3820715994639 },
+    { "latitude" : 48.36119334362505, "longitude" : 24.38458713166062 }
+  ]
+}

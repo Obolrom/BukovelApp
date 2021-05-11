@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.company.app.App
 import com.company.app.R
+import com.r0adkll.slidr.Slidr
 
 class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
 
@@ -50,7 +52,7 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
             layoutManager = LinearLayoutManager(context)
         })
 
-        serviceViewModel.services.observe(viewLifecycleOwner, { items ->
+        serviceViewModel.getServices().observe(viewLifecycleOwner, { items ->
             items?.let {
                 rvAdapter.submitList(it)
                 rvAdapter.notifyDataSetChanged()
@@ -60,9 +62,9 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
 
     override fun onServiceClicked(score: Float) {
         context?.let {
-            Toast.makeText(context,
-                "score $score",
-                Toast.LENGTH_SHORT).show()
+            findNavController().run {
+                navigate(R.id.action_navigation_services_to_serviceDescriptionFragment)
+            }
         }
     }
 }
