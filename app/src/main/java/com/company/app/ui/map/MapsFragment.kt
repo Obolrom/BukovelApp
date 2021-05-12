@@ -3,11 +3,12 @@ package com.company.app.ui.map
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,11 +18,14 @@ import com.company.app.pathfinder.Edge
 import com.company.app.pathfinder.Graph
 import com.company.app.pathfinder.ShortestPathFinder
 import com.google.android.libraries.maps.*
-import com.google.android.libraries.maps.model.*
-import kotlinx.coroutines.Dispatchers
+import com.google.android.libraries.maps.model.LatLng
+import com.google.android.libraries.maps.model.MapStyleOptions
+import com.google.android.libraries.maps.model.PolylineOptions
+import com.google.android.libraries.maps.model.RoundCap
+import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -33,6 +37,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         MapViewModelFactory((activity?.application as App).repository)
     }
     private lateinit var root: View
+    private lateinit var toolbar: Toolbar
+    private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
 
     override fun onCreateView(
@@ -41,6 +47,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
         root = inflater.inflate(R.layout.fragment_maps, container, false)
+
+        toolbar = root.findViewById(R.id.map_toolbar)
+        (activity as AppCompatActivity).supportActionBar?.run {
+            hide()
+            customView = toolbar
+        }
+        mapView = root.findViewById(R.id.map) as MapView
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
 
         return root
     }
@@ -86,12 +101,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             val pathFinder = ShortestPathFinder(graph, 80, 69)
             delay(5000)
             val path = pathFinder.getShortestPath()
-            withContext(Dispatchers.Main) {
-                Toast.makeText(
-                    context?.applicationContext,
-                    path.toString(), Toast.LENGTH_LONG
-                ).show()
-            }
         }
     }
 
@@ -124,5 +133,30 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
     }
 }
