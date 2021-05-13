@@ -2,6 +2,8 @@ package com.company.app
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.company.app.repository.Repository
 import com.company.app.ui.map.*
 import com.google.android.libraries.maps.model.Dash
@@ -31,6 +33,7 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        INSTANCE = this
 
         coroutineScope.launch(Dispatchers.IO) {
             val assets = applicationContext?.assets
@@ -120,5 +123,11 @@ class App: Application() {
             }
         }
         return directions
+    }
+
+    companion object {
+        private var INSTANCE: App? = null
+        val app: App
+            get() = INSTANCE!!
     }
 }
