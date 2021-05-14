@@ -17,13 +17,17 @@ import com.company.app.R
 import com.company.app.pathfinder.Edge
 import com.company.app.pathfinder.Graph
 import com.company.app.pathfinder.ShortestPathFinder
+import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.LatLng
 import com.google.android.libraries.maps.model.MapStyleOptions
+import com.google.android.libraries.maps.model.Polyline
 import com.google.android.libraries.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -76,21 +80,34 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 BottomSheetBehavior.STATE_HIDDEN
             else
                 BottomSheetBehavior.STATE_COLLAPSED
-            line.visible(true)
         }
         redSwitch.setOnClickListener {
-            val mes = if ((it as SwitchCompat).isChecked) "red activated" else "red diactivated"
-            Toast.makeText(context?.applicationContext, mes, Toast.LENGTH_LONG).show()
+            setVisibility(RED, mapViewModel.redSlopes)
         }
-        blackSwitch.setOnClickListener { }
+        blackSwitch.setOnClickListener {
+            setVisibility(BLACK, mapViewModel.blackSlopes)
+        }
         getLocationPermission()
     }
-    val line = PolylineOptions()
-        .width(20f)
-        .add(LatLng(48.36493538314667, 24.397248320057965))
-        .add(LatLng(48.36605713036255, 24.419095746424347))
-        .color(Color.CYAN)
-        .visible(false)
+
+    private fun setVisibility(complexity: Complexity, routes: MutableList<Polyline>) {
+        if (routes.isNotEmpty()) {
+            routes.forEach { polyline -> polyline.remove() }
+            routes.clear()
+            return
+        }
+        with(mapViewModel) {
+            coroutineScope.launch(Dispatchers.Main) {
+                slopes.value!!.forEach { slope ->
+                    val polyline = googleMap.addPolyline(slope.style)
+                    if (slope.complexity == complexity)
+                        routes.add(polyline)
+                    else
+                        polyline.remove()
+                }
+            }
+        }
+    }
 
     override fun onMapReady(map: GoogleMap?) {
         googleMap = map ?: return
@@ -100,39 +117,37 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
 
         mapViewModel.slopes.observe(viewLifecycleOwner, { slopes ->
-            slopes.forEach { slope -> googleMap.addPolyline(slope.style) }
+            slopes.forEach { slope ->
+                val polyline = googleMap.addPolyline(slope.style)
+                if (slope.complexity == RED) {
+                    mapViewModel.redSlopes.add(polyline)
+                } else if (slope.complexity == BLACK) {
+                    mapViewModel.blackSlopes.add(polyline)
+                }
+            }
         })
 
         mapViewModel.lifts.observe(viewLifecycleOwner, { lifts ->
             lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
         })
 
-        googleMap.addPolyline(line)
-
-        // FIXME: 13.05.21 why changing of visibility not working ?
-        mapViewModel.coroutineScope.launch {
-            delay(3000)
-            line.visible(true)
-        }
-
 //        for (edge in (activity?.application as App).edges) {
 //            googleMap.addPolyline(PolylineOptions()
 //                .width(7.0f)
-//                .endCap(RoundCap())
 //                .visible(true)
 //                .addAll(edge.coordinates)
 //                .color(Color.parseColor("#7CFC00")))
 //        }
-
-        (activity?.application as App).coroutineScope.launch {
-            val graph = Graph(86)
-            for (edge in (activity?.application as App).edges) {
-                graph.addEdge(Edge(edge))
-            }
-            val pathFinder = ShortestPathFinder(graph, 80, 69)
-            delay(5000)
-            val path = pathFinder.getShortestPath()
-        }
+//
+//        (activity?.application as App).coroutineScope.launch {
+//            val graph = Graph(86)
+//            for (edge in (activity?.application as App).edges) {
+//                graph.addEdge(Edge(edge))
+//            }
+//            val pathFinder = ShortestPathFinder(graph, 80, 69)
+//            delay(5000)
+//            val path = pathFinder.getShortestPath()
+//        }
     }
 
     private fun getLocationPermission() {
@@ -174,11 +189,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onPause() {
         super.onPause()
         mapView.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mapView.onStop()
     }
 
     override fun onDestroy() {

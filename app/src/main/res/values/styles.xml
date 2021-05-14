@@ -35,4 +35,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="black_switcher_theme" parent="Theme.BukovelApp">
+        <item name="colorSecondary">@color/black</item>
+    </style>
+
+    <style name="red_switcher_theme" parent="Theme.BukovelApp">
+        <item name="colorSecondary">@color/red</item>
+    </style>
+
 </resources>

@@ -22,12 +22,14 @@
     <androidx.appcompat.widget.SwitchCompat
         style="@style/switcher"
         android:id="@+id/red_complexity_level"
-        android:text="middle level | RED"/>
+        android:text="@string/middle_level_red"
+        android:theme="@style/red_switcher_theme"/>
 
     <androidx.appcompat.widget.SwitchCompat
         style="@style/switcher"
         android:id="@+id/black_complexity_level"
-        android:text="high level | BLACK"/>
+        android:text="@string/high_level_black"
+        android:theme="@style/black_switcher_theme"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
