@@ -19,4 +19,5 @@
     <string name="navigator_opener">navigator opener</string>
     <string name="middle_level_red">middle level | RED</string>
     <string name="high_level_black">high level | BLACK</string>
+    <string name="get_directions">get directions</string>
 </resources>

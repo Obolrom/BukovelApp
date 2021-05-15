@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
@@ -47,6 +49,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fabMenu: FloatingActionButton
     private lateinit var redSwitch: SwitchCompat
     private lateinit var blackSwitch: SwitchCompat
+    private lateinit var startPicker: NumberPicker
+    private lateinit var destinationPicker: NumberPicker
+    private lateinit var directionButton: AppCompatButton
     private lateinit var googleMap: GoogleMap
 
     override fun onCreateView(
@@ -61,6 +66,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
         fabMenu = root.findViewById(R.id.fab_map_navigator)
         mapView = root.findViewById(R.id.map) as MapView
+        startPicker = root.findViewById(R.id.start_picker)
+        destinationPicker = root.findViewById(R.id.destination_picker)
+        directionButton = root.findViewById(R.id.get_directions)
         with(mapView) {
             onCreate(savedInstanceState)
             getMapAsync(this@MapsFragment)
@@ -75,6 +83,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+        val values = arrayOf("one", "two", "three", "four", "five", "six", "seven", "eight", "veeeeery long message")
+        initPicker(startPicker, values)
+        initPicker(destinationPicker, values)
         fabMenu.setOnClickListener {
             bottomSheet.state = if (bottomSheet.state == BottomSheetBehavior.STATE_COLLAPSED)
                 BottomSheetBehavior.STATE_HIDDEN
@@ -87,7 +98,21 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         blackSwitch.setOnClickListener {
             setVisibility(BLACK, mapViewModel.blackSlopes)
         }
+        directionButton.setOnClickListener {
+            Toast.makeText(context?.applicationContext,
+                "from ${startPicker.value} to ${destinationPicker.value}",
+                Toast.LENGTH_SHORT).show()
+        }
         getLocationPermission()
+    }
+
+    private fun initPicker(picker: NumberPicker, values: Array<String>) {
+        with(picker) {
+            minValue = 0
+            maxValue = values.size - 1
+            wrapSelectorWheel = true
+            displayedValues = values
+        }
     }
 
     private fun setVisibility(complexity: Complexity, routes: MutableList<Polyline>) {

@@ -19,6 +19,12 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_view" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/grey" />
+
     <androidx.appcompat.widget.SwitchCompat
         style="@style/switcher"
         android:id="@+id/red_complexity_level"
@@ -31,11 +37,42 @@
         android:text="@string/high_level_black"
         android:theme="@style/black_switcher_theme"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:text="shit"
-        android:textSize="36sp"
-        android:layout_gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/grey" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <NumberPicker
+            android:id="@+id/start_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/destination_picker"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <NumberPicker
+            android:id="@+id/destination_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/start_picker"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/login_sign_in_button"
+        android:layout_width="210dp"
+        android:layout_gravity="center"
+        android:id="@+id/get_directions"
+        android:text="@string/get_directions"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="10dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
