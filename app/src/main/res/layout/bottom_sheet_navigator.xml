@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#d9d9d9"
+    android:background="@drawable/rounded_top_corners"
     android:id="@+id/bottom_sheet"
     android:padding="10dp"
     app:behavior_hideable="true"
@@ -19,11 +19,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_view" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="center"
-        android:background="@color/grey" />
+    <View style="@style/divider"/>
 
     <androidx.appcompat.widget.SwitchCompat
         style="@style/switcher"
@@ -37,11 +33,7 @@
         android:text="@string/high_level_black"
         android:theme="@style/black_switcher_theme"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="center"
-        android:background="@color/grey" />
+    <View style="@style/divider" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

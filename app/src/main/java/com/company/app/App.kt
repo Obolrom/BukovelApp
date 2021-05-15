@@ -117,12 +117,24 @@ class App: Application() {
                         .visible(true)
                         .color(R.color.purple_200)
                         .addAll(edge.coordinates)
+                if (filePath.contains("transition"))
+                    directions.add(duplicateTransition(edge))
                 directions.add(edge)
             } catch (ioe: IOException) {
                 ioe.printStackTrace()
             }
         }
         return directions
+    }
+
+    private fun duplicateTransition(edge: EdgeRepresentation): EdgeRepresentation {
+        return EdgeRepresentation(
+            edge.name,
+            edge.destination,
+            edge.start,
+            edge.complexity,
+            edge.distance,
+            edge.coordinates)
     }
 
     companion object {

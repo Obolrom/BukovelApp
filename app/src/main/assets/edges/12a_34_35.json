@@ -1,0 +1,26 @@
+{
+  "name": "12a",
+  "start" : 34,
+  "destination" : 35,
+  "complexity" : "RED",
+  "distance": 336,
+  "coordinates": [
+    {"latitude": 48.367944, "longitude": 24.371852},
+    {"latitude": 48.367956, "longitude": 24.371911},
+    {"latitude": 48.367982, "longitude": 24.372010},
+    {"latitude": 48.368012, "longitude": 24.372102},
+    {"latitude": 48.368050, "longitude": 24.372195},
+    {"latitude": 48.368194, "longitude": 24.372484},
+    {"latitude": 48.368570, "longitude": 24.373080},
+    {"latitude": 48.368641, "longitude": 24.373187},
+    {"latitude": 48.368885, "longitude": 24.373606},
+    {"latitude": 48.369035, "longitude": 24.373861},
+    {"latitude": 48.369235, "longitude": 24.374214},
+    {"latitude": 48.369302, "longitude": 24.374329},
+    {"latitude": 48.369469, "longitude": 24.374569},
+    {"latitude": 48.369537, "longitude": 24.374664},
+    {"latitude": 48.369629, "longitude": 24.374822},
+    {"latitude": 48.369734, "longitude": 24.375081},
+    {"latitude": 48.369855, "longitude": 24.375336}
+  ]
+}

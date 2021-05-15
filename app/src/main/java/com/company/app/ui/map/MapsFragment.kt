@@ -43,7 +43,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val mapViewModel: MapViewModel by viewModels {
         MapViewModelFactory((activity?.application as App).repository)
     }
-    private lateinit var root: View
     private lateinit var mapView: MapView
     private lateinit var bottomSheet: BottomSheetBehavior<LinearLayoutCompat>
     private lateinit var fabMenu: FloatingActionButton
@@ -59,16 +58,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        root = inflater.inflate(R.layout.fragment_maps, container, false)
+        val root = inflater.inflate(R.layout.fragment_maps, container, false)
 
-        bottomSheet = BottomSheetBehavior
-            .from(root.findViewById(R.id.bottom_sheet))
-        bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
-        fabMenu = root.findViewById(R.id.fab_map_navigator)
-        mapView = root.findViewById(R.id.map) as MapView
-        startPicker = root.findViewById(R.id.start_picker)
-        destinationPicker = root.findViewById(R.id.destination_picker)
-        directionButton = root.findViewById(R.id.get_directions)
+        with(root) {
+            bottomSheet = BottomSheetBehavior
+                .from(findViewById(R.id.bottom_sheet))
+            bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            fabMenu = findViewById(R.id.fab_map_navigator)
+            mapView = findViewById(R.id.map)
+            startPicker = findViewById(R.id.start_picker)
+            destinationPicker = findViewById(R.id.destination_picker)
+            directionButton = findViewById(R.id.get_directions)
+        }
         with(mapView) {
             onCreate(savedInstanceState)
             getMapAsync(this@MapsFragment)
@@ -94,8 +95,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
         redSwitch.setOnClickListener {
             setVisibility(RED, mapViewModel.redSlopes)
+            if ( ! redSwitch.isChecked) {
+                hideRoutes(mapViewModel.blackSlopes)
+                blackSwitch.isChecked = false
+            }
         }
         blackSwitch.setOnClickListener {
+            if ( ! redSwitch.isChecked) {
+                setVisibility(RED, mapViewModel.redSlopes)
+                redSwitch.isChecked = true
+            }
             setVisibility(BLACK, mapViewModel.blackSlopes)
         }
         directionButton.setOnClickListener {
@@ -115,10 +124,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    private fun hideRoutes(routes: MutableList<Polyline>) {
+        routes.forEach { polyline -> polyline.remove() }
+        routes.clear()
+    }
+
     private fun setVisibility(complexity: Complexity, routes: MutableList<Polyline>) {
         if (routes.isNotEmpty()) {
-            routes.forEach { polyline -> polyline.remove() }
-            routes.clear()
+            hideRoutes(routes)
             return
         }
         with(mapViewModel) {
@@ -156,13 +169,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
         })
 
-//        for (edge in (activity?.application as App).edges) {
-//            googleMap.addPolyline(PolylineOptions()
-//                .width(7.0f)
-//                .visible(true)
-//                .addAll(edge.coordinates)
-//                .color(Color.parseColor("#7CFC00")))
-//        }
+        for (edge in (activity?.application as App).edges) {
+            googleMap.addPolyline(PolylineOptions()
+                .width(7.0f)
+                .visible(true)
+                .addAll(edge.coordinates)
+                .color(Color.parseColor("#7CFC00")))
+        }
 //
 //        (activity?.application as App).coroutineScope.launch {
 //            val graph = Graph(86)

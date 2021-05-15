@@ -1,0 +1,11 @@
+{
+  "name": "tr7",
+  "start" : 64,
+  "destination" : 65,
+  "complexity" : "BLUE",
+  "distance": 46,
+  "coordinates": [
+    {"latitude": 48.378861391442285, "longitude": 24.41030998368347},
+    {"latitude": 48.37868166737922, "longitude": 24.409749313610842}
+  ]
+}

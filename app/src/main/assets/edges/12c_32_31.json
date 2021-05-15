@@ -1,0 +1,14 @@
+{
+  "name": "12c",
+  "start": 32,
+  "destination": 31,
+  "complexity": "RED",
+  "distance": 229,
+  "coordinates": [
+    { "latitude" : 48.368440, "longitude" : 24.380075 },
+    { "latitude" : 48.368345, "longitude" : 24.380287 },
+    { "latitude" : 48.368139, "longitude" : 24.380609 },
+    { "latitude" : 48.367046, "longitude" : 24.382073 },
+    { "latitude" : 48.366954, "longitude" : 24.382218 }
+  ]
+}

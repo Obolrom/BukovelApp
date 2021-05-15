@@ -43,4 +43,11 @@
         <item name="colorSecondary">@color/red</item>
     </style>
 
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/grey</item>
+    </style>
+
 </resources>

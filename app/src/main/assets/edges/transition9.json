@@ -1,0 +1,11 @@
+{
+  "name": "tr9",
+  "start" : 17,
+  "destination" : 70,
+  "complexity" : "BLUE",
+  "distance": 120,
+  "coordinates": [
+    {"latitude": 48.359069, "longitude": 24.408339},
+    {"latitude": 48.358078, "longitude": 24.407691}
+  ]
+}
