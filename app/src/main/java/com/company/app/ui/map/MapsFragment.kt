@@ -3,6 +3,7 @@ package com.company.app.ui.map
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -169,13 +170,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
         })
 
-        for (edge in (activity?.application as App).edges) {
-            googleMap.addPolyline(PolylineOptions()
-                .width(7.0f)
-                .visible(true)
-                .addAll(edge.coordinates)
-                .color(Color.parseColor("#7CFC00")))
-        }
+//        for (edge in (activity?.application as App).edges) {
+//            googleMap.addPolyline(PolylineOptions()
+//                .width(7.0f)
+//                .visible(true)
+//                .addAll(edge.coordinates)
+//                .color(Color.parseColor("#7CFC00")))
+//                .zIndex = 1.0f
+//        }
 //
 //        (activity?.application as App).coroutineScope.launch {
 //            val graph = Graph(86)

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.company.app.repository.Repository
+import com.company.app.ui.map.Lift
 import com.company.app.ui.services.ServiceViewModel
 
 class LiftsViewModel(private val repository: Repository) : ViewModel() {
@@ -13,6 +14,7 @@ class LiftsViewModel(private val repository: Repository) : ViewModel() {
         value = "This is notifications Fragment"
     }
     val text: LiveData<String> = _text
+    val lifts: LiveData<List<Lift>> = repository.lifts
 }
 
 class LiftsViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {

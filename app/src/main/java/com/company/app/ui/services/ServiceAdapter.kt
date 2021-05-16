@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.app.R
-import com.squareup.picasso.Picasso
 
 class ServiceAdapter(private val callback: OnServiceClickListener) :
         ListAdapter<Service, ServiceAdapter.ViewHolder>(ServiceComparator()) {
@@ -35,7 +34,7 @@ class ServiceAdapter(private val callback: OnServiceClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.fragment_service, parent, false)
+        val view: View = inflater.inflate(R.layout.item_service, parent, false)
 
         return ViewHolder(view)
     }
