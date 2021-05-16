@@ -1,0 +1,17 @@
+{
+  "name": "8d",
+  "start" : 54,
+  "destination" : 53,
+  "complexity" : "BLUE",
+  "distance": 154,
+  "coordinates": [
+    { "latitude" : 48.36734396975585, "longitude" : 24.39380998100626 },
+    { "latitude" : 48.367310165919676, "longitude" : 24.39373958445747 },
+    { "latitude" : 48.367244679905106, "longitude" : 24.39349617357524 },
+    { "latitude" : 48.36720235867972, "longitude" : 24.39330573679684 },
+    { "latitude" : 48.36712261695637, "longitude" : 24.39306903188024 },
+    { "latitude" : 48.36686779905657, "longitude" : 24.392468887557946 },
+    { "latitude" : 48.366714105636085, "longitude" : 24.39213428228747 },
+    { "latitude" : 48.36666648271484, "longitude" : 24.392001557065058}
+  ]
+}

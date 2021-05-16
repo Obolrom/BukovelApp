@@ -22,10 +22,7 @@ import com.company.app.pathfinder.Graph
 import com.company.app.pathfinder.ShortestPathFinder
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
-import com.google.android.libraries.maps.model.LatLng
-import com.google.android.libraries.maps.model.MapStyleOptions
-import com.google.android.libraries.maps.model.Polyline
-import com.google.android.libraries.maps.model.PolylineOptions
+import com.google.android.libraries.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
