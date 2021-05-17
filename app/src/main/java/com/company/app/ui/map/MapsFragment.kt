@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.company.app.App
 import com.company.app.R
+import com.company.app.pathfinder.Graph
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
@@ -24,6 +25,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.*
+import java.util.concurrent.Callable
+import java.util.concurrent.FutureTask
+import kotlin.concurrent.thread
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
@@ -36,6 +40,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         MapViewModelFactory((activity?.application as App).repository)
     }
     private lateinit var mapView: MapView
+    private val navigator: Navigator by lazy { Navigator(requireContext()) }
     private lateinit var bottomSheet: BottomSheetBehavior<LinearLayoutCompat>
     private lateinit var fabMenu: FloatingActionButton
     private lateinit var redSwitch: SwitchCompat
@@ -47,6 +52,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var pickerValues: Array<String>
     private var startPickerMarker: Marker? = null
     private var destinationPickerMarker: Marker? = null
+    private var navigatorJob: Job? = null
+    private var navScope: CoroutineScope = CoroutineScope(SupervisorJob())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -112,9 +119,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private val directionButtonListener = View.OnClickListener {
-        Toast.makeText(context?.applicationContext,
-            "from ${startPicker.value} to ${destinationPicker.value}",
-            Toast.LENGTH_SHORT).show()
+        val start = mapViewModel.vertices[startPicker.value].vertex
+        val destination = mapViewModel.vertices[destinationPicker.value].vertex
+        val graph = Graph(mapViewModel.edgeRepresentationList)
+        directionButton.isClickable = navigatorJob?.isCompleted != true
+        Log.d("slopes", "from $start to $destination")
+        navigatorJob = navScope.launch {
+            val path = navigator.getPath(graph, start, destination)
+            Log.d("slopes", path.toString())
+            directionButton.isClickable = true
+        }
     }
 
     private val blackSwitchListener = View.OnClickListener {
@@ -214,16 +228,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 //                .addAll(edge.coordinates)
 //                .color(Color.parseColor("#7CFC00")))
 //                .zIndex = 1.0f
-//        }
-//
-//        (activity?.application as App).coroutineScope.launch {
-//            val graph = Graph(86)
-//            for (edge in (activity?.application as App).edges) {
-//                graph.addEdge(Edge(edge))
-//            }
-//            val pathFinder = ShortestPathFinder(graph, 80, 69)
-//            delay(5000)
-//            val path = pathFinder.getShortestPath()
 //        }
     }
 

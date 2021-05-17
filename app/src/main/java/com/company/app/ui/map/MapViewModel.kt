@@ -8,6 +8,7 @@ import com.google.android.libraries.maps.model.Polyline
 class MapViewModel(private val repository: Repository): ViewModel() {
     val slopes = repository.slopes
     val lifts = repository.lifts
+    val edgeRepresentationList = repository.edgeRepresentations
     val coroutineScope = repository.coroutineScope
     val vertices: Array<Vertex> = repository.vertices
     val redSlopes: MutableList<Polyline> = mutableListOf()

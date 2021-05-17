@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.company.app.App
 import com.company.app.retrofit.BukovelService
 import com.company.app.retrofit.RetrofitServices
+import com.company.app.ui.map.EdgeRepresentation
 import com.company.app.ui.map.Lift
 import com.company.app.ui.map.Slope
 import com.company.app.ui.map.Vertex
@@ -25,6 +26,7 @@ class Repository(private val app: App) {
     val coroutineScope: CoroutineScope = app.coroutineScope
 
     val vertices: Array<Vertex> = app.vertices
+    val edgeRepresentations: List<EdgeRepresentation> = app.edges
 
     val slopes: LiveData<List<Slope>> = MutableLiveData<List<Slope>>().apply {
         value = app.slopes

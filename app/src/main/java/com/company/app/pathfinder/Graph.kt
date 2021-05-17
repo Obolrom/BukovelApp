@@ -1,5 +1,6 @@
 package com.company.app.pathfinder
 
+import android.util.Log
 import com.company.app.ui.map.EdgeRepresentation
 import java.util.*
 
@@ -12,6 +13,13 @@ class Graph(vertices: Int) {
     init {
         for (i in 0 until vertices)
             adjacencyMap[i] = LinkedList()
+    }
+
+    constructor(edges: List<EdgeRepresentation>)
+        : this(edges.size) {
+        edges.forEach { edgeRepresentation ->
+            addEdge(Edge(edgeRepresentation))
+        }
     }
 
     fun removeSlope(name: String) {
