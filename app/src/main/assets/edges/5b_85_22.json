@@ -1,0 +1,15 @@
+{
+  "name": "5b",
+  "start" : 85,
+  "destination" : 22,
+  "complexity" : "BLUE",
+  "distance": 773,
+  "coordinates": [
+    { "latitude" :48.363357041080285, "longitude" :24.398455114919965 },
+    { "latitude" : 48.363171, "longitude" : 24.398838 },
+    { "latitude" : 48.362615, "longitude" : 24.399685 },
+    { "latitude" : 48.362394, "longitude" : 24.400050 },
+    { "latitude" : 48.360319, "longitude" : 24.402807 },
+    { "latitude" : 48.358273, "longitude" : 24.405565 }
+  ]
+}

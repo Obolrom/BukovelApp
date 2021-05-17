@@ -17,19 +17,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.company.app.App
 import com.company.app.R
-import com.company.app.pathfinder.Edge
-import com.company.app.pathfinder.Graph
-import com.company.app.pathfinder.ShortestPathFinder
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
@@ -50,6 +44,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var destinationPicker: NumberPicker
     private lateinit var directionButton: AppCompatButton
     private lateinit var googleMap: GoogleMap
+    private lateinit var pickerValues: Array<String>
+    private var startPickerMarker: Marker? = null
+    private var destinationPickerMarker: Marker? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,43 +79,79 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-        val values = arrayOf("one", "two", "three", "four", "five", "six", "seven", "eight", "veeeeery long message")
-        initPicker(startPicker, values)
-        initPicker(destinationPicker, values)
-        fabMenu.setOnClickListener {
-            bottomSheet.state = if (bottomSheet.state == BottomSheetBehavior.STATE_COLLAPSED)
-                BottomSheetBehavior.STATE_HIDDEN
-            else
-                BottomSheetBehavior.STATE_COLLAPSED
-        }
-        redSwitch.setOnClickListener {
-            setVisibility(RED, mapViewModel.redSlopes)
-            if ( ! redSwitch.isChecked) {
-                hideRoutes(mapViewModel.blackSlopes)
-                blackSwitch.isChecked = false
+
+        pickerValues = initPickerValues(mapViewModel.vertices)
+        with(startPicker) {
+            initPicker(this)
+            setOnValueChangedListener { picker, oldVal, newVal ->
+                startPickerMarker = startPickerMarker.run {
+                    this?.remove()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(mapViewModel.vertices[newVal].coordinate)
+                        .title(mapViewModel.vertices[newVal].title))
+                }
             }
         }
-        blackSwitch.setOnClickListener {
-            if ( ! redSwitch.isChecked) {
-                setVisibility(RED, mapViewModel.redSlopes)
-                redSwitch.isChecked = true
+        with(destinationPicker) {
+            initPicker(this)
+            setOnValueChangedListener { picker, oldVal, newVal ->
+                destinationPickerMarker = destinationPickerMarker.run {
+                    this?.remove()
+                    googleMap.addMarker(MarkerOptions()
+                        .position(mapViewModel.vertices[newVal].coordinate)
+                        .title(mapViewModel.vertices[newVal].title))
+                }
             }
-            setVisibility(BLACK, mapViewModel.blackSlopes)
         }
-        directionButton.setOnClickListener {
-            Toast.makeText(context?.applicationContext,
-                "from ${startPicker.value} to ${destinationPicker.value}",
-                Toast.LENGTH_SHORT).show()
-        }
+        fabMenu.setOnClickListener(fabMenuButtonListener)
+        redSwitch.setOnClickListener(redSwitchListener)
+        blackSwitch.setOnClickListener(blackSwitchListener)
+        directionButton.setOnClickListener(directionButtonListener)
+
         getLocationPermission()
     }
 
-    private fun initPicker(picker: NumberPicker, values: Array<String>) {
+    private val directionButtonListener = View.OnClickListener {
+        Toast.makeText(context?.applicationContext,
+            "from ${startPicker.value} to ${destinationPicker.value}",
+            Toast.LENGTH_SHORT).show()
+    }
+
+    private val blackSwitchListener = View.OnClickListener {
+        if ( ! redSwitch.isChecked) {
+            setVisibility(RED, mapViewModel.redSlopes)
+            redSwitch.isChecked = true
+        }
+        setVisibility(BLACK, mapViewModel.blackSlopes)
+    }
+
+    private val fabMenuButtonListener = View.OnClickListener {
+        bottomSheet.state = if (bottomSheet.state == BottomSheetBehavior.STATE_COLLAPSED)
+            BottomSheetBehavior.STATE_HIDDEN
+        else
+            BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    private val redSwitchListener = View.OnClickListener {
+        setVisibility(RED, mapViewModel.redSlopes)
+        if ( ! redSwitch.isChecked) {
+            hideRoutes(mapViewModel.blackSlopes)
+            blackSwitch.isChecked = false
+        }
+    }
+
+    private fun initPickerValues(vertices: Array<Vertex>): Array<String> {
+        val names = arrayListOf<String>()
+        vertices.forEach { vertex -> names.add(vertex.title) }
+        return names.toTypedArray()
+    }
+
+    private fun initPicker(picker: NumberPicker) {
         with(picker) {
             minValue = 0
-            maxValue = values.size - 1
+            maxValue = pickerValues.size - 1
             wrapSelectorWheel = true
-            displayedValues = values
+            displayedValues = pickerValues
         }
     }
 
@@ -152,20 +185,27 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style))
         }
 
-        mapViewModel.slopes.observe(viewLifecycleOwner, { slopes ->
-            slopes.forEach { slope ->
-                val polyline = googleMap.addPolyline(slope.style)
-                if (slope.complexity == RED) {
-                    mapViewModel.redSlopes.add(polyline)
-                } else if (slope.complexity == BLACK) {
-                    mapViewModel.blackSlopes.add(polyline)
+        with(mapViewModel) {
+            slopes.observe(viewLifecycleOwner, { slopes ->
+                coroutineScope.launch(Dispatchers.Main) {
+                    slopes.forEach { slope ->
+                        val polyline = googleMap.addPolyline(slope.style)
+                        if (slope.complexity == RED) {
+                            redSlopes.add(polyline)
+                        } else if (slope.complexity == BLACK) {
+                            blackSlopes.add(polyline)
+                        }
+                    }
                 }
-            }
-        })
+            })
 
-        mapViewModel.lifts.observe(viewLifecycleOwner, { lifts ->
-            lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
-        })
+            lifts.observe(viewLifecycleOwner, { lifts ->
+                coroutineScope.launch(Dispatchers.Main) {
+                    lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
+                }
+            })
+        }
+
 
 //        for (edge in (activity?.application as App).edges) {
 //            googleMap.addPolyline(PolylineOptions()
@@ -208,7 +248,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        // FIXME: 18.04.21 make it correct
         when (requestCode) {
             locationPermissionRequest -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

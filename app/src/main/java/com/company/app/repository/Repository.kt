@@ -7,6 +7,7 @@ import com.company.app.retrofit.BukovelService
 import com.company.app.retrofit.RetrofitServices
 import com.company.app.ui.map.Lift
 import com.company.app.ui.map.Slope
+import com.company.app.ui.map.Vertex
 import com.company.app.ui.services.Service
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
@@ -22,6 +23,8 @@ class Repository(private val app: App) {
     }
 
     val coroutineScope: CoroutineScope = app.coroutineScope
+
+    val vertices: Array<Vertex> = app.vertices
 
     val slopes: LiveData<List<Slope>> = MutableLiveData<List<Slope>>().apply {
         value = app.slopes

@@ -62,3 +62,9 @@ class Lift(
                 return super.hashCode()
         }
 }
+
+data class Vertex(
+        val title: String,
+        val vertex: Int,
+        val coordinate: LatLng
+)

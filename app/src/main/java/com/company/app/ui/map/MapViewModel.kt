@@ -9,6 +9,7 @@ class MapViewModel(private val repository: Repository): ViewModel() {
     val slopes = repository.slopes
     val lifts = repository.lifts
     val coroutineScope = repository.coroutineScope
+    val vertices: Array<Vertex> = repository.vertices
     val redSlopes: MutableList<Polyline> = mutableListOf()
     val blackSlopes: MutableList<Polyline> = mutableListOf()
 }

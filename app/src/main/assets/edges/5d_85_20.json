@@ -1,6 +1,9 @@
 {
   "name": "5d",
+  "start": 85,
+  "destination": 20,
   "complexity": "RED",
+  "distance": 834,
   "coordinates": [
     { "latitude" : 48.363357041080285, "longitude" : 24.398455114919965 },
     { "latitude" : 48.36321537589761, "longitude" : 24.39858688357778 },
