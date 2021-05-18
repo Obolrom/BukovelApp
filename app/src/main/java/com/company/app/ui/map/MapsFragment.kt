@@ -52,7 +52,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var pickerValues: Array<String>
     private var startPickerMarker: Marker? = null
     private var destinationPickerMarker: Marker? = null
-    private var navigatorJob: Job? = null
+    private val route: MutableSet<Polyline> = mutableSetOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,44 +89,93 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         pickerValues = initPickerValues(mapViewModel.vertices)
         with(startPicker) {
             initPicker(this)
-            setOnValueChangedListener { picker, oldVal, newVal ->
-                startPickerMarker = startPickerMarker.run {
-                    this?.remove()
-                    googleMap.addMarker(MarkerOptions()
-                        .position(mapViewModel.vertices[newVal].coordinate)
-                        .title(mapViewModel.vertices[newVal].title))
-                }
+            setOnValueChangedListener { _, _, newVal ->
+                startPickerSet(newVal)
             }
         }
         with(destinationPicker) {
             initPicker(this)
-            setOnValueChangedListener { picker, oldVal, newVal ->
-                destinationPickerMarker = destinationPickerMarker.run {
-                    this?.remove()
-                    googleMap.addMarker(MarkerOptions()
-                        .position(mapViewModel.vertices[newVal].coordinate)
-                        .title(mapViewModel.vertices[newVal].title))
-                }
+            setOnValueChangedListener { _, _, newVal ->
+                destinationPickerSet(newVal)
             }
         }
         fabMenu.setOnClickListener(fabMenuButtonListener)
         redSwitch.setOnClickListener(redSwitchListener)
         blackSwitch.setOnClickListener(blackSwitchListener)
         directionButton.setOnClickListener(directionButtonListener)
+        bottomSheet.addBottomSheetCallback(bottomSheetCallback)
 
         getLocationPermission()
     }
 
-    private val directionButtonListener = View.OnClickListener {
-        val start = mapViewModel.vertices[startPicker.value].vertex
-        val destination = mapViewModel.vertices[destinationPicker.value].vertex
-        val graph = Graph(mapViewModel.edgeRepresentationList)
-        directionButton.isClickable = navigatorJob?.isCompleted != true
-        Log.d("slopes", "from $start to $destination")
-        navigatorJob = mapViewModel.coroutineScope.launch {
-            val path = navigator.getPath(graph, start, destination)
+    private fun startPickerSet(newVal: Int) {
+        startPickerMarker = startPickerMarker.run {
+            this?.remove()
+            buildRoute(newVal, destinationPicker.value)
+            googleMap.addMarker(MarkerOptions()
+                .position(mapViewModel.vertices[newVal].coordinate)
+                .title(mapViewModel.vertices[newVal].title))
+        }
+    }
+
+    private fun destinationPickerSet(newVal: Int) {
+        destinationPickerMarker = destinationPickerMarker.run {
+            this?.remove()
+            buildRoute(startPicker.value, newVal)
+            googleMap.addMarker(MarkerOptions()
+                .position(mapViewModel.vertices[newVal].coordinate)
+                .title(mapViewModel.vertices[newVal].title))
+        }
+    }
+
+    private fun buildRoute(start: Int, destination: Int) {
+        mapViewModel.coroutineScope.launch(Dispatchers.Main) {
+            val path = navigator.getPath(
+                Graph(mapViewModel.edgeRepresentationList),
+                mapViewModel.vertices[start].vertex,
+                mapViewModel.vertices[destination].vertex)
             Log.d("slopes", path.toString())
-            directionButton.isClickable = true
+            showPathOnMap(path)
+        }
+    }
+
+    private val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+        override fun onStateChanged(view: View, newState: Int) {
+            when(newState) {
+                BottomSheetBehavior.STATE_COLLAPSED -> {
+                    startPickerSet(startPicker.value)
+                    destinationPickerSet(destinationPicker.value)
+                }
+                BottomSheetBehavior.STATE_HIDDEN -> {
+                    hideRoutes()
+                    startPickerMarker?.remove()
+                    destinationPickerMarker?.remove()
+                }
+                else -> { }
+            }
+        }
+
+        override fun onSlide(bottomSheet: View, slideOffset: Float) { }
+    }
+
+    private val directionButtonListener = View.OnClickListener { }
+
+    private fun hideRoutes() {
+        route.forEach { it.remove() }
+    }
+
+    private fun showPathOnMap(path: Set<Set<Int>>) {
+        hideRoutes()
+        mapViewModel.edgeRepresentationList.forEach { edge ->
+            val edgePointsPair = setOf(edge.start, edge.destination)
+            if (path.contains(edgePointsPair)) {
+                route.add(googleMap.addPolyline(PolylineOptions()
+                    .width(7.0f)
+                    .visible(true)
+                    .addAll(edge.coordinates)
+                    .color(Color.parseColor("#7CFC00"))
+                    .zIndex(1.0f)))
+            }
         }
     }
 
@@ -218,16 +267,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 }
             })
         }
-
-
-//        for (edge in (activity?.application as App).edges) {
-//            googleMap.addPolyline(PolylineOptions()
-//                .width(7.0f)
-//                .visible(true)
-//                .addAll(edge.coordinates)
-//                .color(Color.parseColor("#7CFC00")))
-//                .zIndex = 1.0f
-//        }
     }
 
     private fun getLocationPermission() {
