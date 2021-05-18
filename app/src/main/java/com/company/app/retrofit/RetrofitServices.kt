@@ -1,7 +1,7 @@
 package com.company.app.retrofit
 
 object RetrofitServices {
-    private const val BASE_URL = "https://192.168.0.104:5001/Home/"
+    private const val BASE_URL = "http://ikolopatin-001-site1.dtempurl.com/Home/"
 
     val bukovelService: BukovelService
         get() = RetrofitClient.getBukovelClient(BASE_URL).create(BukovelService::class.java)

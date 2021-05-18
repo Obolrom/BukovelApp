@@ -33,7 +33,6 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-
         root = inflater.inflate(R.layout.fragment_services, container, false)
 
         return root

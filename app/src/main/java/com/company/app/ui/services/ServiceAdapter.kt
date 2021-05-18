@@ -23,7 +23,7 @@ class ServiceAdapter(private val callback: OnServiceClickListener) :
         val ratingBar: AppCompatRatingBar = itemView.findViewById(R.id.service_rb)
 
         fun bind(listItem: Service) {
-            name.text = listItem.name
+            name.text = listItem.title
             ratingBar.rating = listItem.score
 
             itemView.setOnClickListener {

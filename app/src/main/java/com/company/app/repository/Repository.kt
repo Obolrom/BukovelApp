@@ -14,8 +14,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DisposableHandle
-import kotlinx.coroutines.SupervisorJob
 
 class Repository(private val app: App) {
     private val bukovelService: BukovelService by lazy { RetrofitServices.bukovelService }
@@ -36,18 +34,18 @@ class Repository(private val app: App) {
         value = app.lifts
     }
 
-    fun callRetrofitApi() : Service {
-        var service: Service = Service(4.3f, "sdf", "dsfs")
+    fun callRetrofitApi() : MutableLiveData<List<Service>> {
+        val services: MutableLiveData<List<Service>> = MutableLiveData<List<Service>>()
         bukovelService.getTestService()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableSingleObserver<Service>() {
-                override fun onSuccess(response: Service) {
-                    service = response
+            .subscribe(object : DisposableSingleObserver<List<Service>>() {
+                override fun onSuccess(response: List<Service>) {
+                    services.value = response
                 }
 
                 override fun onError(e: Throwable) { }
             })
-        return service
+        return services
     }
 }

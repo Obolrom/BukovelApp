@@ -53,7 +53,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private var startPickerMarker: Marker? = null
     private var destinationPickerMarker: Marker? = null
     private var navigatorJob: Job? = null
-    private var navScope: CoroutineScope = CoroutineScope(SupervisorJob())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -124,7 +123,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val graph = Graph(mapViewModel.edgeRepresentationList)
         directionButton.isClickable = navigatorJob?.isCompleted != true
         Log.d("slopes", "from $start to $destination")
-        navigatorJob = navScope.launch {
+        navigatorJob = mapViewModel.coroutineScope.launch {
             val path = navigator.getPath(graph, start, destination)
             Log.d("slopes", path.toString())
             directionButton.isClickable = true
