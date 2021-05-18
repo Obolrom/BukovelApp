@@ -233,7 +233,6 @@ class GraphTest {
         graph.addEdge(Edge(70, 17, 120, ""))
         graph.addEdge(Edge(17, 70, 120, ""))
         graph.addEdge(Edge(78, 79, 324, ""))
-
     }
 
     @Test

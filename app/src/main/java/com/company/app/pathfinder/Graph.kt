@@ -7,7 +7,7 @@ import java.util.*
 class Graph(vertices: Int) {
     private var adjacencyMap: MutableMap<Int, MutableList<Edge>> =
             Hashtable(vertices * 2)
-    val vertexAmount: Int
+    val edgeAmount: Int
         get() = adjacencyMap.size
 
     init {

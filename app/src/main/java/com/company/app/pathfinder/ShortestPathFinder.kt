@@ -7,11 +7,11 @@ class ShortestPathFinder(
         private val graph: Graph,
         private val source: Int,
         private val destination: Int) {
-    private val priorityQueue: PriorityQueue<Edge> = PriorityQueue(graph.vertexAmount) { vertex1, vertex2 ->
+    private val priorityQueue: PriorityQueue<Edge> = PriorityQueue(graph.edgeAmount) { vertex1, vertex2 ->
         vertex1.weight.compareTo(vertex2.weight)
     }
     private val visitedVertices: MutableSet<Int> = hashSetOf()
-    private val shortestPaths: ShortestPaths = ShortestPaths(graph.vertexAmount)
+    private val shortestPaths: ShortestPaths = ShortestPaths(graph.edgeAmount)
 
     fun getShortestPath(): List<Int> {
         dijkstra()
@@ -23,7 +23,7 @@ class ShortestPathFinder(
         shortestPaths.updateShortestDistance(source, 0)
 
         try {
-            while (visitedVertices.size != graph.vertexAmount) {
+            while (visitedVertices.size != graph.edgeAmount) {
                 val currentEdge = priorityQueue.remove()
                 visitedVertices.add(currentEdge.destination)
                 if (visitedVertices.contains(destination)) {
