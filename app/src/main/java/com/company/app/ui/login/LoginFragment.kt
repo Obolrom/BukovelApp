@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.company.app.App
 import com.company.app.R
 import com.google.android.material.textfield.TextInputEditText
 

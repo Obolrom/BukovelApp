@@ -1,0 +1,25 @@
+{
+  "name": "1a",
+  "start" : 8,
+  "destination" : 9,
+  "complexity" : "RED",
+  "distance": 240,
+  "coordinates": [
+    {"latitude": 48.348383, "longitude": 24.411274},
+    {"latitude": 48.348385, "longitude": 24.411563},
+    {"latitude": 48.348390, "longitude": 24.411687},
+    {"latitude": 48.348410, "longitude": 24.411783},
+    {"latitude": 48.348419, "longitude": 24.411871},
+    {"latitude": 48.348421, "longitude": 24.411929},
+    {"latitude": 48.348414, "longitude": 24.412014},
+    {"latitude": 48.348385, "longitude": 24.412119},
+    {"latitude": 48.348156, "longitude": 24.412796},
+    {"latitude": 48.348143, "longitude": 24.412888},
+    {"latitude": 48.348129, "longitude": 24.413218},
+    {"latitude": 48.348159, "longitude": 24.413441},
+    {"latitude": 48.348241, "longitude": 24.413759},
+    {"latitude": 48.348330, "longitude": 24.413965},
+    {"latitude": 48.348388, "longitude": 24.414086},
+    {"latitude": 48.348460, "longitude": 24.414303}
+  ]
+}

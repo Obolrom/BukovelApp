@@ -1,0 +1,18 @@
+{
+  "name": "1e",
+  "start" : 7,
+  "destination" : 1,
+  "complexity" : "BLUE",
+  "distance": 58,
+  "coordinates":
+  [ {"latitude": 48.352606, "longitude": 24.416090},
+    {"latitude": 48.352608, "longitude": 24.416163},
+    {"latitude": 48.352592, "longitude": 24.416322},
+    {"latitude": 48.352595, "longitude": 24.416433},
+    {"latitude": 48.352625, "longitude": 24.416644},
+    {"latitude": 48.352634, "longitude": 24.416681},
+    {"latitude": 48.352670, "longitude": 24.416736},
+    {"latitude": 48.352715, "longitude": 24.416773},
+    {"latitude": 48.352733, "longitude": 24.416782}
+  ]
+}

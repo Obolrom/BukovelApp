@@ -1,0 +1,11 @@
+{
+  "name": "8",
+  "start": 49,
+  "destination": 59,
+  "complexity": "BLUE",
+  "distance": 851,
+  "coordinates": [
+    { "latitude" : 48.3725894996292, "longitude" : 24.396288749681553 },
+    { "latitude" : 48.36505749587485, "longitude" : 24.394223827797813 }
+  ]
+}

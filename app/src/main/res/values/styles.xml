@@ -26,5 +26,28 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="switcher">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:checked">true</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="black_switcher_theme" parent="Theme.BukovelApp">
+        <item name="colorSecondary">@color/black</item>
+    </style>
+
+    <style name="red_switcher_theme" parent="Theme.BukovelApp">
+        <item name="colorSecondary">@color/red</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/grey</item>
+    </style>
 
 </resources>

@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#808080</color>
     <color name="golden">#FFCC01</color>
+    <color name="lift">#ff32CD32</color>
+    <color name="red">#ce0018</color>
+    <color name="high_load">#ffcc0000</color>
+    <color name="middle_load">#ffffaa00</color>
+    <color name="low_load">#ffffeb7a</color>
+    <color name="absent_load">#ffa5d610</color>
 </resources>

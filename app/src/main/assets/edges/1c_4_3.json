@@ -1,0 +1,30 @@
+{
+  "name": "1c",
+  "start" : 4,
+  "destination" : 3,
+  "complexity" : "BLUE",
+  "distance": 505,
+  "coordinates":
+  [
+    {"latitude": 48.347487,"longitude":24.421224},
+    {"latitude": 48.347587,"longitude":24.421290},
+    {"latitude": 48.347773,"longitude":24.421370},
+    {"latitude": 48.348094,"longitude":24.421446},
+    {"latitude": 48.348511,"longitude":24.421487},
+    {"latitude": 48.348711,"longitude":24.421471},
+    {"latitude": 48.349065,"longitude":24.421345},
+    {"latitude": 48.349249,"longitude":24.421310},
+    {"latitude": 48.349512,"longitude":24.421297},
+    {"latitude": 48.349696,"longitude":24.421269},
+    {"latitude": 48.349987,"longitude":24.421154},
+    {"latitude": 48.350267,"longitude":24.421005},
+    {"latitude": 48.350444,"longitude":24.420882},
+    {"latitude": 48.350633,"longitude":24.420707},
+    {"latitude": 48.350742,"longitude":24.420572},
+    {"latitude": 48.350782,"longitude":24.420489},
+    {"latitude": 48.350862,"longitude":24.420326},
+    {"latitude": 48.351015,"longitude":24.419951},
+    {"latitude": 48.351114,"longitude":24.419720},
+    {"latitude": 48.351396,"longitude":24.419162}
+  ]
+}

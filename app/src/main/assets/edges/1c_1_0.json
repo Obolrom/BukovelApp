@@ -1,0 +1,23 @@
+{
+  "name": "1c",
+  "start" : 1,
+  "destination" : 0,
+  "complexity" : "BLUE",
+  "distance": 125,
+  "coordinates": [
+    {"latitude": 48.352733, "longitude": 24.416782},
+    {"latitude": 48.352757, "longitude": 24.416782},
+    {"latitude": 48.352778, "longitude": 24.416773},
+    {"latitude": 48.352813, "longitude": 24.416744},
+    {"latitude": 48.352889, "longitude": 24.416632},
+    {"latitude": 48.352839, "longitude": 24.416709},
+    {"latitude": 48.352886, "longitude": 24.416637},
+    {"latitude": 48.352930, "longitude": 24.416587},
+    {"latitude": 48.353000, "longitude": 24.416522},
+    {"latitude": 48.353153, "longitude": 24.416419},
+    {"latitude": 48.353225, "longitude": 24.416389},
+    {"latitude": 48.353322, "longitude": 24.416374},
+    {"latitude": 48.353420, "longitude": 24.416373},
+    {"latitude": 48.353638, "longitude": 24.416417}
+  ]
+}

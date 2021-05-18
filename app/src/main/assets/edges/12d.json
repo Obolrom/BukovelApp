@@ -1,0 +1,19 @@
+{
+  "name": "12d",
+  "start": 35,
+  "destination": 32,
+  "complexity": "RED",
+  "distance": 410,
+  "coordinates": [
+    { "latitude" : 48.369855, "longitude" : 24.375336 },
+    { "latitude" : 48.369915, "longitude" : 24.375794 },
+    { "latitude" : 48.369930, "longitude" : 24.376170 },
+    { "latitude" : 48.369937, "longitude" : 24.376642 },
+    { "latitude" : 48.369823, "longitude" : 24.377393 },
+    { "latitude" : 48.369751, "longitude" : 24.377747 },
+    { "latitude" : 48.369602, "longitude" : 24.378294 },
+    { "latitude" : 48.369381, "longitude" : 24.378755 },
+    { "latitude" : 48.369024, "longitude" : 24.379292 },
+    { "latitude" : 48.368440, "longitude" : 24.380075 }
+  ]
+}

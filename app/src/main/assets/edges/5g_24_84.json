@@ -1,0 +1,29 @@
+{
+  "name": "5g",
+  "start" : 24,
+  "destination" : 84,
+  "complexity" : "RED",
+  "distance": 578,
+  "coordinates":
+  [
+    {"latitude": 48.354602, "longitude": 24.396595},
+    {"latitude": 48.354616, "longitude": 24.396716},
+    {"latitude": 48.354730, "longitude": 24.397210},
+    {"latitude": 48.354849, "longitude": 24.397533},
+    {"latitude": 48.354975, "longitude": 24.397818},
+    {"latitude": 48.355336, "longitude": 24.398463},
+    {"latitude": 48.355577, "longitude": 24.398754},
+    {"latitude": 48.355782, "longitude": 24.399087},
+    {"latitude": 48.355983, "longitude": 24.399479},
+    {"latitude": 48.356355, "longitude": 24.400332},
+    {"latitude": 48.356478, "longitude": 24.400741},
+    {"latitude": 48.356693, "longitude": 24.401486},
+    {"latitude": 48.356786, "longitude": 24.401852},
+    {"latitude": 48.356858, "longitude": 24.402206},
+    {"latitude": 48.356897, "longitude": 24.402416},
+    {"latitude": 48.356940, "longitude": 24.402792},
+    {"latitude": 48.356956, "longitude": 24.403041},
+    {"latitude": 48.356982, "longitude": 24.403242},
+    {"latitude": 48.356988, "longitude": 24.403346}
+  ]
+}

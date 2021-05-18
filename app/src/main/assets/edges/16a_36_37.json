@@ -1,0 +1,16 @@
+{
+  "name": "16a",
+  "start": 36,
+  "destination": 37,
+  "complexity": "RED",
+  "distance": 122,
+  "coordinates": [
+    { "latitude" : 48.372090, "longitude" : 24.377971 },
+    { "latitude" : 48.371758, "longitude" : 24.378754 },
+    { "latitude" : 48.371667, "longitude" : 24.378922 },
+    { "latitude" : 48.371667, "longitude" : 24.378920 },
+    { "latitude" : 48.371603, "longitude" : 24.379011 },
+    { "latitude" : 48.371482, "longitude" : 24.379146 },
+    { "latitude" : 48.371394, "longitude" : 24.379218 }
+  ]
+}

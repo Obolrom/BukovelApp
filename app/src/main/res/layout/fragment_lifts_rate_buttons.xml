@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.flexbox.FlexboxLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:justifyContent="space_around"
+    android:padding="5dp">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/high_load_lift_btn"
+        android:background="@drawable/rate_button"
+        android:text="high"
+        app:backgroundTint="@color/high_load"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/middle_load_lift_btn"
+        android:background="@drawable/rate_button"
+        android:text="middle"
+        app:backgroundTint="@color/middle_load"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/low_load_lift_btn"
+        android:background="@drawable/rate_button"
+        android:text="low"
+        app:backgroundTint="@color/low_load"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/absent_load_lift_btn"
+        android:background="@drawable/rate_button"
+        android:text="absent"
+        app:backgroundTint="@color/absent_load"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+</com.google.android.flexbox.FlexboxLayout>

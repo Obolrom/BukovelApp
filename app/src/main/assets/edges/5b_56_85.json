@@ -1,0 +1,20 @@
+{
+  "name": "5b",
+  "start" : 56,
+  "destination" : 85,
+  "complexity" : "BLUE",
+  "distance": 496,
+  "coordinates": [
+    { "latitude" : 48.363891, "longitude" : 24.392218 },
+    { "latitude" : 48.363962, "longitude" : 24.392379 },
+    { "latitude" : 48.364268, "longitude" : 24.393366 },
+    { "latitude" : 48.364304, "longitude" : 24.393656 },
+    { "latitude" : 48.364304, "longitude" : 24.394503 },
+    { "latitude" : 48.364176, "longitude" : 24.396005 },
+    { "latitude" : 48.364140, "longitude" : 24.396295 },
+    { "latitude" : 48.363898, "longitude" : 24.397207 },
+    { "latitude" : 48.363798, "longitude" : 24.397497 },
+    { "latitude" : 48.363549, "longitude" : 24.398076 },
+    { "latitude" :48.363357041080285, "longitude" :24.398455114919965 }
+  ]
+}

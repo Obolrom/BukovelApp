@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_top_corners"
+    android:id="@+id/bottom_sheet"
+    android:padding="10dp"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="120dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <View
+        android:layout_width="32dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_view" />
+
+    <View style="@style/divider"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        style="@style/switcher"
+        android:id="@+id/red_complexity_level"
+        android:text="@string/middle_level_red"
+        android:theme="@style/red_switcher_theme"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        style="@style/switcher"
+        android:id="@+id/black_complexity_level"
+        android:text="@string/high_level_black"
+        android:theme="@style/black_switcher_theme"/>
+
+    <View style="@style/divider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <NumberPicker
+            android:id="@+id/start_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/destination_picker"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <NumberPicker
+            android:id="@+id/destination_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/start_picker"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/login_sign_in_button"
+        android:layout_width="210dp"
+        android:layout_gravity="center"
+        android:id="@+id/get_directions"
+        android:text="@string/get_directions"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="10dp"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

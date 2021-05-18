@@ -1,0 +1,13 @@
+{
+  "name": "tr10",
+  "start" : 69,
+  "destination" : 70,
+  "complexity" : "BLUE",
+  "distance": 346,
+  "coordinates": [
+    { "latitude" : 48.36132150221218, "longitude" : 24.405836008366 },
+    { "latitude" : 48.36024431902757, "longitude" : 24.40644395105125 },
+    { "latitude" : 48.35905325469783, "longitude" : 24.407315421122732 },
+    { "latitude" : 48.35904781675441, "longitude" : 24.408279860080366 }
+  ]
+}

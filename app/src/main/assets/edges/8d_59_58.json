@@ -1,0 +1,14 @@
+{
+  "name": "8d",
+  "start" : 59,
+  "destination" : 58,
+  "complexity" : "BLUE",
+  "distance": 27,
+  "coordinates": [
+    { "latitude" :48.365070247182594, "longitude" : 24.393749058346657},
+    { "latitude" : 48.36505966228755, "longitude" : 24.393795325857436 },
+    { "latitude" : 48.36505208879017, "longitude" : 24.39391133133867 },
+    { "latitude" : 48.36506099855791, "longitude" : 24.39404141831567 },
+    { "latitude" : 48.36507347242839, "longitude" : 24.39410579134583 }
+  ]
+}

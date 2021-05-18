@@ -1,0 +1,11 @@
+{
+  "name": "tr1",
+  "start" : 8,
+  "destination" : 10,
+  "complexity" : "BLUE",
+  "distance": 116,
+  "coordinates": [
+    {"latitude": 48.348383, "longitude": 24.411274},
+    {"latitude": 48.348328, "longitude": 24.409706}
+  ]
+}

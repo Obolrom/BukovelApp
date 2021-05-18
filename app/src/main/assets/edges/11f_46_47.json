@@ -1,0 +1,28 @@
+{
+  "name": "11f",
+  "start" : 46,
+  "destination" : 47,
+  "complexity" : "BLUE",
+  "distance": 390,
+  "coordinates": [
+    {"latitude": 48.371844, "longitude":24.386739},
+    {"latitude": 48.371909, "longitude":24.386888},
+    {"latitude": 48.371962, "longitude":24.387064},
+    {"latitude": 48.371991, "longitude":24.387190},
+    {"latitude": 48.372056, "longitude":24.387547},
+    {"latitude": 48.372085, "longitude":24.387760},
+    {"latitude": 48.372095, "longitude":24.388017},
+    {"latitude": 48.372095, "longitude":24.388276},
+    {"latitude": 48.372106, "longitude":24.388568},
+    {"latitude": 48.372106, "longitude":24.388568},
+    {"latitude": 48.372096, "longitude":24.389162},
+    {"latitude": 48.372052, "longitude":24.389762},
+    {"latitude": 48.372063, "longitude":24.390023},
+    {"latitude": 48.372109, "longitude":24.390265},
+    {"latitude": 48.372174, "longitude":24.390488},
+    {"latitude": 48.372199, "longitude":24.390721},
+    {"latitude": 48.372192, "longitude":24.390925},
+    {"latitude": 48.372151, "longitude":24.391660},
+    {"latitude": 48.372120, "longitude":24.391899}
+  ]
+}

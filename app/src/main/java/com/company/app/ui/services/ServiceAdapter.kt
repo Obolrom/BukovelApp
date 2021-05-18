@@ -23,7 +23,7 @@ class ServiceAdapter(private val callback: OnServiceClickListener) :
         val ratingBar: AppCompatRatingBar = itemView.findViewById(R.id.service_rb)
 
         fun bind(listItem: Service) {
-            name.text = listItem.name
+            name.text = listItem.title
             ratingBar.rating = listItem.score
 
             itemView.setOnClickListener {
@@ -34,7 +34,7 @@ class ServiceAdapter(private val callback: OnServiceClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.fragment_service, parent, false)
+        val view: View = inflater.inflate(R.layout.item_service, parent, false)
 
         return ViewHolder(view)
     }

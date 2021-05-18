@@ -1,0 +1,13 @@
+{
+  "name": "5b",
+  "start" : 22,
+  "destination" : 21,
+  "complexity" : "BLUE",
+  "distance": 41,
+  "coordinates": [
+    { "latitude" : 48.358273, "longitude" : 24.405565 },
+    { "latitude" : 48.358095, "longitude" : 24.405683 },
+    { "latitude" : 48.357953, "longitude" : 24.405694 },
+    { "latitude" : 48.357924, "longitude" : 24.405683 }
+  ]
+}

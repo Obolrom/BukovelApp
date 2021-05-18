@@ -1,0 +1,21 @@
+{
+  "name": "3a",
+  "start" : 19,
+  "destination" : 72,
+  "complexity" : "BLUE",
+  "distance": 263,
+  "coordinates":
+  [
+    { "latitude" : 48.368662, "longitude" : 24.417532 },
+    { "latitude" : 48.368315, "longitude" : 24.417248 },
+    { "latitude" : 48.367745, "longitude" : 24.416894 },
+    { "latitude" : 48.367492, "longitude" : 24.416768 },
+    { "latitude" : 48.367152, "longitude" : 24.416654 },
+    { "latitude" : 48.367089, "longitude" : 24.416620 },
+    { "latitude" : 48.367034, "longitude" : 24.416592 },
+    { "latitude" : 48.367034, "longitude" : 24.416592 },
+    { "latitude" : 48.366871, "longitude" : 24.416407 },
+    { "latitude" : 48.366687, "longitude" : 24.416043 },
+    { "latitude" : 48.366639, "longitude" : 24.415895 }
+  ]
+}

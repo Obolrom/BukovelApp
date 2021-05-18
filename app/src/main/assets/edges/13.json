@@ -1,0 +1,11 @@
+{
+  "name": "13",
+  "start": 74,
+  "destination": 80,
+  "complexity": "BLUE",
+  "distance": 1093,
+  "coordinates": [
+    { "latitude" : 48.36923230802998, "longitude" : 24.41071801877244 },
+    { "latitude" : 48.372853020802005, "longitude" : 24.42447333591403 }
+  ]
+}

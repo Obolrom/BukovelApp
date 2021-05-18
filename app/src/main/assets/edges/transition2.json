@@ -1,0 +1,11 @@
+{
+  "name": "tr2",
+  "start" : 11,
+  "destination" : 10,
+  "complexity" : "BLUE",
+  "distance": 177,
+  "coordinates": [
+    {"latitude": 48.34919014627268, "longitude": 24.407520259161057},
+    {"latitude": 48.348353705995756, "longitude": 24.40956536074768}
+  ]
+}

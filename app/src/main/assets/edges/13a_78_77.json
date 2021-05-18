@@ -1,0 +1,21 @@
+{
+  "name": "13a",
+  "start" : 78,
+  "destination" :77,
+  "complexity" : "RED",
+  "distance": 316,
+  "coordinates":
+  [
+    {"latitude": 48.372831, "longitude": 24.416534},
+    {"latitude": 48.372817, "longitude": 24.416373},
+    {"latitude": 48.372802, "longitude": 24.416296},
+    {"latitude": 48.372761, "longitude": 24.416137},
+    {"latitude": 48.372293, "longitude": 24.415215},
+    {"latitude": 48.372202, "longitude": 24.414979},
+    {"latitude": 48.372068, "longitude": 24.414689},
+    {"latitude": 48.371835, "longitude": 24.414316},
+    {"latitude": 48.371470, "longitude": 24.413554},
+    {"latitude": 48.371286, "longitude": 24.413267},
+    {"latitude": 48.371155, "longitude": 24.413159}
+  ]
+}

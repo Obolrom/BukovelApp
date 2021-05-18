@@ -1,0 +1,11 @@
+{
+  "name": "tr5",
+  "start" : 49,
+  "destination" : 48,
+  "complexity" : "BLUE",
+  "distance": 98,
+  "coordinates": [
+    {"latitude": 48.372944, "longitude": 24.395096},
+    {"latitude": 48.372580, "longitude": 24.396307}
+  ]
+}

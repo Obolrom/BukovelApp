@@ -1,0 +1,11 @@
+{
+  "name": "15",
+  "start": 50,
+  "destination": 64,
+  "complexity": "BLUE",
+  "distance": 1145,
+  "coordinates": [
+    { "latitude" : 48.372220660973966, "longitude" : 24.397647385308773 },
+    { "latitude" : 48.378644799553484, "longitude" : 24.40976391681636 }
+  ]
+}

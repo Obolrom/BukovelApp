@@ -1,5 +1,6 @@
 {
   "name": "1a",
+  "complexity" : "RED",
   "coordinates": [
     { "latitude" : 48.348383, "longitude" : 24.411274 },
     { "latitude" : 48.348385, "longitude" : 24.411563 },
@@ -55,7 +56,6 @@
     { "latitude" : 48.349291, "longitude" : 24.417807 },
     { "latitude" : 48.349614, "longitude" : 24.417422 },
     { "latitude" : 48.349760, "longitude" : 24.417273 },
-    { "latitude" : 48.349888, "longitude" : 24.417146 },
     { "latitude" : 48.349888, "longitude" : 24.417146 },
     { "latitude" : 48.350167, "longitude" : 24.416889 },
     { "latitude" : 48.350312, "longitude" : 24.416737 },

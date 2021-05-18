@@ -1,0 +1,11 @@
+{
+  "name": "6",
+  "start": 23,
+  "destination": 26,
+  "complexity": "BLUE",
+  "distance": 733,
+  "coordinates": [
+    { "latitude" : 48.357740867828866, "longitude" : 24.402708991468526 },
+    { "latitude" : 48.35958667547804, "longitude" : 24.393180393342316 }
+  ]
+}

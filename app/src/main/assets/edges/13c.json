@@ -1,0 +1,26 @@
+{
+  "name": "13c",
+  "start": 82,
+  "destination": 76,
+  "complexity": "RED",
+  "distance": 526,
+  "coordinates": [
+    { "latitude" : 48.370054, "longitude" : 24.418881 },
+    { "latitude" : 48.370223, "longitude" : 24.418356 },
+    { "latitude" : 48.370343, "longitude" : 24.417891 },
+    { "latitude" : 48.370383, "longitude" : 24.417486 },
+    { "latitude" : 48.370433, "longitude" : 24.417096 },
+    { "latitude" : 48.370462, "longitude" : 24.416121 },
+    { "latitude" : 48.370562, "longitude" : 24.415581 },
+    { "latitude" : 48.370582, "longitude" : 24.415221 },
+    { "latitude" : 48.370582, "longitude" : 24.414891 },
+    { "latitude" : 48.370552, "longitude" : 24.414576 },
+    { "latitude" : 48.370481, "longitude" : 24.414399 },
+    { "latitude" : 48.370409, "longitude" : 24.414056 },
+    { "latitude" : 48.370331, "longitude" : 24.413745 },
+    { "latitude" : 48.370292, "longitude" : 24.413487 },
+    { "latitude" : 48.370370, "longitude" : 24.412784 },
+    { "latitude" : 48.370377, "longitude" : 24.412505 },
+    { "latitude" : 48.370301, "longitude" : 24.411984 }
+  ]
+}

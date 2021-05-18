@@ -1,0 +1,23 @@
+{
+  "name": "1d",
+  "start" : 5,
+  "destination" : 2,
+  "complexity" : "RED",
+  "distance" : 266,
+  "coordinates": [
+    { "latitude" : 48.349888, "longitude" : 24.417146 },
+    { "latitude" : 48.350131, "longitude" : 24.417053 },
+    { "latitude" : 48.350252, "longitude" : 24.417084 },
+    { "latitude" : 48.350376, "longitude" : 24.417141 },
+    { "latitude" : 48.350493, "longitude" : 24.417231 },
+    { "latitude" : 48.350587, "longitude" : 24.417326 },
+    { "latitude" : 48.350698, "longitude" : 24.417459 },
+    { "latitude" : 48.350801, "longitude" : 24.417591 },
+    { "latitude" : 48.351025, "longitude" : 24.417801 },
+    { "latitude" : 48.351134, "longitude" : 24.417893 },
+    { "latitude" : 48.351401, "longitude" : 24.418103 },
+    { "latitude" : 48.351756, "longitude" : 24.418343 },
+    { "latitude" : 48.351869, "longitude" : 24.418388 },
+    { "latitude" : 48.352037, "longitude" : 24.418433 }
+  ]
+}

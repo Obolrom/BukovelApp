@@ -1,0 +1,21 @@
+{
+  "name": "13e",
+  "start" : 73,
+  "destination" :74,
+  "complexity" : "BLUE",
+  "distance": 260,
+  "coordinates": [
+    {"latitude": 48.368322, "longitude": 24.413114},
+    {"latitude": 48.368310, "longitude": 24.412999},
+    {"latitude": 48.368306, "longitude": 24.412336},
+    {"latitude": 48.368317, "longitude": 24.411709},
+    {"latitude": 48.368328, "longitude": 24.411580},
+    {"latitude": 48.368357, "longitude": 24.411422},
+    {"latitude": 48.368421, "longitude": 24.411213},
+    {"latitude": 48.368549, "longitude": 24.410977},
+    {"latitude": 48.368645, "longitude": 24.410848},
+    {"latitude": 48.368991, "longitude": 24.410596},
+    {"latitude": 48.369076, "longitude": 24.410601},
+    {"latitude": 48.369256, "longitude": 24.410867}
+  ]
+}

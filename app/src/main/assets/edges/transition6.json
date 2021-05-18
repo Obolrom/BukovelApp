@@ -1,0 +1,11 @@
+{
+  "name": "tr6",
+  "start" : 49,
+  "destination" : 50,
+  "complexity" : "BLUE",
+  "distance": 106,
+  "coordinates": [
+    {"latitude": 48.37262797784771, "longitude": 24.39631054079085},
+    {"latitude": 48.37220707796505, "longitude" : 24.39759836911264}
+  ]
+}

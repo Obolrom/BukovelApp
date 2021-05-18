@@ -15,13 +15,24 @@
         android:id="@+id/navigation_services"
         android:name="com.company.app.ui.services.ServicesFragment"
         android:label="@string/title_services"
-        tools:layout="@layout/fragment_services" />
+        tools:layout="@layout/fragment_services" >
+        <action
+            android:id="@+id/action_navigation_services_to_serviceDescriptionFragment"
+            app:destination="@id/serviceDescriptionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/serviceDescriptionFragment"
+        android:name="com.company.app.ui.services.ServiceDescriptionFragment"
+        android:label="ServiceDescription"
+        tools:layout="@layout/fragment_service_description">
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_lifts"
-        android:name="com.company.app.ui.notifications.NotificationsFragment"
+        android:name="com.company.app.ui.lifts.LiftsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_lifts" />
 
     <fragment
         android:id="@+id/navigation_login"
@@ -36,7 +47,7 @@
     <fragment
         android:id="@+id/navigation_maps"
         android:name="com.company.app.ui.map.MapsFragment"
-        android:label="fragment_maps"
+        android:label="SlopesMap"
         tools:layout="@layout/fragment_maps" />
 
     <fragment
