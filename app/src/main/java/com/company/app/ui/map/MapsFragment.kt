@@ -53,6 +53,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private var startPickerMarker: Marker? = null
     private var destinationPickerMarker: Marker? = null
     private val route: MutableSet<Polyline> = mutableSetOf()
+    private var isRoutePinned: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -147,7 +148,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     destinationPickerSet(destinationPicker.value)
                 }
                 BottomSheetBehavior.STATE_HIDDEN -> {
-                    hideRoutes()
+                    if ( ! isRoutePinned) hideRoutes()
                     startPickerMarker?.remove()
                     destinationPickerMarker?.remove()
                 }
@@ -158,13 +159,22 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         override fun onSlide(bottomSheet: View, slideOffset: Float) { }
     }
 
-    private val directionButtonListener = View.OnClickListener { }
+    private val directionButtonListener = View.OnClickListener {
+        isRoutePinned = !isRoutePinned
+        if (isRoutePinned) {
+            directionButton.text = resources.getString(R.string.unpin_route)
+        } else {
+            directionButton.text = resources.getString(R.string.pin_route)
+            hideRoutes()
+        }
+    }
 
     private fun hideRoutes() {
         route.forEach { it.remove() }
     }
 
     private fun showPathOnMap(path: Set<Set<Int>>) {
+        if (isRoutePinned) return
         hideRoutes()
         mapViewModel.edgeRepresentationList.forEach { edge ->
             val edgePointsPair = setOf(edge.start, edge.destination)

@@ -19,6 +19,7 @@
     <string name="navigator_opener">navigator opener</string>
     <string name="middle_level_red">middle level | RED</string>
     <string name="high_level_black">high level | BLACK</string>
-    <string name="get_directions">get directions</string>
+    <string name="pin_route">pin route</string>
+    <string name="unpin_route">unpin route</string>
     <string name="lifts_current_state">Lifts current load</string>
 </resources>
