@@ -25,6 +25,6 @@
         android:src="@drawable/ic_baseline_menu_24"
         android:contentDescription="@string/navigator_opener" />
 
-    <include layout="@layout/bottom_sheet_navigator" />
+    <include layout="@layout/fragment_bottom_sheet_navigator" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

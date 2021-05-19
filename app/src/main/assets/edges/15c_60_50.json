@@ -1,0 +1,17 @@
+{
+  "name": "15c",
+  "start" : 60,
+  "destination" : 50,
+  "complexity" : "RED",
+  "distance": 291,
+  "coordinates": [
+    { "latitude" : 48.375208, "longitude" : 24.398668 },
+    { "latitude" : 48.374512, "longitude" : 24.398428 },
+    { "latitude" : 48.374081, "longitude" : 24.398349 },
+    { "latitude" : 48.373677, "longitude" : 24.398230 },
+    { "latitude" : 48.373437, "longitude" : 24.398179 },
+    { "latitude" : 48.373213, "longitude" : 24.398101 },
+    { "latitude" : 48.372975, "longitude" : 24.397939 },
+    { "latitude" : 48.372664, "longitude" : 24.397791 }
+  ]
+}

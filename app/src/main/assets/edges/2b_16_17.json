@@ -1,0 +1,20 @@
+{
+  "name": "2b",
+  "start" : 16,
+  "destination" : 17,
+  "complexity" : "RED",
+  "distance": 167,
+  "coordinates": [
+    { "latitude" :48.356559766403656, "longitude" :24.40774165807352},
+    { "latitude" : 48.356742, "longitude" : 24.407770 },
+    { "latitude" : 48.356780, "longitude" : 24.407775 },
+    { "latitude" : 48.356964, "longitude" : 24.407787 },
+    { "latitude" : 48.357164, "longitude" : 24.407773 },
+    { "latitude" : 48.357362, "longitude" : 24.407745 },
+    { "latitude" : 48.357575, "longitude" : 24.407686 },
+    { "latitude" : 48.357767, "longitude" : 24.407650 },
+    { "latitude" : 48.357918, "longitude" : 24.407627 },
+    { "latitude" : 48.358013, "longitude" : 24.407617 },
+    { "latitude" : 48.358056, "longitude" : 24.407613 }
+  ]
+}

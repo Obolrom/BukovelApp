@@ -1,6 +1,9 @@
 {
   "name": "9a2",
+  "start" : 69,
+  "destination" : 70,
   "complexity" : "BLUE",
+  "distance": 360,
   "coordinates": [
     { "latitude" : 48.361191739835746, "longitude" : 24.406056414736785 },
     { "latitude" : 48.36106788045222, "longitude" : 24.406174432039638 },

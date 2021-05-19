@@ -1,0 +1,19 @@
+{
+  "name": "a",
+  "start" : 18,
+  "destination" : 20,
+  "complexity" : "RED",
+  "distance": 44,
+  "coordinates": [
+    { "latitude" : 48.35675472306064, "longitude" : 24.40355942571137 },
+    { "latitude" : 48.356786, "longitude" : 24.403592 },
+    { "latitude" : 48.356827, "longitude" : 24.403648 },
+    { "latitude" : 48.356858, "longitude" : 24.403704 },
+    { "latitude" : 48.356879, "longitude" : 24.403756 },
+    { "latitude" : 48.356887, "longitude" : 24.403820 },
+    { "latitude" : 48.356893, "longitude" : 24.403893 },
+    { "latitude" : 48.356895, "longitude" : 24.404021 },
+    { "latitude" : 48.356910, "longitude" : 24.404069 }
+  ]
+}
+

@@ -1,0 +1,13 @@
+{
+  "name": "2b",
+  "start" : 14,
+  "destination" : 15,
+  "complexity" : "RED",
+  "distance": 28,
+  "coordinates": [
+    { "latitude" : 48.356162, "longitude" : 24.407570 },
+    { "latitude" : 48.356244, "longitude" : 24.407639 },
+    { "latitude" : 48.356329, "longitude" : 24.407682 },
+    { "latitude" :48.35639543206257,"longitude" : 24.40770412810567}
+  ]
+}

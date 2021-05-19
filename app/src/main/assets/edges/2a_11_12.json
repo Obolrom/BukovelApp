@@ -1,0 +1,19 @@
+{
+  "name": "2a",
+  "start" : 11,
+  "destination" : 12,
+  "complexity" : "RED",
+  "distance": 320,
+  "coordinates": [
+    { "latitude" : 48.353293, "longitude" : 24.407492 },
+    { "latitude" : 48.353853, "longitude" : 24.407508 },
+    { "latitude" : 48.354101, "longitude" : 24.407488 },
+    { "latitude" : 48.354586, "longitude" : 24.407456 },
+    { "latitude" : 48.355054, "longitude" : 24.407441 },
+    { "latitude" : 48.355054, "longitude" : 24.407441 },
+    { "latitude" : 48.355509, "longitude" : 24.407441 },
+    { "latitude" : 48.355941, "longitude" : 24.407519 },
+    { "latitude" : 48.356162, "longitude" : 24.407570 }
+  ]
+}
+

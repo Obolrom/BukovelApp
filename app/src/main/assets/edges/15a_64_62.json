@@ -1,0 +1,27 @@
+{
+  "name": "15a",
+  "start" : 64,
+  "destination" : 62,
+  "complexity" : "RED",
+  "distance": 478,
+  "coordinates": [
+    { "latitude" : 48.378696, "longitude" : 24.409662 },
+    { "latitude" : 48.378676, "longitude" : 24.409374 },
+    { "latitude" : 48.378629, "longitude" : 24.409122 },
+    { "latitude" : 48.378588, "longitude" : 24.408835 },
+    { "latitude" : 48.378494, "longitude" : 24.408362 },
+    { "latitude" : 48.378400, "longitude" : 24.408018 },
+    { "latitude" : 48.378216, "longitude" : 24.407574 },
+    { "latitude" : 48.378076, "longitude" : 24.407278 },
+    { "latitude" : 48.377684, "longitude" : 24.406270 },
+    { "latitude" : 48.377614, "longitude" : 24.406002 },
+    { "latitude" : 48.377515, "longitude" : 24.405696 },
+    { "latitude" : 48.377319, "longitude" : 24.405285 },
+    { "latitude" : 48.377235, "longitude" : 24.405073 },
+    { "latitude" : 48.377143, "longitude" : 24.404814 },
+    { "latitude" : 48.377069, "longitude" : 24.404536 },
+    { "latitude" : 48.376979, "longitude" : 24.404297 },
+    { "latitude" : 48.376909, "longitude" : 24.404043 },
+    { "latitude" : 48.376842, "longitude" : 24.403889 }
+  ]
+}
