@@ -3,20 +3,34 @@ package com.company.app.ui.lifts
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.company.app.R
 import com.company.app.ui.map.Lift
+import java.util.*
 
-class LiftsAdapter() :
+class LiftsAdapter(private val callback: OnLiftClickListener) :
         ListAdapter<Lift, LiftsAdapter.ViewHolder>(LiftComparator()) {
+    interface OnLiftClickListener {
+        fun onLiftClick(lift: Lift)
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val textView: AppCompatTextView = itemView.findViewById(R.id.item_lift_tv)
 
-
-        fun bind(itemView: Lift) {
-
+        fun bind(lift: Lift) {
+            textView.text = lift.name.toUpperCase(Locale.ROOT)
+            // FIXME: 20.05.21 loading
+//            textView.background = lift.
+            itemView.setOnClickListener {
+                with(it) {
+                    isPressed = true
+                    isSelected = true
+                }
+                callback.onLiftClick(lift)
+            }
         }
     }
 

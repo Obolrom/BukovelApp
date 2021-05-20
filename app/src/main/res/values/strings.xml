@@ -22,4 +22,7 @@
     <string name="pin_route">pin route</string>
     <string name="unpin_route">unpin route</string>
     <string name="lifts_current_state">Lifts current load</string>
+    <string name="active_lifts">active lifts:</string>
+    <string name="slash">/</string>
+    <string name="rating_of_lift">rating of lift:</string>
 </resources>
