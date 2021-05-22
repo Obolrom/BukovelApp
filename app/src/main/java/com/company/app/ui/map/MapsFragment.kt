@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.company.app.App
 import com.company.app.R
+import com.company.app.pathfinder.Edge
 import com.company.app.pathfinder.Graph
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
@@ -173,11 +174,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         route.forEach { it.remove() }
     }
 
-    private fun showPathOnMap(path: Set<Set<Int>>) {
+    private fun showPathOnMap(path: Set<Edge>) {
         if (isRoutePinned) return
         hideRoutes()
         mapViewModel.edgeRepresentationList.forEach { edge ->
-            val edgePointsPair = setOf(edge.start, edge.destination)
+            val edgePointsPair = Edge(edge)
             if (path.contains(edgePointsPair)) {
                 route.add(googleMap.addPolyline(PolylineOptions()
                     .width(7.0f)

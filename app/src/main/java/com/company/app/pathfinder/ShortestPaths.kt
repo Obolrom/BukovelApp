@@ -11,23 +11,24 @@ class ShortestPaths(vertices: Int) {
             paths.add(Path())
     }
 
-    fun getShortestPath(destination: Int): List<Int> {
-        val path: MutableList<Int> = LinkedList()
+    fun getShortestPath(destination: Int): List<Edge> {
+        val path: MutableList<Edge> = LinkedList()
         var currentNode = destination
-        path.add(currentNode)
         while (paths[currentNode].parent != ROOT) {
-            path.add(paths[currentNode].parent)
+            path.add(paths[currentNode].edge!!)
             currentNode = paths[currentNode].parent
         }
         return path
     }
 
-    fun updateShortestDistance(vertex: Int, distance: Int) {
-        paths[vertex].distance = distance
+    fun updateShortestDistance(edge: Edge, distance: Int) {
+        paths[edge.destination].distance = distance
+        paths[edge.destination].edge = edge
     }
 
-    fun updateParentByShortestPath(vertex: Int, parent: Int) {
-        paths[vertex].parent = parent
+    fun updateParentByShortestPath(edge: Edge, parent: Int) {
+        paths[edge.destination].parent = parent
+        paths[edge.destination].edge = edge
     }
 
     fun getDistance(edge: Edge): Int {
@@ -35,8 +36,12 @@ class ShortestPaths(vertices: Int) {
     }
 
     class Path {
+        var edge: Edge? = null
         var distance: Int = Int.MAX_VALUE
         var parent: Int = ROOT
+        override fun toString(): String {
+            return "$edge"
+        }
     }
 
     companion object {

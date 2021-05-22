@@ -37,14 +37,6 @@ class App: Application() {
             lifts = readLiftsDirectory(assets?.list(liftsDirectory) ?: arrayOf())
             edges = readEdgesDirectory(assets?.list(edgesDirectory) ?: arrayOf())
             vertices = readVerticesDirectory(assets?.list(verticesDirectory) ?: arrayOf())
-            for (slope in edges) {
-                if (slope.distance == 1) {
-                    val distance = calculateDistance(slope).roundToInt()
-                    Log.d("slopes",
-                        "${slope.name}, ${slope.start} -> ${slope.destination}, distance = $distance meters"
-                    )
-                }
-            }
         }
     }
 

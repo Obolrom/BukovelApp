@@ -6,19 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.company.app.App
 import com.company.app.R
+import com.company.app.User
 import com.google.android.material.textfield.TextInputEditText
 
 class LoginFragment : Fragment() {
 
+    private val loginViewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory((activity?.application as App).repository)
+    }
     private lateinit var loginInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
-    private lateinit var loginViewModel: LoginViewModel
     private lateinit var signInButton: Button
 
     override fun onAttach(context: Context) {
@@ -30,8 +32,6 @@ class LoginFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        loginViewModel =
-                ViewModelProvider(this).get(LoginViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_login, container, false)
         loginInput = root.findViewById(R.id.tiet_sign_in_enter_login)
         passwordInput = root.findViewById(R.id.tiet_sign_in_enter_password)
@@ -40,11 +40,11 @@ class LoginFragment : Fragment() {
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         signInButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_login_to_navigation_registration)
+            loginViewModel.register("Grozehich", "123456")
+//            findNavController().navigate(R.id.action_navigation_login_to_navigation_registration)
         }
     }
 }

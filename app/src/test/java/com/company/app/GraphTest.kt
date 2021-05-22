@@ -33,7 +33,7 @@ class GraphTest {
         val pathFinder = ShortestPathFinder(graph, 6, 8)
         val path = pathFinder.getShortestPath()
         println(path)
-        assert(path.equals(listOf(6, 3, 1, 0, 8)))
+        assert(path == (listOf(6, 3, 1, 0, 8)))
     }
 
     @Test
@@ -43,7 +43,7 @@ class GraphTest {
         val pathFinder = ShortestPathFinder(graph, 9, 8)
         val path = pathFinder.getShortestPath()
         println(path)
-        assert(path.equals(listOf(9, 6, 3, 1, 0, 8)))
+        assert(path == (listOf(9, 6, 3, 1, 0, 8)))
     }
 
     @Test
@@ -54,7 +54,7 @@ class GraphTest {
         val pathFinder = ShortestPathFinder(graph, 9, 8)
         val path = pathFinder.getShortestPath()
         println(path)
-        assert(path.equals(listOf(9, 6, 5, 2, 1, 0, 8)))
+        assert(path == listOf(9, 6, 5, 2, 1, 0, 8))
     }
 
     private fun initGraph2() {

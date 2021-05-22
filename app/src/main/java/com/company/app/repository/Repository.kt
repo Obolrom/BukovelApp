@@ -1,8 +1,10 @@
 package com.company.app.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.company.app.App
+import com.company.app.User
 import com.company.app.retrofit.BukovelService
 import com.company.app.retrofit.RetrofitServices
 import com.company.app.ui.map.EdgeRepresentation
@@ -14,6 +16,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class Repository(private val app: App) {
     private val bukovelService: BukovelService by lazy { RetrofitServices.bukovelService }
@@ -47,5 +52,18 @@ class Repository(private val app: App) {
                 override fun onError(e: Throwable) { }
             })
         return services
+    }
+
+    fun registerUser(nickname: String, password: String) {
+        bukovelService.register(nickname, password)
+            .enqueue(object : Callback<Boolean> {
+                override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                    Log.d("net", "response ${response.message()}")
+                }
+
+                override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                    Log.d("net", "fail")
+                }
+            })
     }
 }

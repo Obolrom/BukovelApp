@@ -76,7 +76,7 @@ class LiftsFragment : Fragment(), LiftsAdapter.OnLiftClickListener {
     }
 
     private fun initRV() {
-        val adapter = LiftsAdapter(this)
+        val adapter = LiftsAdapter(requireContext(), this)
         with(liftRecyclerView) {
             liftsViewModel.lifts.observe(viewLifecycleOwner, {
                 adapter.submitList(it)
