@@ -2,6 +2,7 @@ package com.company.app.ui.services
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,11 +23,8 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
     private val serviceViewModel: ServiceViewModel by viewModels {
         ServiceViewModelFactory((activity?.application as App).repository)
     }
+    private lateinit var sharedViewModel: SharedViewModel
     private lateinit var root: View
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -38,8 +36,9 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         val recyclerView = root.findViewById<RecyclerView>(R.id.rv_services)
         val rvAdapter = ServiceAdapter(this)
@@ -59,8 +58,9 @@ class ServicesFragment : Fragment(), ServiceAdapter.OnServiceClickListener {
         })
     }
 
-    override fun onServiceClicked(score: Float) {
+    override fun onServiceClicked(service: Service) {
         context?.let {
+            sharedViewModel.currentServiceName.value = service.title
             findNavController().run {
                 navigate(R.id.action_navigation_services_to_serviceDescriptionFragment)
             }

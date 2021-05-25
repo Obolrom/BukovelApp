@@ -14,7 +14,7 @@ import com.company.app.R
 class ServiceAdapter(private val callback: OnServiceClickListener) :
         ListAdapter<Service, ServiceAdapter.ViewHolder>(ServiceComparator()) {
     interface OnServiceClickListener {
-        fun onServiceClicked(score: Float)
+        fun onServiceClicked(service: Service)
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -27,7 +27,7 @@ class ServiceAdapter(private val callback: OnServiceClickListener) :
             ratingBar.rating = listItem.score
 
             itemView.setOnClickListener {
-                callback.onServiceClicked(ratingBar.rating)
+                callback.onServiceClicked(listItem)
             }
         }
     }

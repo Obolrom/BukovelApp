@@ -1,5 +1,7 @@
 package com.company.app.ui.services
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +11,11 @@ import com.company.app.repository.Repository
 class ServiceViewModel(private val repository: Repository) : ViewModel() {
 
     fun getServices(): LiveData<List<Service>> {
-        return repository.callRetrofitApi()
+        return repository.getServices()
+    }
+
+    fun getServiceReviews(serviceName: String) : MutableLiveData<List<ServiceReview>> {
+        return repository.getServiceReviews(serviceName)
     }
 }
 

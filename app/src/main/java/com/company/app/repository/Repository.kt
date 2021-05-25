@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.company.app.App
-import com.company.app.User
 import com.company.app.retrofit.BukovelService
 import com.company.app.retrofit.RetrofitServices
 import com.company.app.ui.map.EdgeRepresentation
@@ -12,6 +11,7 @@ import com.company.app.ui.map.Lift
 import com.company.app.ui.map.Slope
 import com.company.app.ui.map.Vertex
 import com.company.app.ui.services.Service
+import com.company.app.ui.services.ServiceReview
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -39,9 +39,9 @@ class Repository(private val app: App) {
         value = app.lifts
     }
 
-    fun callRetrofitApi() : MutableLiveData<List<Service>> {
+    fun getServices() : MutableLiveData<List<Service>> {
         val services: MutableLiveData<List<Service>> = MutableLiveData<List<Service>>()
-        bukovelService.getTestService()
+        bukovelService.getServices()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : DisposableSingleObserver<List<Service>>() {
@@ -52,6 +52,21 @@ class Repository(private val app: App) {
                 override fun onError(e: Throwable) { }
             })
         return services
+    }
+
+    fun getServiceReviews(serviceName: String) : MutableLiveData<List<ServiceReview>> {
+        val reviews: MutableLiveData<List<ServiceReview>> = MutableLiveData<List<ServiceReview>>()
+        bukovelService.getServiceReviews(serviceName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableSingleObserver<List<ServiceReview>>() {
+                override fun onSuccess(response: List<ServiceReview>) {
+                    reviews.value = response
+                }
+
+                override fun onError(e: Throwable) { }
+            })
+        return reviews
     }
 
     fun registerUser(nickname: String, password: String) {
