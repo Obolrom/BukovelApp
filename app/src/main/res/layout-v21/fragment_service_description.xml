@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="service name"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:id="@+id/service_description_rb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:progressTint="@color/golden"
+        android:numStars="5"
+        android:rating="3.5"
+        android:stepSize="0.05"
+        android:layout_marginBottom="10dp"/>
+
+    <View style="@style/divider" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/serv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="description"
+        android:layout_margin="10dp"/>
+
+    <View style="@style/divider" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_services"
+        tools:listitem="@layout/item_service_review"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.services.ServicesFragment" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
