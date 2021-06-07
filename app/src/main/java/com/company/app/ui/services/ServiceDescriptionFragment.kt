@@ -43,7 +43,7 @@ class ServiceDescriptionFragment : Fragment() {
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         sharedViewModel.currentServiceName.observe(viewLifecycleOwner, { serviceName ->
-            view.findViewById<TextView>(R.id.textView).text = serviceName
+            view.findViewById<TextView>(R.id.service_name_tv).text = serviceName
             serviceViewModel.getServiceReviews(serviceName).observe(viewLifecycleOwner, {
                 displayReviews(it)
             })

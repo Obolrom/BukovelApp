@@ -1,36 +1,14 @@
-package com.company.app.ui.mics
+package com.company.app.ui.services
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.company.app.R
-import com.company.app.ui.services.Service
-
-abstract class Adapter<T>(
-    diffCallback: DiffUtil.ItemCallback<T>,
-    @LayoutRes private val layoutResource: Int
-) : ListAdapter<T, Adapter.BaseViewHolder<T>>(diffCallback) {
-    interface OnClickItemListener<T> {
-        fun onItemClick(item: T)
-    }
-
-    abstract class BaseViewHolder<T>(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        abstract fun bind(item: T)
-    }
-
-    override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
-    }
-}
+import com.company.app.ui.misc.Adapter
 
 class ServiceAdapter(
     private val callback: OnClickItemListener<Service>

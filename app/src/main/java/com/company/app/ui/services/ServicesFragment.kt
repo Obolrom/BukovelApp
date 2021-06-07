@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.company.app.App
 import com.company.app.R
-import com.company.app.ui.mics.Adapter
-import com.company.app.ui.mics.ServiceAdapter
+import com.company.app.ui.misc.Adapter
+
 
 class ServicesFragment :
     Fragment(), Adapter.OnClickItemListener<Service> {
