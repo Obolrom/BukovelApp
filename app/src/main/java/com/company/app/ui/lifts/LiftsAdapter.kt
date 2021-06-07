@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.company.app.R
+import com.company.app.databinding.ItemLiftBinding
 import com.company.app.ui.map.Lift
 import com.company.app.ui.misc.Adapter
 import java.util.*
@@ -19,16 +20,17 @@ class LiftsAdapter(private val context: Context,
         fun onLiftClick(lift: Lift)
     }
 
-    inner class LiftViewHolder(itemView: View) :
-        Adapter.BaseViewHolder<Lift>(itemView) {
-        private val textView: AppCompatTextView = itemView.findViewById(R.id.item_lift_tv)
+    inner class LiftViewHolder(private val binding: ItemLiftBinding) :
+        Adapter.BaseViewHolder<Lift>(binding.root) {
 
         override fun bind(item: Lift) {
-            textView.text = item.name.uppercase(Locale.ROOT)
+            binding.lift = item
+            binding.executePendingBindings()
+
             // FIXME: 20.05.21 loading
 //            textView.background = lift.
             if ( ! item.active)
-                textView.setBackgroundColor(ContextCompat
+                binding.itemLiftTv.setBackgroundColor(ContextCompat
                     .getColor(context.applicationContext, R.color.light_grey))
             itemView.setOnClickListener {
                 callback.onLiftClick(item)
@@ -40,10 +42,10 @@ class LiftsAdapter(private val context: Context,
         parent: ViewGroup,
         viewType: Int
     ): BaseViewHolder<Lift> {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_lift, parent, false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemLiftBinding.inflate(layoutInflater, parent, false)
 
-        return LiftViewHolder(view)
+        return LiftViewHolder(binding)
     }
 
     class LiftComparator : DiffUtil.ItemCallback<Lift>() {

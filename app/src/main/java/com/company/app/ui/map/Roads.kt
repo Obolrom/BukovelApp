@@ -4,8 +4,8 @@ import com.company.app.R
 import com.google.android.libraries.maps.model.*
 
 abstract class Road(
-        val name: String,
-        val coordinates: List<LatLng>,
+        var name: String,
+        var coordinates: List<LatLng>,
         var active: Boolean,
         var style: PolylineOptions
 ) {

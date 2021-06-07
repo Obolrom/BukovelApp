@@ -8,20 +8,19 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.recyclerview.widget.DiffUtil
 import com.company.app.R
+import com.company.app.databinding.ItemServiceBinding
 import com.company.app.ui.misc.Adapter
 
 class ServiceAdapter(
     private val callback: OnClickItemListener<Service>
 ) : Adapter<Service>(ServiceComparator(), R.layout.item_service) {
 
-    inner class ServiceViewHolder(itemView: View) : Adapter.BaseViewHolder<Service>(itemView) {
-        val image: ImageView = itemView.findViewById(R.id.service_iv)
-        val name : TextView = itemView.findViewById(R.id.service_name_tv)
-        val ratingBar: AppCompatRatingBar = itemView.findViewById(R.id.service_rb)
+    inner class ServiceViewHolder(private val binding: ItemServiceBinding) :
+        Adapter.BaseViewHolder<Service>(binding.root) {
 
         override fun bind(item: Service) {
-            name.text = item.title
-            ratingBar.rating = item.score
+            binding.service = item
+            binding.executePendingBindings()
 
             itemView.setOnClickListener {
                 callback.onItemClick(item)
@@ -30,10 +29,10 @@ class ServiceAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Service> {
-        val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.item_service, parent, false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemServiceBinding.inflate(layoutInflater, parent, false)
 
-        return ServiceViewHolder(view)
+        return ServiceViewHolder(binding)
     }
 
     class ServiceComparator : DiffUtil.ItemCallback<Service>() {
