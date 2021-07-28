@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class Service(
         @SerializedName("id")
-        var id: Int,
+        val id: Int,
 
         @SerializedName("name")
-        var title : String,
+        val title : String,
 
         @SerializedName("description")
-        var description: String,
+        val description: String,
 
         @SerializedName("mark")
-        var score: Float)
+        val score: Float)
