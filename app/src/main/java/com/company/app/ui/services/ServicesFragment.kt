@@ -18,9 +18,9 @@ import com.company.app.ui.misc.Adapter
 class ServicesFragment :
     Fragment(), Adapter.OnClickItemListener<Service> {
 
-    private val serviceViewModel: ServiceViewModel by viewModels {
-        ServiceViewModelFactory((activity?.application as App).repository)
-    }
+//    private val serviceViewModel: ServiceViewModel by viewModels {
+//        ServiceViewModelFactory((activity?.application as App).repository)
+//    }
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var root: View
 
@@ -48,12 +48,12 @@ class ServicesFragment :
             layoutManager = LinearLayoutManager(context)
         })
 
-        serviceViewModel.getServices().observe(viewLifecycleOwner, { items ->
-            items?.let {
-                rvAdapter.submitList(it)
-                rvAdapter.notifyDataSetChanged()
-            }
-        })
+//        serviceViewModel.getServices().observe(viewLifecycleOwner, { items ->
+//            items?.let {
+//                rvAdapter.submitList(it)
+//                rvAdapter.notifyDataSetChanged()
+//            }
+//        })
     }
 
     override fun onItemClick(item: Service) {

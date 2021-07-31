@@ -1,5 +1,6 @@
 package com.company.app.ui.map
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -13,9 +14,9 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.company.app.App
+import androidx.lifecycle.viewModelScope
 import com.company.app.R
+import com.company.app.appComponent
 import com.company.app.pathfinder.Edge
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
@@ -24,6 +25,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -31,9 +33,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val coarseLocation = android.Manifest.permission.ACCESS_COARSE_LOCATION
     private val locationPermissionRequest: Int = 2001
     private val bukovelResortCenter: LatLng = LatLng(48.364952, 24.3990655)
-    private val mapViewModel: MapViewModel by viewModels {
-        MapViewModelFactory((activity?.application as App).repository)
-    }
+
+    @Inject
+    lateinit var mapViewModel: MapViewModel
+
     private lateinit var mapView: MapView
     private lateinit var bottomSheet: BottomSheetBehavior<LinearLayoutCompat>
     private lateinit var fabMenu: FloatingActionButton
@@ -48,6 +51,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private var destinationPickerMarker: Marker? = null
     private val route: MutableSet<Polyline> = mutableSetOf()
     private var isRoutePinned: Boolean = false
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -207,10 +215,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private fun initPicker(picker: NumberPicker) {
         with(picker) {
-            minValue = 0
-            maxValue = pickerValues.size - 1
-            wrapSelectorWheel = true
-            displayedValues = pickerValues
+//            minValue = 0
+//            maxValue = pickerValues.size - 1
+//            wrapSelectorWheel = true
+//            displayedValues = pickerValues
         }
     }
 
@@ -225,7 +233,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             return
         }
         with(mapViewModel) {
-            coroutineScope.launch(Dispatchers.Main) {
+            viewModelScope.launch(Dispatchers.Main) {
                 slopes.value!!.forEach { slope ->
                     val polyline = googleMap.addPolyline(slope.style)
                     if (slope.complexity == complexity)
@@ -246,21 +254,21 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         with(mapViewModel) {
             slopes.observe(viewLifecycleOwner, { slopes ->
-                coroutineScope.launch(Dispatchers.Main) {
-                    slopes.forEach { slope ->
-                        val polyline = googleMap.addPolyline(slope.style)
-                        if (slope.complexity == RED) {
-                            redSlopes.add(polyline)
-                        } else if (slope.complexity == BLACK) {
-                            blackSlopes.add(polyline)
-                        }
-                    }
-                }
+//                viewModelScope.launch(Dispatchers.Main) {
+//                    slopes.forEach { slope ->
+//                        val polyline = googleMap.addPolyline(slope.style)
+//                        if (slope.complexity == RED) {
+//                            redSlopes.add(polyline)
+//                        } else if (slope.complexity == BLACK) {
+//                            blackSlopes.add(polyline)
+//                        }
+//                    }
+//                }
             })
 
             lifts.observe(viewLifecycleOwner, { lifts ->
-                coroutineScope.launch(Dispatchers.Main) {
-                    lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
+                viewModelScope.launch(Dispatchers.Main) {
+//                    lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
                 }
             })
         }

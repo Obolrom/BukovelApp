@@ -21,9 +21,9 @@ import com.company.app.ui.map.Lift
 
 class LiftsFragment : Fragment(), LiftsAdapter.OnLiftClickListener {
 
-    private val liftsViewModel: LiftsViewModel by viewModels {
-        LiftsViewModelFactory((activity?.application as App).repository)
-    }
+//    private val liftsViewModel: LiftsViewModel by viewModels {
+//        LiftsViewModelFactory((activity?.application as App).repository)
+//    }
     private lateinit var liftRecyclerView: RecyclerView
     private lateinit var currentLiftRateTextView: AppCompatTextView
     private lateinit var rateBottomBar: LinearLayoutCompat
@@ -56,8 +56,8 @@ class LiftsFragment : Fragment(), LiftsAdapter.OnLiftClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRV()
-        view.findViewById<AppCompatTextView>(R.id.lifts_amount).text =
-            liftsViewModel.lifts.value?.size.toString() ?: ""
+//        view.findViewById<AppCompatTextView>(R.id.lifts_amount).text =
+//            liftsViewModel.lifts.value?.size.toString() ?: ""
 
         highLoadButton.setOnClickListener {
             Toast.makeText(context?.applicationContext,
@@ -77,14 +77,14 @@ class LiftsFragment : Fragment(), LiftsAdapter.OnLiftClickListener {
 
     private fun initRV() {
         val adapter = LiftsAdapter(requireContext(), this)
-        with(liftRecyclerView) {
-            liftsViewModel.lifts.observe(viewLifecycleOwner, {
-                adapter.submitList(it)
-                adapter.notifyDataSetChanged()
-                activeLiftsAmount.text = it.map { lift -> lift.active }.size.toString()
-            })
-            this.adapter = adapter
-        }
+//        with(liftRecyclerView) {
+//            liftsViewModel.lifts.observe(viewLifecycleOwner, {
+//                adapter.submitList(it)
+//                adapter.notifyDataSetChanged()
+//                activeLiftsAmount.text = it.map { lift -> lift.active }.size.toString()
+//            })
+//            this.adapter = adapter
+//        }
     }
 
     override fun onLiftClick(lift: Lift) {

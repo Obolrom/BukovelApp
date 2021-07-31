@@ -16,9 +16,9 @@ import com.google.android.material.textfield.TextInputEditText
 
 class LoginFragment : Fragment() {
 
-    private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory((activity?.application as App).repository)
-    }
+//    private val loginViewModel: LoginViewModel by viewModels {
+//        LoginViewModelFactory((activity?.application as App).repository)
+//    }
     private lateinit var loginInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
     private lateinit var signInButton: Button
@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signInButton.setOnClickListener {
-            loginViewModel.register("Grozehich", "123456")
+//            loginViewModel.register("Grozehich", "123456")
 //            findNavController().navigate(R.id.action_navigation_login_to_navigation_registration)
         }
     }
