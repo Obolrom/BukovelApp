@@ -8,11 +8,17 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.company.app.di.AppComponent
 import com.company.app.di.AppInjector
+import com.company.app.repository.MapRepository
 import timber.log.Timber
+import javax.inject.Inject
 
 class App: Application(), ViewModelStoreOwner, LifecycleObserver {
 
     lateinit var appComponent: AppComponent
+
+    // should make prefetch, because
+    @Inject
+    lateinit var mapRepository: MapRepository
 
     override fun onCreate() {
         super.onCreate()

@@ -3,25 +3,23 @@ package com.company.app.ui.map
 import androidx.lifecycle.*
 import com.company.app.pathfinder.Edge
 import com.company.app.pathfinder.Graph
-import com.company.app.repository.Repository
+import com.company.app.repository.MapRepository
 import com.google.android.libraries.maps.model.Polyline
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class MapViewModel @Inject constructor(
-    private val repository: Repository,
+    private val mapRepository: MapRepository,
 ): ViewModel() {
 
     private val navigator: Navigator by lazy { NavigatorImpl() }
 
     private var navigatorJob: Job? = null
 
-    val slopes: LiveData<List<Slope>> = MutableLiveData<List<Slope>>().apply {
-        value = repository._slopes
-    }
-    val lifts = repository.lifts
-    val edgeRepresentationList = repository.edgeRepresentations
-    val vertices: Array<Vertex> = repository.vertices
+    val slopes: LiveData<Slope> = mapRepository.getSlopes().asLiveData()
+    val lifts: LiveData<Lift> = mapRepository.getLifts().asLiveData()
+    val edgeRepresentationList: List<EdgeRepresentation> = mapRepository.edges
+    val vertices: Array<Vertex> = mapRepository.vertices.toTypedArray()
     val redSlopes: MutableList<Polyline> = mutableListOf()
     val blackSlopes: MutableList<Polyline> = mutableListOf()
 

@@ -2,23 +2,19 @@ package com.company.app.repository
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.company.app.retrofit.BukovelService
 import com.company.app.ui.map.*
 import com.company.app.ui.services.Service
 import com.company.app.ui.services.ServiceReview
-import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
 import com.google.gson.Gson
 import com.google.maps.android.SphericalUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,40 +24,26 @@ import java.io.BufferedReader
 import java.io.IOException
 
 @Singleton
-class Repository @Inject constructor(
+class MapRepository @Inject constructor(
     private val context: Context,
     private val bukovelService: BukovelService
 ) {
     private val gsonConverter = Gson()
     private val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob())
-    var _slopes: List<Slope>? = null
-    var _lifts: List<Lift>? = null
-    var _edges: List<EdgeRepresentation>? = null
-    var _vertices: Array<Vertex>? = null
-    val assets = context.assets
+
+    private val _edges: MutableList<EdgeRepresentation> = mutableListOf()
+    val edges: List<EdgeRepresentation> = _edges
+
+    private val _vertices: MutableList<Vertex> = ArrayList()
+    val vertices: List<Vertex> = _vertices
+
+    private val assets = context.assets
 
     init {
         coroutineScope.launch(Dispatchers.IO) {
-            _slopes = readSlopesDirectory(assets?.list(slopeDirectory) ?: arrayOf())
-            _lifts = readLiftsDirectory(assets?.list(liftsDirectory) ?: arrayOf())
-            _edges = readEdgesDirectory(assets?.list(edgesDirectory) ?: arrayOf())
-            _vertices = readVerticesDirectory(assets?.list(verticesDirectory) ?: arrayOf())
+            getEdges().collect { edge -> _edges.add(edge) }
+            getVertices().collect { vertex -> _vertices.add(vertex) }
         }
-    }
-
-    private val database: BukovelDatabase by lazy {
-        BukovelDatabase.getDatabase(context, coroutineScope)
-    }
-
-    val vertices: Array<Vertex> = _vertices ?: arrayOf()
-    val edgeRepresentations: List<EdgeRepresentation> = _edges ?: listOf()
-
-    val slopes: LiveData<List<Slope>> = MutableLiveData<List<Slope>>().apply {
-        value = _slopes
-    }
-
-    val lifts: LiveData<List<Lift>> = MutableLiveData<List<Lift>>().apply {
-        value = _lifts
     }
 
     fun getServices() : MutableLiveData<List<Service>> {
@@ -115,23 +97,24 @@ class Repository @Inject constructor(
         return distance
     }
 
-    private fun readVerticesDirectory(fileNames: Array<String>): Array<Vertex> {
-        val directions = arrayListOf<Vertex>()
+    private fun getVertices(): Flow<Vertex> = flow {
+        val fileNames = assets?.list(verticesDirectory) ?: arrayOf()
+
         for (filePath in fileNames) {
             try {
                 val file = assets.open("${verticesDirectory}/$filePath")
                 val content = file.bufferedReader().use(BufferedReader::readText)
                 val vertex = gsonConverter.fromJson(content, Vertex::class.java)
-                directions.add(vertex)
+                emit(vertex)
             } catch (ioe: IOException) {
                 ioe.printStackTrace()
             }
         }
-        return directions.toTypedArray()
-    }
+    }.flowOn(Dispatchers.IO)
 
-    private fun readSlopesDirectory(fileNames: Array<String>): List<Slope> {
-        val directions = mutableListOf<Slope>()
+    fun getSlopes(): Flow<Slope> = flow {
+        val fileNames = assets?.list(slopeDirectory) ?: arrayOf()
+
         for (filePath in fileNames) {
             try {
                 val file = assets.open("${slopeDirectory}/$filePath")
@@ -144,16 +127,16 @@ class Repository @Inject constructor(
                     .visible(true)
                     .addAll(slope.coordinates)
                     .addSpan(getGradientByComplexity(slope.complexity))
-                directions.add(slope)
+                emit(slope)
             } catch (ioe: IOException) {
                 ioe.printStackTrace()
             }
         }
-        return directions
-    }
+    }.flowOn(Dispatchers.IO)
 
-    private fun readLiftsDirectory(fileNames: Array<String>): List<Lift> {
-        val directions = mutableListOf<Lift>()
+    fun getLifts(): Flow<Lift> = flow {
+        val fileNames = assets?.list(liftsDirectory) ?: arrayOf()
+
         for (filePath in fileNames) {
             try {
                 val file = assets.open("${liftsDirectory}/$filePath")
@@ -167,16 +150,16 @@ class Repository @Inject constructor(
                     .pattern(listOf(Gap(10F), Dash(15F)))
 //                    .color(R.color.purple_200)
                     .addAll(lift.coordinates)
-                directions.add(lift)
+                emit(lift)
             } catch (ioe: IOException) {
                 ioe.printStackTrace()
             }
         }
-        return directions
-    }
+    }.flowOn(Dispatchers.IO)
 
-    private fun readEdgesDirectory(fileNames: Array<String>): List<EdgeRepresentation> {
-        val directions = mutableListOf<EdgeRepresentation>()
+    fun getEdges(): Flow<EdgeRepresentation> = flow {
+        val fileNames = assets?.list(edgesDirectory) ?: arrayOf()
+
         for (filePath in fileNames) {
             try {
                 val file = assets.open("${edgesDirectory}/$filePath")
@@ -188,15 +171,16 @@ class Repository @Inject constructor(
                     .visible(true)
 //                    .color(R.color.purple_200)
                     .addAll(edge.coordinates)
-                if (filePath.contains("transition"))
-                    directions.add(duplicateTransition(edge))
-                directions.add(edge)
+                val direction =
+                    if (filePath.contains("transition")) duplicateTransition(edge)
+                    else edge
+
+                emit(direction)
             } catch (ioe: IOException) {
                 ioe.printStackTrace()
             }
         }
-        return directions
-    }
+    }.flowOn(Dispatchers.IO)
 
     private fun duplicateTransition(edge: EdgeRepresentation): EdgeRepresentation {
         return EdgeRepresentation(

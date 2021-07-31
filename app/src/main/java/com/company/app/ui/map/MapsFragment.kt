@@ -13,11 +13,12 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.company.app.R
 import com.company.app.appComponent
 import com.company.app.pathfinder.Edge
+import com.company.app.ui.AbsFragment
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
@@ -25,17 +26,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.*
-import javax.inject.Inject
 
-class MapsFragment : Fragment(), OnMapReadyCallback {
+class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
 
-    private val fineLocation = android.Manifest.permission.ACCESS_FINE_LOCATION
-    private val coarseLocation = android.Manifest.permission.ACCESS_COARSE_LOCATION
-    private val locationPermissionRequest: Int = 2001
-    private val bukovelResortCenter: LatLng = LatLng(48.364952, 24.3990655)
-
-    @Inject
-    lateinit var mapViewModel: MapViewModel
+    private val mapViewModel: MapViewModel by viewModels { appViewModelFactory }
 
     private lateinit var mapView: MapView
     private lateinit var bottomSheet: BottomSheetBehavior<LinearLayoutCompat>
@@ -84,8 +78,24 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initViewModels() {
+        with(mapViewModel) {
+            slopes.observe(viewLifecycleOwner) { slope ->
+                val polyline = googleMap.addPolyline(slope.style)
+                if (slope.complexity == RED) {
+                    redSlopes.add(polyline)
+                } else if (slope.complexity == BLACK) {
+                    blackSlopes.add(polyline)
+                }
+            }
+
+            lifts.observe(viewLifecycleOwner) { lift ->
+                googleMap.addPolyline(lift.style)
+            }
+        }
+    }
+
+    override fun initViews() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
@@ -215,10 +225,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private fun initPicker(picker: NumberPicker) {
         with(picker) {
-//            minValue = 0
-//            maxValue = pickerValues.size - 1
-//            wrapSelectorWheel = true
-//            displayedValues = pickerValues
+            minValue = 0
+            maxValue = pickerValues.size - 1
+            wrapSelectorWheel = true
+            displayedValues = pickerValues
         }
     }
 
@@ -234,7 +244,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
         with(mapViewModel) {
             viewModelScope.launch(Dispatchers.Main) {
-                slopes.value!!.forEach { slope ->
+                slopes.observe(viewLifecycleOwner) { slope ->
                     val polyline = googleMap.addPolyline(slope.style)
                     if (slope.complexity == complexity)
                         routes.add(polyline)
@@ -250,27 +260,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         with(googleMap) {
             moveCamera(CameraUpdateFactory.newLatLng(bukovelResortCenter))
             setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style))
-        }
-
-        with(mapViewModel) {
-            slopes.observe(viewLifecycleOwner, { slopes ->
-//                viewModelScope.launch(Dispatchers.Main) {
-//                    slopes.forEach { slope ->
-//                        val polyline = googleMap.addPolyline(slope.style)
-//                        if (slope.complexity == RED) {
-//                            redSlopes.add(polyline)
-//                        } else if (slope.complexity == BLACK) {
-//                            blackSlopes.add(polyline)
-//                        }
-//                    }
-//                }
-            })
-
-            lifts.observe(viewLifecycleOwner, { lifts ->
-                viewModelScope.launch(Dispatchers.Main) {
-//                    lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
-                }
-            })
         }
     }
 
@@ -327,5 +316,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+
+    companion object {
+        private const val fineLocation = android.Manifest.permission.ACCESS_FINE_LOCATION
+        private const val coarseLocation = android.Manifest.permission.ACCESS_COARSE_LOCATION
+        private const val locationPermissionRequest: Int = 2001
+        private val bukovelResortCenter: LatLng = LatLng(48.364952, 24.3990655)
     }
 }
