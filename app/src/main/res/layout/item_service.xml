@@ -51,7 +51,7 @@
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:gravity="center"
-                android:text="@={service.title}" />
+                android:text="@{service.title}" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
@@ -61,7 +61,7 @@
                 android:layout_gravity="center"
                 android:progressTint="@color/golden"
                 android:numStars="5"
-                android:rating="@={service.score}"
+                android:rating="@{service.score}"
                 android:stepSize="0.05"
                 tools:targetApi="lollipop" />
         </LinearLayout>

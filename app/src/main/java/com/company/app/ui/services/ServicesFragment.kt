@@ -39,7 +39,7 @@ class ServicesFragment :
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         val recyclerView = root.findViewById<RecyclerView>(R.id.rv_services)
-        val rvAdapter = ServiceAdapter(this, )
+        val rvAdapter = ServiceAdapter(this)
 
         with(recyclerView, {
             setHasFixedSize(true)

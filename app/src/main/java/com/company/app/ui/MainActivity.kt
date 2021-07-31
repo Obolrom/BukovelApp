@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_login,
             R.id.navigation_maps
         ))
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 }
