@@ -3,7 +3,6 @@ package com.company.app.ui.map
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import androidx.fragment.app.viewModels
 import com.company.app.App
 import com.company.app.R
 import com.company.app.pathfinder.Edge
-import com.company.app.pathfinder.Graph
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
@@ -26,10 +24,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.*
-import java.util.concurrent.Callable
-import java.util.concurrent.FutureTask
-import kotlin.concurrent.thread
-
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -41,7 +35,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         MapViewModelFactory((activity?.application as App).repository)
     }
     private lateinit var mapView: MapView
-    private val navigator: Navigator by lazy { Navigator(requireContext()) }
     private lateinit var bottomSheet: BottomSheetBehavior<LinearLayoutCompat>
     private lateinit var fabMenu: FloatingActionButton
     private lateinit var redSwitch: SwitchCompat
@@ -131,14 +124,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun buildRoute(start: Int, destination: Int) {
-        mapViewModel.coroutineScope.launch(Dispatchers.Main) {
-            val path = navigator.getPath(
-                Graph(mapViewModel.edgeRepresentationList),
-                mapViewModel.vertices[start].vertex,
-                mapViewModel.vertices[destination].vertex)
-            Log.d("slopes", path.toString())
-            showPathOnMap(path)
-        }
+        mapViewModel.buildRoute(start, destination, ::showPathOnMap)
     }
 
     private val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {

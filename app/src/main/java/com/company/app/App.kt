@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.BufferedReader
 import java.io.IOException
 import kotlin.math.roundToInt
@@ -30,6 +31,10 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
 
         coroutineScope.launch(Dispatchers.IO) {
             val assets = applicationContext?.assets

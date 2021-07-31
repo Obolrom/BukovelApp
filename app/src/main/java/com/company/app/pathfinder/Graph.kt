@@ -1,6 +1,5 @@
 package com.company.app.pathfinder
 
-import android.util.Log
 import com.company.app.ui.map.EdgeRepresentation
 import java.util.*
 
