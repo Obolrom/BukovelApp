@@ -17,23 +17,25 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.company.app.R
 import com.company.app.appComponent
+import com.company.app.databinding.FragmentMapsBinding
 import com.company.app.pathfinder.Edge
 import com.company.app.ui.AbsFragment
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.*
+import timber.log.Timber
 
 class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     private val mapViewModel: MapViewModel by viewModels { appViewModelFactory }
 
-    private lateinit var mapView: MapView
+    private var _binding: FragmentMapsBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var bottomSheet: BottomSheetBehavior<LinearLayoutCompat>
-    private lateinit var fabMenu: FloatingActionButton
     private lateinit var redSwitch: SwitchCompat
     private lateinit var blackSwitch: SwitchCompat
     private lateinit var startPicker: NumberPicker
@@ -56,44 +58,27 @@ class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_maps, container, false)
+        _binding = FragmentMapsBinding.inflate(inflater, container, false)
 
-        with(root) {
+        with(binding.root) {
             bottomSheet = BottomSheetBehavior
                 .from(findViewById(R.id.bottom_sheet))
             bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
-            fabMenu = findViewById(R.id.fab_map_navigator)
-            mapView = findViewById(R.id.map)
             startPicker = findViewById(R.id.start_picker)
             destinationPicker = findViewById(R.id.destination_picker)
             directionButton = findViewById(R.id.get_directions)
         }
-        with(mapView) {
+        with(binding.map) {
             onCreate(savedInstanceState)
             getMapAsync(this@MapsFragment)
         }
-        redSwitch = root.findViewById(R.id.red_complexity_level)
-        blackSwitch = root.findViewById(R.id.black_complexity_level)
+        redSwitch = binding.root.findViewById(R.id.red_complexity_level)
+        blackSwitch = binding.root.findViewById(R.id.black_complexity_level)
 
-        return root
+        return _binding!!.root
     }
 
-    override fun initViewModels() {
-        with(mapViewModel) {
-            slopes.observe(viewLifecycleOwner) { slope ->
-                val polyline = googleMap.addPolyline(slope.style)
-                if (slope.complexity == RED) {
-                    redSlopes.add(polyline)
-                } else if (slope.complexity == BLACK) {
-                    blackSlopes.add(polyline)
-                }
-            }
-
-            lifts.observe(viewLifecycleOwner) { lift ->
-                googleMap.addPolyline(lift.style)
-            }
-        }
-    }
+    override fun initViewModels() { }
 
     override fun initViews() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -112,7 +97,7 @@ class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
                 destinationPickerSet(newVal)
             }
         }
-        fabMenu.setOnClickListener(fabMenuButtonListener)
+        binding.fabMapNavigator.setOnClickListener(fabMenuButtonListener)
         redSwitch.setOnClickListener(redSwitchListener)
         blackSwitch.setOnClickListener(blackSwitchListener)
         directionButton.setOnClickListener(directionButtonListener)
@@ -243,14 +228,12 @@ class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
             return
         }
         with(mapViewModel) {
-            viewModelScope.launch(Dispatchers.Main) {
-                slopes.observe(viewLifecycleOwner) { slope ->
-                    val polyline = googleMap.addPolyline(slope.style)
-                    if (slope.complexity == complexity)
-                        routes.add(polyline)
-                    else
-                        polyline.remove()
-                }
+            slopes.value?.forEach { slope ->
+                val polyline = googleMap.addPolyline(slope.style)
+                if (slope.complexity == complexity)
+                    routes.add(polyline)
+                else
+                    polyline.remove()
             }
         }
     }
@@ -260,6 +243,23 @@ class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
         with(googleMap) {
             moveCamera(CameraUpdateFactory.newLatLng(bukovelResortCenter))
             setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style))
+        }
+
+        with(mapViewModel) {
+            slopes.observe(viewLifecycleOwner) { slopes ->
+                slopes?.forEach { slope ->
+                    val polyline = googleMap.addPolyline(slope.style)
+                    if (slope.complexity == RED) {
+                        redSlopes.add(polyline)
+                    } else if (slope.complexity == BLACK) {
+                        blackSlopes.add(polyline)
+                    }
+                }
+            }
+
+            lifts.observe(viewLifecycleOwner) { lift ->
+                googleMap.addPolyline(lift.style)
+            }
         }
     }
 
@@ -295,27 +295,27 @@ class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
+        binding.map.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        mapView.onPause()
+        binding.map.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView.onDestroy()
+        binding.map.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        binding.map.onSaveInstanceState(outState)
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView.onLowMemory()
+        binding.map.onLowMemory()
     }
 
     companion object {

@@ -2,6 +2,7 @@ package com.company.app.repository
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.company.app.retrofit.BukovelService
 import com.company.app.ui.map.*
@@ -31,6 +32,9 @@ class MapRepository @Inject constructor(
     private val gsonConverter = Gson()
     private val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob())
 
+    private val _slopes: MutableLiveData<List<Slope>> = MutableLiveData()
+    val slopes: LiveData<List<Slope>?> = _slopes
+
     private val _edges: MutableList<EdgeRepresentation> = mutableListOf()
     val edges: List<EdgeRepresentation> = _edges
 
@@ -40,7 +44,11 @@ class MapRepository @Inject constructor(
     private val assets = context.assets
 
     init {
+        val slopeList = mutableListOf<Slope>()
+        _slopes.value = slopeList
+
         coroutineScope.launch(Dispatchers.IO) {
+            getSlopes().collect { slope -> slopeList.add(slope) }
             getEdges().collect { edge -> _edges.add(edge) }
             getVertices().collect { vertex -> _vertices.add(vertex) }
         }

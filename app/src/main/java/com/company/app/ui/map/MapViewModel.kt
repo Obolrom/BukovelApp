@@ -16,7 +16,7 @@ class MapViewModel @Inject constructor(
 
     private var navigatorJob: Job? = null
 
-    val slopes: LiveData<Slope> = mapRepository.getSlopes().asLiveData()
+    val slopes: LiveData<List<Slope>?> = mapRepository.slopes
     val lifts: LiveData<Lift> = mapRepository.getLifts().asLiveData()
     val edgeRepresentationList: List<EdgeRepresentation> = mapRepository.edges
     val vertices: Array<Vertex> = mapRepository.vertices.toTypedArray()
