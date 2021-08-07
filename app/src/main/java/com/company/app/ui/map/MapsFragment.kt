@@ -1,5 +1,6 @@
 package com.company.app.ui.map
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -12,31 +13,29 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.company.app.App
+import androidx.lifecycle.viewModelScope
 import com.company.app.R
+import com.company.app.appComponent
+import com.company.app.databinding.FragmentMapsBinding
 import com.company.app.pathfinder.Edge
+import com.company.app.ui.AbsFragment
 import com.company.app.ui.map.Complexity.*
 import com.google.android.libraries.maps.*
 import com.google.android.libraries.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.coroutines.*
+import timber.log.Timber
 
-class MapsFragment : Fragment(), OnMapReadyCallback {
+class MapsFragment : AbsFragment(R.layout.fragment_maps), OnMapReadyCallback {
 
-    private val fineLocation = android.Manifest.permission.ACCESS_FINE_LOCATION
-    private val coarseLocation = android.Manifest.permission.ACCESS_COARSE_LOCATION
-    private val locationPermissionRequest: Int = 2001
-    private val bukovelResortCenter: LatLng = LatLng(48.364952, 24.3990655)
-    private val mapViewModel: MapViewModel by viewModels {
-        MapViewModelFactory((activity?.application as App).repository)
-    }
-    private lateinit var mapView: MapView
+    private val mapViewModel: MapViewModel by viewModels { appViewModelFactory }
+
+    private var _binding: FragmentMapsBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var bottomSheet: BottomSheetBehavior<LinearLayoutCompat>
-    private lateinit var fabMenu: FloatingActionButton
     private lateinit var redSwitch: SwitchCompat
     private lateinit var blackSwitch: SwitchCompat
     private lateinit var startPicker: NumberPicker
@@ -49,35 +48,39 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val route: MutableSet<Polyline> = mutableSetOf()
     private var isRoutePinned: Boolean = false
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_maps, container, false)
+        _binding = FragmentMapsBinding.inflate(inflater, container, false)
 
-        with(root) {
+        with(binding.root) {
             bottomSheet = BottomSheetBehavior
                 .from(findViewById(R.id.bottom_sheet))
             bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
-            fabMenu = findViewById(R.id.fab_map_navigator)
-            mapView = findViewById(R.id.map)
             startPicker = findViewById(R.id.start_picker)
             destinationPicker = findViewById(R.id.destination_picker)
             directionButton = findViewById(R.id.get_directions)
         }
-        with(mapView) {
+        with(binding.map) {
             onCreate(savedInstanceState)
             getMapAsync(this@MapsFragment)
         }
-        redSwitch = root.findViewById(R.id.red_complexity_level)
-        blackSwitch = root.findViewById(R.id.black_complexity_level)
+        redSwitch = binding.root.findViewById(R.id.red_complexity_level)
+        blackSwitch = binding.root.findViewById(R.id.black_complexity_level)
 
-        return root
+        return _binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initViewModels() { }
+
+    override fun initViews() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
@@ -94,7 +97,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 destinationPickerSet(newVal)
             }
         }
-        fabMenu.setOnClickListener(fabMenuButtonListener)
+        binding.fabMapNavigator.setOnClickListener(fabMenuButtonListener)
         redSwitch.setOnClickListener(redSwitchListener)
         blackSwitch.setOnClickListener(blackSwitchListener)
         directionButton.setOnClickListener(directionButtonListener)
@@ -225,14 +228,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             return
         }
         with(mapViewModel) {
-            coroutineScope.launch(Dispatchers.Main) {
-                slopes.value!!.forEach { slope ->
-                    val polyline = googleMap.addPolyline(slope.style)
-                    if (slope.complexity == complexity)
-                        routes.add(polyline)
-                    else
-                        polyline.remove()
-                }
+            slopes.value?.forEach { slope ->
+                val polyline = googleMap.addPolyline(slope.style)
+                if (slope.complexity == complexity)
+                    routes.add(polyline)
+                else
+                    polyline.remove()
             }
         }
     }
@@ -245,24 +246,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         }
 
         with(mapViewModel) {
-            slopes.observe(viewLifecycleOwner, { slopes ->
-                coroutineScope.launch(Dispatchers.Main) {
-                    slopes.forEach { slope ->
-                        val polyline = googleMap.addPolyline(slope.style)
-                        if (slope.complexity == RED) {
-                            redSlopes.add(polyline)
-                        } else if (slope.complexity == BLACK) {
-                            blackSlopes.add(polyline)
-                        }
+            slopes.observe(viewLifecycleOwner) { slopes ->
+                slopes?.forEach { slope ->
+                    val polyline = googleMap.addPolyline(slope.style)
+                    if (slope.complexity == RED) {
+                        redSlopes.add(polyline)
+                    } else if (slope.complexity == BLACK) {
+                        blackSlopes.add(polyline)
                     }
                 }
-            })
+            }
 
-            lifts.observe(viewLifecycleOwner, { lifts ->
-                coroutineScope.launch(Dispatchers.Main) {
-                    lifts.forEach { lift -> googleMap.addPolyline(lift.style) }
-                }
-            })
+            lifts.observe(viewLifecycleOwner) { lift ->
+                googleMap.addPolyline(lift.style)
+            }
         }
     }
 
@@ -298,26 +295,33 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
+        binding.map.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        mapView.onPause()
+        binding.map.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mapView.onDestroy()
+        binding.map.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        binding.map.onSaveInstanceState(outState)
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView.onLowMemory()
+        binding.map.onLowMemory()
+    }
+
+    companion object {
+        private const val fineLocation = android.Manifest.permission.ACCESS_FINE_LOCATION
+        private const val coarseLocation = android.Manifest.permission.ACCESS_COARSE_LOCATION
+        private const val locationPermissionRequest: Int = 2001
+        private val bukovelResortCenter: LatLng = LatLng(48.364952, 24.3990655)
     }
 }

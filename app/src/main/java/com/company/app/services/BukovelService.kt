@@ -1,17 +1,16 @@
-package com.company.app.retrofit
+package com.company.app.services
 
 import com.company.app.ui.services.Service
 import com.company.app.ui.services.ServiceReview
-import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.*
 
 interface BukovelService {
     @GET("GetServices")
-    fun getServices() : Single<List<Service>>
+    fun getServices() : List<Service>
 
     @GET("GetServiceReview")
-    fun getServiceReviews(@Query("name") service: String) : Single<List<ServiceReview>>
+    fun getServiceReviews(@Query("name") service: String) : List<ServiceReview>
 
     @FormUrlEncoded
     @POST("Register")

@@ -4,20 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.company.app.repository.Repository
-import com.company.app.ui.map.Lift
-import com.company.app.ui.services.ServiceViewModel
+import com.company.app.repository.MapRepository
 
-class LiftsViewModel(private val repository: Repository) : ViewModel() {
+class LiftsViewModel(private val repository: MapRepository) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
     }
     val text: LiveData<String> = _text
-    val lifts: LiveData<List<Lift>> = repository.lifts
+//    val lifts: LiveData<List<Lift>> = repository.lifts
 }
 
-class LiftsViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
+class LiftsViewModelFactory(private val repository: MapRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LiftsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

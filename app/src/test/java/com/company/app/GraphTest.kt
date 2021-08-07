@@ -3,10 +3,13 @@ package com.company.app
 import com.company.app.pathfinder.Graph
 import com.company.app.pathfinder.Edge
 import com.company.app.pathfinder.ShortestPathFinder
+import com.google.gson.Gson
+import kotlinx.coroutines.*
 import org.junit.Test
 
 class GraphTest {
     lateinit var graph: Graph
+    private val coroutineScope = CoroutineScope(SupervisorJob())
 
     private fun initGraph1() {
         graph = Graph(10)
@@ -30,31 +33,37 @@ class GraphTest {
     @Test
     fun graphSP1() {
         initGraph1()
-        val pathFinder = ShortestPathFinder(graph, 6, 8)
-        val path = pathFinder.getShortestPath()
-        println(path)
-        assert(path == (listOf(6, 3, 1, 0, 8)))
+        coroutineScope.launch {
+            val pathFinder = ShortestPathFinder(graph, 6, 8)
+            val path = pathFinder.getShortestPath()
+            println(path)
+            assert(path == (listOf(6, 3, 1, 0, 8)))
+        }
     }
 
     @Test
     fun graphSP2() {
         initGraph1()
-        graph.removeSlope("1b")
-        val pathFinder = ShortestPathFinder(graph, 9, 8)
-        val path = pathFinder.getShortestPath()
-        println(path)
-        assert(path == (listOf(9, 6, 3, 1, 0, 8)))
+        coroutineScope.launch {
+            graph.removeSlope("1b")
+            val pathFinder = ShortestPathFinder(graph, 9, 8)
+            val path = pathFinder.getShortestPath()
+            println(path)
+            assert(path == (listOf(9, 6, 3, 1, 0, 8)))
+        }
     }
 
     @Test
     fun graphSP3() {
         initGraph1()
-        graph.removeSlope("1b")
-        graph.removeSlope("1d")
-        val pathFinder = ShortestPathFinder(graph, 9, 8)
-        val path = pathFinder.getShortestPath()
-        println(path)
-        assert(path == listOf(9, 6, 5, 2, 1, 0, 8))
+        coroutineScope.launch {
+            graph.removeSlope("1b")
+            graph.removeSlope("1d")
+            val pathFinder = ShortestPathFinder(graph, 9, 8)
+            val path = pathFinder.getShortestPath()
+            println(path)
+            assert(path == listOf(9, 6, 5, 2, 1, 0, 8))
+        }
     }
 
     private fun initGraph2() {
@@ -69,31 +78,37 @@ class GraphTest {
     @Test
     fun graphSP4() {
         initGraph2()
-        val pathFinder = ShortestPathFinder(graph, 0, 2)
-        val path = pathFinder.getShortestPath()
-        println(path)
-        assert(path == listOf(0, 1, 2))
+        coroutineScope.launch {
+            val pathFinder = ShortestPathFinder(graph, 0, 2)
+            val path = pathFinder.getShortestPath()
+            println(path)
+            assert(path == listOf(0, 1, 2))
+        }
     }
 
     @Test
     fun graphSP5() {
         initGraph2()
-        graph.removeSlope("a")
-        val pathFinder = ShortestPathFinder(graph, 0, 2)
-        val path = pathFinder.getShortestPath()
-        println(path)
-        assert(path == listOf(0, 3, 2))
+        coroutineScope.launch {
+            graph.removeSlope("a")
+            val pathFinder = ShortestPathFinder(graph, 0, 2)
+            val path = pathFinder.getShortestPath()
+            println(path)
+            assert(path == listOf(0, 3, 2))
+        }
     }
 
     @Test
     fun graphSP6() {
         initGraph2()
-        graph.removeSlope("a")
-        graph.removeSlope("c")
-        val pathFinder = ShortestPathFinder(graph, 0, 2)
-        val path = pathFinder.getShortestPath()
-        println(path)
-        assert(path == listOf(0, 2))
+        coroutineScope.launch {
+            graph.removeSlope("a")
+            graph.removeSlope("c")
+            val pathFinder = ShortestPathFinder(graph, 0, 2)
+            val path = pathFinder.getShortestPath()
+            println(path)
+            assert(path == listOf(0, 2))
+        }
     }
 
     private fun initRealGraph() {
@@ -236,10 +251,28 @@ class GraphTest {
     }
 
     @Test
-    fun from33To0() {
+    fun from33To0() = runBlocking {
         initRealGraph()
         val pathFinder = ShortestPathFinder(graph, 33, 48)
         val path = pathFinder.getShortestPath()
         println(path)
+    }
+
+    @Test
+    fun from32To50() = runBlocking {
+        initRealGraph()
+        val pathFinder = ShortestPathFinder(graph, 32, 50)
+        val path = pathFinder.getShortestPath()
+        println(path)
+        assert(path == listOf(32, 50))
+    }
+
+    @Test
+    fun from50To32() = runBlocking {
+        initRealGraph()
+        val pathFinder = ShortestPathFinder(graph, 50, 32)
+        val path = pathFinder.getShortestPath()
+        println(path)
+        assert(path == listOf(32, 50))
     }
 }

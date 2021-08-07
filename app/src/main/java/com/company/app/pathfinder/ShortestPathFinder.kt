@@ -1,15 +1,15 @@
 package com.company.app.pathfinder
 
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.yield
 import timber.log.Timber
 import java.util.*
 import kotlin.NoSuchElementException
 
 class ShortestPathFinder(
-        private val graph: Graph,
-        private val source: Int,
-        private val destination: Int) {
+    private val graph: Graph,
+    private val source: Int,
+    private val destination: Int
+) {
     private val priorityQueue: PriorityQueue<Edge> = PriorityQueue(graph.edgeAmount) { vertex1, vertex2 ->
         vertex1.weight.compareTo(vertex2.weight)
     }
@@ -20,8 +20,6 @@ class ShortestPathFinder(
         dijkstra()
         return shortestPaths.getShortestPath(destination).asReversed()
     }
-
-    var i = 0
 
     suspend fun dijkstra() {
         priorityQueue.add(Edge(source, 0))
@@ -37,9 +35,9 @@ class ShortestPathFinder(
                 visitNeighbors(currentEdge)
                 yield()
             }
-        }
-        catch (nse: NoSuchElementException) { }
-        catch (spf: ShortestPathFoundException) { }
+        } catch (nse: NoSuchElementException) {
+            Timber.tag(TAG_PATH_FINDER).e("No route found")
+        } catch (spf: ShortestPathFoundException) { }
 
         Timber.d("DIJKSTRA FOUND PATH")
     }
@@ -62,5 +60,9 @@ class ShortestPathFinder(
                 priorityQueue.add(Edge(edge.destination, shortestPaths.getDistance(edge)))
             }
         }
+    }
+
+    companion object {
+        private const val TAG_PATH_FINDER = "TAG_PATH_FINDER"
     }
 }

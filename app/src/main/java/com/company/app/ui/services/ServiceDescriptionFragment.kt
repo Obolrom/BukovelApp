@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.company.app.App
+import com.company.app.BukovelApp
 import com.company.app.R
 
 
@@ -36,17 +36,17 @@ class ServiceDescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        serviceViewModel = ViewModelProvider(
-            viewModelStore,
-            ServiceViewModelFactory((activity?.application as App).repository)
-        ).get(ServiceViewModel::class.java)
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-
-        sharedViewModel.currentServiceName.observe(viewLifecycleOwner, { serviceName ->
-            view.findViewById<TextView>(R.id.service_name_tv).text = serviceName
-            serviceViewModel.getServiceReviews(serviceName).observe(viewLifecycleOwner, {
-                displayReviews(it)
-            })
-        })
+//        serviceViewModel = ViewModelProvider(
+//            viewModelStore,
+//            ServiceViewModelFactory((activity?.application as App).repository)
+//        ).get(ServiceViewModel::class.java)
+//        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+//
+//        sharedViewModel.currentServiceName.observe(viewLifecycleOwner, { serviceName ->
+//            view.findViewById<TextView>(R.id.service_name_tv).text = serviceName
+//            serviceViewModel.getServiceReviews(serviceName).observe(viewLifecycleOwner, {
+//                displayReviews(it)
+//            })
+//        })
     }
 }
