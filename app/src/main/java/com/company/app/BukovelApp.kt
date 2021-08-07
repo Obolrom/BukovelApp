@@ -12,7 +12,7 @@ import com.company.app.repository.MapRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-class App: Application(), ViewModelStoreOwner, LifecycleObserver {
+class BukovelApp: Application(), ViewModelStoreOwner, LifecycleObserver {
 
     lateinit var appComponent: AppComponent
 
@@ -39,6 +39,6 @@ class App: Application(), ViewModelStoreOwner, LifecycleObserver {
 
 val Context.appComponent: AppComponent
     get() = when (this) {
-        is App -> appComponent
+        is BukovelApp -> appComponent
         else -> this.applicationContext.appComponent
     }

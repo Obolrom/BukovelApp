@@ -1,4 +1,4 @@
-package com.company.app.retrofit
+package com.company.app.services
 
 import com.company.app.ui.services.Service
 import com.company.app.ui.services.ServiceReview

@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.company.app.App
+import com.company.app.BukovelApp
 import com.company.app.R
 
 

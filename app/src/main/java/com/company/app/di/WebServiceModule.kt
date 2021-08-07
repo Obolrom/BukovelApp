@@ -1,7 +1,7 @@
 package com.company.app.di
 
 import com.company.app.BuildConfig
-import com.company.app.retrofit.BukovelService
+import com.company.app.services.BukovelService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

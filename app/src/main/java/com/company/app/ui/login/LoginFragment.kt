@@ -7,11 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.company.app.App
 import com.company.app.R
-import com.company.app.User
 import com.google.android.material.textfield.TextInputEditText
 
 class LoginFragment : Fragment() {

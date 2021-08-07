@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.company.app.retrofit.BukovelService
+import com.company.app.services.BukovelService
 import com.company.app.ui.map.*
 import com.company.app.ui.services.Service
 import com.company.app.ui.services.ServiceReview

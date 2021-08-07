@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.company.app.App
+import com.company.app.BukovelApp
 import com.company.app.R
 import com.company.app.ui.misc.Adapter
 
