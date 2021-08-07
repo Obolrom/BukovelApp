@@ -25,7 +25,7 @@ class MapViewModel @Inject constructor(
 
     fun buildRoute(start: Int, destination: Int, showOnMap: (Set<Edge>) -> Unit) {
         navigatorJob?.cancel()
-        navigatorJob = viewModelScope.launch(Dispatchers.IO) {
+        navigatorJob = viewModelScope.launch(Dispatchers.Default) {
             val path = navigator.getPath(
                 Graph(edgeRepresentationList),
                 vertices[start].vertex,

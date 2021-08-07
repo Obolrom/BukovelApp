@@ -11,9 +11,6 @@ import com.company.app.ui.services.ServiceReview
 import com.google.android.libraries.maps.model.*
 import com.google.gson.Gson
 import com.google.maps.android.SphericalUtil
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import retrofit2.Call
@@ -56,31 +53,13 @@ class MapRepository @Inject constructor(
 
     fun getServices() : MutableLiveData<List<Service>> {
         val services: MutableLiveData<List<Service>> = MutableLiveData<List<Service>>()
-        bukovelService.getServices()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableSingleObserver<List<Service>>() {
-                override fun onSuccess(response: List<Service>) {
-                    services.value = response
-                }
 
-                override fun onError(e: Throwable) { }
-            })
         return services
     }
 
     fun getServiceReviews(serviceName: String) : MutableLiveData<List<ServiceReview>> {
         val reviews: MutableLiveData<List<ServiceReview>> = MutableLiveData<List<ServiceReview>>()
-        bukovelService.getServiceReviews(serviceName)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableSingleObserver<List<ServiceReview>>() {
-                override fun onSuccess(response: List<ServiceReview>) {
-                    reviews.value = response
-                }
 
-                override fun onError(e: Throwable) { }
-            })
         return reviews
     }
 
