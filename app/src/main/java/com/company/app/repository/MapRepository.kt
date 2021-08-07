@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 import java.io.BufferedReader
@@ -99,7 +100,7 @@ class MapRepository @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getSlopes(): Flow<Slope> = flow {
+    private fun getSlopes(): Flow<Slope> = flow {
         val fileNames = assets?.list(slopeDirectory) ?: arrayOf()
 
         for (filePath in fileNames) {
@@ -144,7 +145,7 @@ class MapRepository @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getEdges(): Flow<EdgeRepresentation> = flow {
+    private fun getEdges(): Flow<EdgeRepresentation> = flow {
         val fileNames = assets?.list(edgesDirectory) ?: arrayOf()
 
         for (filePath in fileNames) {
@@ -158,11 +159,10 @@ class MapRepository @Inject constructor(
                     .visible(true)
 //                    .color(R.color.purple_200)
                     .addAll(edge.coordinates)
-                val direction =
-                    if (filePath.contains("transition")) duplicateTransition(edge)
-                    else edge
+                if (filePath.contains("transition"))
+                    emit(duplicateTransition(edge))
 
-                emit(direction)
+                emit(edge)
             } catch (ioe: IOException) {
                 ioe.printStackTrace()
             }

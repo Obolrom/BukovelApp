@@ -1,5 +1,6 @@
 package com.company.app.di
 
+import android.content.Context
 import com.company.app.BukovelApp
 import dagger.Module
 import dagger.Provides
@@ -8,7 +9,7 @@ import dagger.Provides
 class AppModule(private val application: BukovelApp) {
 
     @Provides
-    fun getContext() = application.applicationContext
+    fun getContext(): Context = application.applicationContext
 }
 
 @Module(includes = [
